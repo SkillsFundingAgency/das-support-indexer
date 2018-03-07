@@ -24,6 +24,10 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.DependencyResolution
             For<IChallengeService>().Use<ChallengeService>();
             For<IDatetimeService>().Use<DatetimeService>();
             For<IManifestRepository>().Singleton().Use<ManifestRepository>();
+
+            For<IUserProfileService>().Use<UserProfileService>();
+            
+
         }
     }
 }

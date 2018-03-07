@@ -9,6 +9,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Microsoft.ApplicationInsights.Extensibility;
 using SFA.DAS.NLog.Logger;
+using SFA.DAS.Support.Portal.ApplicationServices.Services;
 using SFA.DAS.Web.Policy;
 
 namespace SFA.DAS.Support.Portal.Web
@@ -43,6 +44,7 @@ namespace SFA.DAS.Support.Portal.Web
                     new ResponseHeaderRestrictionPolicy()
                 }
             ).Apply(new HttpContextWrapper(HttpContext.Current), PolicyConcern.HttpResponse);
+
         }
 
         protected void Application_Error(object sender, EventArgs e)
@@ -78,9 +80,14 @@ namespace SFA.DAS.Support.Portal.Web
 
         private string TryAddUserContext()
         {
-            return $"User Name: {HttpContext.Current?.User?.Identity?.Name ?? "Unknown"}\r\n";
+            return $"User Name: {GetUserName() ?? "Unknown"}\r\n";
         }
 
+        private static string GetUserName()
+        {
+            return HttpContext.Current?.User?.Identity?.Name;
+        }
+        
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
         {
             var context = Context;
@@ -105,5 +112,15 @@ namespace SFA.DAS.Support.Portal.Web
 
             TelemetryConfiguration.Active.TelemetryInitializers.Add(new ApplicationInsightsInitializer());
         }
+
+
+        protected void Application_PostAuthenticateRequest(object sender, EventArgs e)
+        {
+            var userProfileService = DependencyResolver.Current.GetService<IUserProfileService>();
+            if (userProfileService == null) return;
+            var userProfile = userProfileService.RetrieveProfileForUser(GetUserName() ?? "unidentified");
+            Session["UserProfile"] = userProfile;
+        }
+
     }
 }

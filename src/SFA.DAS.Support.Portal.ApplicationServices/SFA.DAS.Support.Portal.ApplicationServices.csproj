@@ -96,6 +96,7 @@
     <Compile Include="Responses\SearchResponseCodes.cs" />
     <Compile Include="Services\ChallengeResult.cs" />
     <Compile Include="Services\ChallengeService.cs" />
+    <Compile Include="Services\CloudUserProfileRepository.cs" />
     <Compile Include="Services\Crypto.cs" />
     <Compile Include="Services\DatetimeService.cs" />
     <Compile Include="Services\IChallengeService.cs" />
@@ -103,9 +104,13 @@
     <Compile Include="Services\IDatetimeService.cs" />
     <Compile Include="Services\IFormMapper.cs" />
     <Compile Include="Services\IGetCurrentIdentity.cs" />
+    <Compile Include="Services\IKeyedItemRepository.cs" />
     <Compile Include="Services\IManifestRepository.cs" />
+    <Compile Include="Services\IUserProfileService.cs" />
     <Compile Include="Services\ManifestRepository.cs" />
     <Compile Include="Models\ResourceResultModel.cs" />
+    <Compile Include="Services\UserProfile.cs" />
+    <Compile Include="Services\UserProfileService.cs" />
     <Compile Include="Settings\SiteSettings.cs" />
     <Compile Include="Settings\CryptoSettings.cs" />
     <Compile Include="Settings\ICryptoSettings.cs" />
