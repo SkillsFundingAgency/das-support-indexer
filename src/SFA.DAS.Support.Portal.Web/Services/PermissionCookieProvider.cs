@@ -55,7 +55,7 @@ namespace SFA.DAS.Support.Portal.Web.Services
             var name = string.Format(_cookieFormat, id.ToLower());
             var httpCookie = response.Cookies.Get(name);
             if (httpCookie == null)
-                httpCookie = new HttpCookie(name, payload);
+                httpCookie = new HttpCookie(name, payload){HttpOnly = true, Secure = true};
             else
                 httpCookie.Value = payload;
 

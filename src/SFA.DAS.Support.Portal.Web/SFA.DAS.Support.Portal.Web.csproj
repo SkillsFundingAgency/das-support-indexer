@@ -442,6 +442,9 @@
     <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="App_Start\StructuremapWebApi.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ConsentController.cs" />
+    <Compile Include="Models\ConsentModel.cs" />
     <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Models\VersionInformation.cs" />
     <Compile Include="DependencyResolution\StructureMapWebApiDependencyResolver.cs" />
@@ -563,6 +566,8 @@
     <None Include="packages.config" />
     <Content Include="scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="scripts\jquery-3.1.1.min.map" />
+    <Content Include="Views\Consent\Index.cshtml" />
+    <Content Include="Views\Consent\Denied.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

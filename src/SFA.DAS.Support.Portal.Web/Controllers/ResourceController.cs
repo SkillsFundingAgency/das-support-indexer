@@ -9,7 +9,7 @@ using SFA.DAS.Support.Shared.Discovery;
 
 namespace SFA.DAS.Support.Portal.Web.Controllers
 {
-    public class ResourceController : Controller
+    public class ResourceController : BaseController
     {
         private readonly ICheckPermissions _checker;
         private readonly IGrantPermissions _granter;
@@ -18,7 +18,9 @@ namespace SFA.DAS.Support.Portal.Web.Controllers
         public ResourceController(
             IManifestRepository repository,
             ICheckPermissions checker,
-            IGrantPermissions granter, IServiceConfiguration serviceConfiguration)
+            IGrantPermissions granter, 
+            IServiceConfiguration serviceConfiguration, 
+            IUserProfileService userProfileService) : base(userProfileService)
         {
             _repository = repository;
             _checker = checker;

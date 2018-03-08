@@ -1,0 +1,25 @@
+﻿@model ConsentModel
+<section class="search no-search-term">
+    <div class="grid-row">
+        <div class="column-full">
+            <div>
+                <h1>User Consent</h1>
+                <div>
+                    Use of this system requries your consent to DAS monitoring your actions within the DAS Console.
+                </div>
+                <div>
+                    This data is used to make real-time and other related security decisions regarding the appropriate exposure of confidential customer information.
+                </div>
+                <div>
+                    This data is not passed to external organisations.
+                </div>
+                <div>If you wish to withdraw your consent, at a later time, please end an email to: dataprotection@tempuri.org</div>
+
+                <hr />
+                <div>Do you give consent for your on-line DAS Console activity to be monitored and logged?</div>
+                <a class="button" href="~/consent/granted?returnUrl=@Model.ReturnUrl">Yes</a>
+                <a class="button btn-danger" href="~/consent/denied?resource=@Model.ReturnUrl">No</a>
+            </div>
+        </div>
+    </div>
+</section>

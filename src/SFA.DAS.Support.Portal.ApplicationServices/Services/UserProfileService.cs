@@ -6,8 +6,9 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.Services
     {
         private readonly IKeyedItemRepository<string, UserProfile> _repository;
 
-        public UserProfileService(IKeyedItemRepository<string, UserProfile> repository)
+        public UserProfileService(IKeyedItemRepository<string, UserProfile> repository, DateTimeOffset termsAndConditionsApplyFrom)
         {
+            TermsAndConditionsApplyFrom = termsAndConditionsApplyFrom;
             _repository = repository;
         }
 
@@ -33,5 +34,6 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.Services
             return _repository.Retreive(userIdentity); ;
         }
 
+        public DateTimeOffset TermsAndConditionsApplyFrom { get; private set; }
     }
 }

@@ -18,24 +18,11 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.UnitTests.UserProfile
         {
             Assert.IsNull(_unit.Identity);
         }
-        //[Test]
-        //public void ItShouldRecordIfTheUserHasNotAgreedTheTermsAndConditionsForThisVersionByDefault()
-        //{
-        //    Assert.False(_unit.HasAgreedTermsAndConditions);
-        //}
 
-        //[Test]
-        //public void ItShouldProvideADateAndTimeOfFirstLogOn()
-        //{
-        //    Assert.IsNull(_unit.FirstLogOn);
-        //}
-
-        //[Test]
-        //public void ItShouldProvideADateAndTimeOfLastLogOn()
-        //{
-        //    Assert.IsNull(_unit.LastLogOn);
-        //}
-
-
+        [Test]
+        public void ItShouldNotHaveRecordedIfTheUserHasAgreedTheTermsAndConditions()
+        {
+            Assert.IsNull(_unit.AgreedTermsAndConditions);
+        }
     }
 }

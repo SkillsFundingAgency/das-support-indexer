@@ -1,4 +1,6 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using MediatR;
 using SFA.DAS.Support.Portal.ApplicationServices.Services;
 using StructureMap.Configuration.DSL;
@@ -25,7 +27,9 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.DependencyResolution
             For<IDatetimeService>().Use<DatetimeService>();
             For<IManifestRepository>().Singleton().Use<ManifestRepository>();
 
-            For<IUserProfileService>().Use<UserProfileService>();
+            For<Dictionary<string, UserProfile>>().Singleton().Use(new Dictionary<string, UserProfile>());
+            For<IKeyedItemRepository<string,UserProfile>>().Use<UserProfileRepository>();
+            For<IUserProfileService>().Use(x=> new UserProfileService(x.GetInstance<IKeyedItemRepository<string, UserProfile>>(), DateTimeOffset.MinValue);
             
 
         }

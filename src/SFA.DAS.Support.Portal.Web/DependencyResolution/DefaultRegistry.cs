@@ -26,12 +26,14 @@ namespace SFA.DAS.Support.Portal.Web.DependencyResolution
     using SFA.DAS.Configuration.AzureTableStorage;
     using SFA.DAS.NLog.Logger;
     using SFA.DAS.Support.Common.Infrastucture.Settings;
+    using SFA.DAS.Support.Portal.ApplicationServices.Services;
     using SFA.DAS.Support.Portal.ApplicationServices.Settings;
     using SFA.DAS.Support.Portal.Core.Services;
     using SFA.DAS.Support.Portal.Infrastructure.DependencyResolution;
     using SFA.DAS.Support.Shared.Discovery;
     using StructureMap.Configuration.DSL;
     using StructureMap.Graph;
+    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
 
     [ExcludeFromCodeCoverage]
@@ -57,8 +59,7 @@ namespace SFA.DAS.Support.Portal.Web.DependencyResolution
                 x.GetInstance<IRequestContext>(),
                 x.GetInstance<ILoggingPropertyFactory>().GetProperties())).AlwaysUnique();
 
-
-
+           
             WebConfiguration configuration = GetConfiguration();
 
             For<IWebConfiguration>().Use(configuration);

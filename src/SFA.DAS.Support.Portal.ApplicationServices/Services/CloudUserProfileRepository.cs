@@ -6,16 +6,18 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.Services
     {
         private readonly Dictionary<string, UserProfile> _repository = new Dictionary<string, UserProfile>();
 
+        public UserProfileRepository(Dictionary<string, UserProfile> repository)
+        {
+            _repository = repository;
+        }
+
         public UserProfile Store(UserProfile item)
         {
             if (_repository.ContainsKey(item.Identity))
             {
-                _repository[item.Identity] = item;
+                _repository.Remove(item.Identity);
             }
-            else
-            {
-                _repository.Add(item.Identity, item);
-            }
+            _repository.Add(item.Identity, item);
             return item;
         }
 

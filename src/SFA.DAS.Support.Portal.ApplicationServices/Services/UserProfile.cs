@@ -8,8 +8,6 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.Services
 
         public DateTimeOffset Created { get; set; }
 
-        //public bool HasAgreedTermsAndConditions { get; set; }
-        //public DateTime? FirstLogOn { get; set; }
-        //public DateTime? LastLogOn { get; set; }
+        public DateTimeOffset? AgreedTermsAndConditions { get; set; } 
     }
 }

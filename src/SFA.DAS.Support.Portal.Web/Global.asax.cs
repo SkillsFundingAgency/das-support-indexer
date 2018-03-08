@@ -112,15 +112,5 @@ namespace SFA.DAS.Support.Portal.Web
 
             TelemetryConfiguration.Active.TelemetryInitializers.Add(new ApplicationInsightsInitializer());
         }
-
-
-        protected void Application_PostAuthenticateRequest(object sender, EventArgs e)
-        {
-            var userProfileService = DependencyResolver.Current.GetService<IUserProfileService>();
-            if (userProfileService == null) return;
-            var userProfile = userProfileService.RetrieveProfileForUser(GetUserName() ?? "unidentified");
-            Session["UserProfile"] = userProfile;
-        }
-
     }
 }
