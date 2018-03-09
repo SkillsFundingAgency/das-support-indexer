@@ -1,4 +1,5 @@
-﻿using Moq;
+﻿using System;
+using Moq;
 using NUnit.Framework;
 using SFA.DAS.Support.Portal.ApplicationServices.Services;
 
@@ -16,7 +17,7 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.UnitTests.UserProfile
         public void Setup()
         {
             _mockUserProfileRepository = new Mock<IKeyedItemRepository<string, ApplicationServices.Services.UserProfile>>();
-            _unit = new UserProfileService(_mockUserProfileRepository.Object);
+            _unit = new UserProfileService(_mockUserProfileRepository.Object, DateTimeOffset.MinValue);
         }
 
         [Test]

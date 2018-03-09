@@ -7,6 +7,7 @@ using NUnit.Framework;
 using SFA.DAS.NLog.Logger;
 using SFA.DAS.Support.Portal.ApplicationServices.Queries;
 using SFA.DAS.Support.Portal.ApplicationServices.Responses;
+using SFA.DAS.Support.Portal.ApplicationServices.Services;
 using SFA.DAS.Support.Portal.Web.Services;
 using SFA.DAS.Support.Portal.Web.ViewModels;
 using SFA.DAS.Support.Shared.SearchIndexModel;
@@ -28,7 +29,7 @@ namespace SFA.DAS.Support.Portal.UnitTests.Web.Controllers.SearchController
         private Mock<ILog> _mockLogger;
         private Mock<IMappingService> _mockMappingService;
         private Mock<IMediator> _mockMediator;
-
+        private Mock<IUserProfileService> _mockUserProfileService;
         [Test]
         public async Task ShouldReturnValidViewModel()
         {
@@ -49,7 +50,9 @@ namespace SFA.DAS.Support.Portal.UnitTests.Web.Controllers.SearchController
                 .Setup(x => x.Map<SearchResponse, SearchResultsViewModel>(response))
                 .Returns(new SearchResultsViewModel());
 
-            _sut = new Portal.Web.Controllers.SearchController(_mockMappingService.Object, _mockMediator.Object);
+            _mockUserProfileService = new Mock<IUserProfileService>();
+
+            _sut = new Portal.Web.Controllers.SearchController(_mockMappingService.Object, _mockMediator.Object, _mockUserProfileService.Object);
 
             var result = await _sut.Index(query);
 

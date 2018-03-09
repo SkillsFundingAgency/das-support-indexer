@@ -29,7 +29,7 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.DependencyResolution
 
             For<Dictionary<string, UserProfile>>().Singleton().Use(new Dictionary<string, UserProfile>());
             For<IKeyedItemRepository<string,UserProfile>>().Use<UserProfileRepository>();
-            For<IUserProfileService>().Use(x=> new UserProfileService(x.GetInstance<IKeyedItemRepository<string, UserProfile>>(), DateTimeOffset.MinValue);
+            For<IUserProfileService>().Use(x=> new UserProfileService(x.GetInstance<IKeyedItemRepository<string, UserProfile>>(), DateTimeOffset.MinValue));
             
 
         }
