@@ -4,11 +4,14 @@ using System.IdentityModel.Tokens;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 using Microsoft.IdentityModel.Protocols;
 using Microsoft.Owin.Security.Notifications;
 using Microsoft.Owin.Security.WsFederation;
 using Newtonsoft.Json;
 using SFA.DAS.NLog.Logger;
+using SFA.DAS.Support.Portal.ApplicationServices.Services;
 using SFA.DAS.Support.Portal.Core.Services;
 using SFA.DAS.Support.Portal.Web.Settings;
 
@@ -116,10 +119,18 @@ namespace SFA.DAS.Support.Portal.Web
                     throw new SecurityTokenValidationException();
                 }
 
-                var userEmail = notification.AuthenticationTicket.Identity.Claims
-                    .Single(x => x.Type == ClaimTypes.Upn).Value;
-                notification.AuthenticationTicket.Identity.AddClaim(new Claim(ClaimTypes.Email,
-                    userEmail));
+                var userEmail = notification.AuthenticationTicket.Identity
+                                        .Claims.Single(x => x.Type == ClaimTypes.Upn).Value;
+
+                var userProfileService = DependencyResolver.Current.GetService<IUserProfileService>();
+                if (userProfileService != null)
+                {
+                    if (userProfileService.RetrieveProfileForUser(userEmail) == null)
+                        userProfileService.StoreProfileForUser(userEmail);
+                }
+
+                notification.AuthenticationTicket.Identity
+                        .AddClaim(new Claim(ClaimTypes.Email, userEmail));
             }
             catch (Exception ex)
             {

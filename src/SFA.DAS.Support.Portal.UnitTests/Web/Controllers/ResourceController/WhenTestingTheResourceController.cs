@@ -20,7 +20,7 @@ namespace SFA.DAS.Support.Portal.UnitTests.Web.Controllers.ResourceController
 
         protected IServiceConfiguration ServiceConfiguration;
         protected ControllerContext UnitControllerContext;
-
+        protected Mock<IUserProfileService> MockUserProfileService;
         [SetUp]
         public override void Setup()
         {
@@ -29,12 +29,12 @@ namespace SFA.DAS.Support.Portal.UnitTests.Web.Controllers.ResourceController
             MockManifestRepository = new Mock<IManifestRepository>();
             MockPermissionsChecker = new Mock<ICheckPermissions>();
             MockPermissionsGranter = new Mock<IGrantPermissions>();
-
+            MockUserProfileService = new Mock<IUserProfileService>();
             Unit = new Portal.Web.Controllers.ResourceController(
                 MockManifestRepository.Object,
                 MockPermissionsChecker.Object,
                 MockPermissionsGranter.Object,
-                ServiceConfiguration);
+                ServiceConfiguration, MockUserProfileService.Object);
 
             MockContextBase = new Mock<HttpContextBase>();
 

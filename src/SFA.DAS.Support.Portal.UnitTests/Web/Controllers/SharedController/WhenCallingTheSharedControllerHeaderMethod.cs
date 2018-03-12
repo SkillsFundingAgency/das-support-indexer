@@ -1,5 +1,7 @@
 ﻿using System.Web.Mvc;
+using Moq;
 using NUnit.Framework;
+using SFA.DAS.Support.Portal.ApplicationServices.Services;
 using SFA.DAS.Support.Portal.Web.ViewModels;
 
 namespace SFA.DAS.Support.Portal.UnitTests.Web.Controllers.SharedController
@@ -9,10 +11,12 @@ namespace SFA.DAS.Support.Portal.UnitTests.Web.Controllers.SharedController
         WhenCallingTheSharedControllerHeaderMethod : WhenTestingAnMvcControllerOfType<
             Portal.Web.Controllers.SharedController>
     {
+        private Mock<IUserProfileService> _mockIUserProfileService;
         [SetUp]
         public override void Setup()
         {
-            base.Setup();
+            _mockIUserProfileService = new Mock<IUserProfileService>();
+            Unit = new Portal.Web.Controllers.SharedController(_mockIUserProfileService.Object);
             ActionResultResponse = Unit.Header();
         }
 

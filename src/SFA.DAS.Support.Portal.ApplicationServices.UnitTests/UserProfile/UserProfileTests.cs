@@ -5,12 +5,12 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.UnitTests.UserProfile
     [TestFixture]
     public class UserProfileTests
     {
-        private UserProfile _unit;
+        private ApplicationServices.Services.UserProfile _unit;
 
         [SetUp]
         public void Setup()
         {
-            _unit = new UserProfile();
+            _unit = new ApplicationServices.Services.UserProfile();
         }
 
         [Test]
@@ -18,24 +18,11 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.UnitTests.UserProfile
         {
             Assert.IsNull(_unit.Identity);
         }
-        [Test]
-        public void ItShouldRecordIfTheUserHasNotAgreedTheTermsAndConditionsForThisVersionByDefault()
-        {
-            Assert.False(_unit.HasAgreedTermsAndConditions);
-        }
 
         [Test]
-        public void ItShouldProvideADateAndTimeOfFirstLogOn()
+        public void ItShouldNotHaveRecordedIfTheUserHasAgreedTheTermsAndConditions()
         {
-            Assert.IsNull(_unit.FirstLogOn);
+            Assert.IsNull(_unit.AgreedTermsAndConditions);
         }
-
-        [Test]
-        public void ItShouldProvideADateAndTimeOfLastLogOn()
-        {
-            Assert.IsNull(_unit.LastLogOn);
-        }
-
-
     }
 }

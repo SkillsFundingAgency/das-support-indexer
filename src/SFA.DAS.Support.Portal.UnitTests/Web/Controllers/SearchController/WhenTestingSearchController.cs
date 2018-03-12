@@ -6,6 +6,7 @@ using MediatR;
 using Moq;
 using NUnit.Framework;
 using SFA.DAS.NLog.Logger;
+using SFA.DAS.Support.Portal.ApplicationServices.Services;
 using SFA.DAS.Support.Portal.Web.Services;
 
 namespace SFA.DAS.Support.Portal.UnitTests.Web.Controllers.SearchController
@@ -22,7 +23,7 @@ namespace SFA.DAS.Support.Portal.UnitTests.Web.Controllers.SearchController
         protected RouteData RouteData;
         protected Portal.Web.Controllers.SearchController Unit;
         protected ControllerContext UnitControllerContext;
-
+        protected Mock<IUserProfileService> MockUserProfileService;
 
         [SetUp]
         public void Init()
@@ -30,10 +31,12 @@ namespace SFA.DAS.Support.Portal.UnitTests.Web.Controllers.SearchController
             MockLogger = new Mock<ILog>();
             MockMappingService = new Mock<IMappingService>();
             MockMediator = new Mock<IMediator>();
+            MockUserProfileService = new Mock<IUserProfileService>();
 
             Unit = new Portal.Web.Controllers.SearchController(
-                MockMappingService.Object,
-                MockMediator.Object);
+                                    MockMappingService.Object,
+                                    MockMediator.Object, 
+                                    MockUserProfileService.Object);
 
             RouteData = new RouteData();
             MockContextBase = new Mock<HttpContextBase>();

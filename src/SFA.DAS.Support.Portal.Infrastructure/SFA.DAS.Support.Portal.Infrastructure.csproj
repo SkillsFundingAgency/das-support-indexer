@@ -137,7 +137,6 @@
     <Compile Include="Services\FormMapper.cs" />
     <Compile Include="Services\IAzureSearchProvider.cs" />
     <Compile Include="Services\IWindowsLogonIdentityProvider.cs" />
-    <Compile Include="Services\SiteConnector.cs" />
     <Compile Include="Services\WindowsLogonIdentityProvider.cs" />
     <Compile Include="Settings\IAzureSearchSettings.cs" />
   </ItemGroup>

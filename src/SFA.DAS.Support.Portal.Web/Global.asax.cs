@@ -37,12 +37,7 @@ namespace SFA.DAS.Support.Portal.Web
         protected void Application_PreSendRequestHeaders(object sender, EventArgs e)
         {
             if (HttpContext.Current == null) return;
-            new HttpContextPolicyProvider(
-                new List<IHttpContextPolicy>
-                {
-                    new ResponseHeaderRestrictionPolicy()
-                }
-            ).Apply(new HttpContextWrapper(HttpContext.Current), PolicyConcern.HttpResponse);
+            new HttpContextPolicyProvider().Apply(new HttpContextWrapper(HttpContext.Current), PolicyConcern.HttpResponse);
         }
 
         protected void Application_Error(object sender, EventArgs e)
@@ -78,24 +73,19 @@ namespace SFA.DAS.Support.Portal.Web
 
         private string TryAddUserContext()
         {
-            return $"User Name: {HttpContext.Current?.User?.Identity?.Name ?? "Unknown"}\r\n";
+            return $"User Name: {GetUserName() ?? "Unknown"}\r\n";
         }
 
+        private static string GetUserName()
+        {
+            return HttpContext.Current?.User?.Identity?.Name;
+        }
+        
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
         {
-            var context = Context;
-            var application = sender as HttpApplication;
-
-            application?.Context?.Response.Headers.Remove("Server");
-            application?.Context?.Response.Cache.SetCacheability(HttpCacheability.NoCache);
-            application?.Context?.Response.Cache.AppendCacheExtension("no-store, must-revalidate");
-            application?.Context?.Response.AppendHeader("Pragma", "no-cache");
-            application?.Context?.Response.AppendHeader("Expires", "0");
-
-            if (context.Request.Path.StartsWith("/__browserlink")) return;
-
+            if (Context.Request.Path.StartsWith("/__browserlink")) return;
             var logger = DependencyResolver.Current.GetService<ILog>();
-            logger.Info($"{context.Request.HttpMethod} {context.Request.Path}");
+            logger.Info($"{Context.Request.HttpMethod} {Context.Request.Path}");
         }
 
         private void SetupApplicationInsights()
