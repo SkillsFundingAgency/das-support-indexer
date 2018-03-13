@@ -177,8 +177,6 @@
     <Compile Include="Services\ManifestRepository\WhenCallingSubmitChallenge.cs" />
     <Compile Include="Services\ManifestRepository\WhenTestingManifestRepository.cs" />
     <Compile Include="UserProfile\UserProfileServiceTests.cs" />
-    <Compile Include="UserProfile\UserProfile.cs" />
-    <Compile Include="UserProfile\UserProfileService.cs" />
     <Compile Include="UserProfile\UserProfileTests.cs" />
   </ItemGroup>
   <ItemGroup>

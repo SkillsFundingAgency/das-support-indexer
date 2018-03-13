@@ -568,6 +568,7 @@
     <Content Include="scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Consent\Index.cshtml" />
     <Content Include="Views\Consent\Denied.cshtml" />
+    <Content Include="Views\Shared\_consent.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -4,8 +4,7 @@
         <div class="column-full">
             <div>
                 <h1>User Consent</h1>
-                <div>User Consent information....</div>
-                <hr />
+                @Html.Partial("_consent")
                 <div>Do you give your consent?</div>
                 <a class="button" href="~/consent/granted?returnUrl=@Model.ReturnUrl">Yes</a>
                 <a class="button btn-danger" href="~/consent/denied?resource=@Model.ReturnUrl">No</a>

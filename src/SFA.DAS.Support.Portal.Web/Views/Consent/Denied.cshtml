@@ -2,7 +2,10 @@
 <section class="search no-search-term">
     <div class="grid-row">
         <div class="column-full">
-            <div>Consent to monitor your DAS Support Console Activity is required.</div>
+            
+            <h1>Access Denied</h1>
+            <div>You have not given your consent.</div>
+            @Html.Partial("_consent")
         </div>
         <div>Do you give your consent?</div>
         <a class="button" href="~/consent/granted?returnUrl=@Model.ReturnUrl">Yes</a>
