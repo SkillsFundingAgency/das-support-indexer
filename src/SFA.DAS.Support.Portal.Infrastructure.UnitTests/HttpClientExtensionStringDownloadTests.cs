@@ -13,7 +13,7 @@ namespace SFA.DAS.Support.Portal.Infrastructure.UnitTests
         public void Setup()
         {
             _emptyJsonContent = "{}";
-           
+
 
             _mockHttpMessageHandler = new MockHttpMessageHandler();
             _httpClient = new HttpClient(_mockHttpMessageHandler);

@@ -10,8 +10,7 @@ namespace SFA.DAS.Support.Portal.Web
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             var roleSettings = DependencyResolver.Current.GetService<IRoleSettings>();
-            filters.Add(new AuthorizeAttribute { Roles = roleSettings.ConsoleUserRole });
-
+            filters.Add(new AuthorizeAttribute {Roles = roleSettings.ConsoleUserRole});
         }
     }
 }

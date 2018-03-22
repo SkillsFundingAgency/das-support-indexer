@@ -1,61 +1,53 @@
-﻿using Moq;
+﻿using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Threading.Tasks;
+using Moq;
+using Nest;
 using NUnit.Framework;
 using SFA.DAS.Support.Indexer.ApplicationServices.Services;
 using SFA.DAS.Support.Shared.SearchIndexModel;
-using System.Threading.Tasks;
-using Nest;
-using System.Collections.Generic;
-using System.Net;
-using System;
-using SFA.DAS.Support.Shared.Discovery;
 
 namespace SFA.DAS.Support.Indexer.ApplicationServices.UnitTests
 {
     [TestFixture]
     public class AccountIndexResourceProcessorTest : IndexResourceProcessorBase
     {
-       
-
         [SetUp]
         public void Setup()
         {
-            base.Initialise();
-
+            Initialise();
         }
 
         [Test]
-        public async Task ShouldProcessOnlyAccountSearchType()
+        public async Task ShouldCallDeleteIndexWhenDownloadFails()
         {
-
             _indexNameCreator
-                .Setup(o => o.CreateNewIndexName(_indexName, SearchCategory.User))
+                .Setup(o => o.CreateNewIndexName(_indexName, SearchCategory.Account))
                 .Returns(_indexName);
 
-          
+            _downloader
+                .Setup(o => o.LastCode)
+                .Returns(HttpStatusCode.InternalServerError);
 
             var sut = new AccountIndexResourceProcessor(_siteSettings.Object,
-                                                        _downloader.Object,
-                                                        _indexProvider.Object,
-                                                        _searchSettings.Object,
-                                                        _logger.Object,
-                                                        _indexNameCreator.Object,
-                                                        _elasticClient.Object);
+                _downloader.Object,
+                _indexProvider.Object,
+                _searchSettings.Object,
+                _logger.Object,
+                _indexNameCreator.Object,
+                _elasticClient.Object);
+
+            await sut.ProcessResource(_baseUrl, _accountSiteResource);
 
 
-
-
-            await sut.ProcessResource(_baseUrl, _userSiteResource);
-
-            _indexNameCreator
-                .Verify(o => o.CreateNewIndexName(_indexName, SearchCategory.User), Times.Never);
-
+            _indexProvider
+                .Verify(o => o.DeleteIndex(_indexName), Times.Once);
         }
 
         [Test]
         public async Task ShouldNotProcessAccountModelIfUnauthorised()
         {
-
-
             _downloader
                 .Setup(o => o.Download<IEnumerable<AccountSearchModel>>(_baseUrl))
                 .Returns(Task.FromResult(_accountModels));
@@ -100,23 +92,22 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.UnitTests
                 .Verify(o => o.DeleteIndexes(_indexToRetain, It.IsAny<string>()), Times.Never);
 
             _elasticClient
-                .Verify(x => x.CreateIndex(_indexName, It.IsAny<Func<CreateIndexDescriptor, ICreateIndexRequest>>(), string.Empty), Times.Once);
-
+                .Verify(
+                    x => x.CreateIndex(_indexName, It.IsAny<Func<CreateIndexDescriptor, ICreateIndexRequest>>(),
+                        string.Empty), Times.Once);
         }
 
 
         [Test]
         public async Task ShouldProcessAccountModel()
         {
-            
-
             var sut = new AccountIndexResourceProcessor(_siteSettings.Object,
-                                                        _downloader.Object,
-                                                        _indexProvider.Object,
-                                                        _searchSettings.Object,
-                                                        _logger.Object,
-                                                        _indexNameCreator.Object,
-                                                        _elasticClient.Object);
+                _downloader.Object,
+                _indexProvider.Object,
+                _searchSettings.Object,
+                _logger.Object,
+                _indexNameCreator.Object,
+                _elasticClient.Object);
 
             await sut.ProcessResource(_baseUrl, _accountSiteResource);
 
@@ -136,44 +127,38 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.UnitTests
                 .Verify(o => o.DeleteIndex(_indexName), Times.Never);
 
             _indexProvider
-               .Verify(o => o.CreateIndexAlias(_indexName, It.IsAny<string>()), Times.Once);
+                .Verify(o => o.CreateIndexAlias(_indexName, It.IsAny<string>()), Times.Once);
 
             _indexProvider
-              .Verify(o => o.DeleteIndexes(_indexToRetain, It.IsAny<string>()), Times.Once);
+                .Verify(o => o.DeleteIndexes(_indexToRetain, It.IsAny<string>()), Times.Once);
 
             _elasticClient
-              .Verify(x => x.CreateIndex(_indexName, It.IsAny<Func<CreateIndexDescriptor, ICreateIndexRequest>>(), string.Empty), Times.Once);
-
+                .Verify(
+                    x => x.CreateIndex(_indexName, It.IsAny<Func<CreateIndexDescriptor, ICreateIndexRequest>>(),
+                        string.Empty), Times.Once);
         }
 
         [Test]
-        public async Task ShouldCallDeleteIndexWhenDownloadFails()
+        public async Task ShouldProcessOnlyAccountSearchType()
         {
-
             _indexNameCreator
-                .Setup(o => o.CreateNewIndexName(_indexName, SearchCategory.Account))
+                .Setup(o => o.CreateNewIndexName(_indexName, SearchCategory.User))
                 .Returns(_indexName);
 
-            _downloader
-               .Setup(o => o.LastCode)
-               .Returns(HttpStatusCode.InternalServerError);
 
             var sut = new AccountIndexResourceProcessor(_siteSettings.Object,
-                                                        _downloader.Object,
-                                                        _indexProvider.Object,
-                                                        _searchSettings.Object,
-                                                        _logger.Object,
-                                                        _indexNameCreator.Object,
-                                                        _elasticClient.Object);
-
-            await sut.ProcessResource(_baseUrl, _accountSiteResource);
+                _downloader.Object,
+                _indexProvider.Object,
+                _searchSettings.Object,
+                _logger.Object,
+                _indexNameCreator.Object,
+                _elasticClient.Object);
 
 
-            _indexProvider
-                .Verify(o => o.DeleteIndex(_indexName), Times.Once);
+            await sut.ProcessResource(_baseUrl, _userSiteResource);
 
+            _indexNameCreator
+                .Verify(o => o.CreateNewIndexName(_indexName, SearchCategory.User), Times.Never);
         }
-
-
     }
 }

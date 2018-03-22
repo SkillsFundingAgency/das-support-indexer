@@ -18,5 +18,4 @@ namespace SFA.DAS.Support.Shared.Discovery
         Uri FindSiteBaseUriForManfiestElement(Dictionary<SupportServiceIdentity, Uri> sites,
             SupportServiceResourceKey challengeKey);
     }
-    
 }

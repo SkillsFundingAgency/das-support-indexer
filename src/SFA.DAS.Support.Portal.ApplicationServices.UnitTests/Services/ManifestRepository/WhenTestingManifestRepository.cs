@@ -12,7 +12,6 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.UnitTests.Services.Manifest
 {
     public class WhenTestingManifestRepository
     {
-       
         private ServiceConfiguration _siteManifests = new ServiceConfiguration();
 
 
@@ -44,7 +43,7 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.UnitTests.Services.Manifest
 
             TestSiteManifest = new EmployerAccountSiteManifest();
 
-            _siteManifests.Add( TestSiteManifest);
+            _siteManifests.Add(TestSiteManifest);
 
 
             TestSites = HttpsTestsite;
@@ -54,7 +53,7 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.UnitTests.Services.Manifest
 
             TestSiteUri = TestSites.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries)
                 .Where(x => !string.IsNullOrWhiteSpace(x))
-                .Select(x=>x.Split(new []{'|'},StringSplitOptions.RemoveEmptyEntries ))
+                .Select(x => x.Split(new[] {'|'}, StringSplitOptions.RemoveEmptyEntries))
                 .Select(x => new Uri(x[1])).First();
 
             TestSiteUri = new Uri($"{TestSiteUri}api/manifest");

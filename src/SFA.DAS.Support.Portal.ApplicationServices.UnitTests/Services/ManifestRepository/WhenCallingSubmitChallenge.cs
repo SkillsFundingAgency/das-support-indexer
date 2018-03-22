@@ -15,17 +15,6 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.UnitTests.Services.Manifest
     [TestFixture]
     public class WhenCallingSubmitChallenge : WhenTestingManifestRepository
     {
-
-        private string _id;
-        private Dictionary<string, string> _submittedFormData;
-        private string _uriString;
-        private string _redirectUrl;
-        private string _innerAction;
-        private string _challengekey;
-        private IDictionary<string, string> _postedFormData;
-        private string _resourceKey;
-
-
         [SetUp]
         public override void Setup()
         {
@@ -51,10 +40,19 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.UnitTests.Services.Manifest
 
             foreach (var item in _submittedFormData)
             {
-                if (new[] { "redirect", "innerAction", "challengeKey" }.Contains(item.Key)) continue;
+                if (new[] {"redirect", "innerAction", "challengeKey"}.Contains(item.Key)) continue;
                 _postedFormData.Add(item.Key, item.Value);
             }
         }
+
+        private string _id;
+        private Dictionary<string, string> _submittedFormData;
+        private string _uriString;
+        private string _redirectUrl;
+        private string _innerAction;
+        private string _challengekey;
+        private IDictionary<string, string> _postedFormData;
+        private string _resourceKey;
 
         [Test]
         public async Task ItShouldReceiveAFormResponseOnFail()
@@ -114,7 +112,7 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.UnitTests.Services.Manifest
             {
                 {"redirect", _redirectUrl},
                 {"innerAction", _innerAction},
-                {"resourceKey", _resourceKey.ToString()},
+                {"resourceKey", _resourceKey},
                 {"challengeKey", "BadChallengKey"},
                 {"Key1", "Value1"},
                 {"Key2", "Value2"}

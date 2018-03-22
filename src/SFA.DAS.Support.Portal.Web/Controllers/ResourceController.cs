@@ -15,6 +15,7 @@ namespace SFA.DAS.Support.Portal.Web.Controllers
         private readonly IGrantPermissions _granter;
         private readonly IManifestRepository _repository;
         private readonly IServiceConfiguration _serviceConfiguration;
+
         public ResourceController(
             IManifestRepository repository,
             ICheckPermissions checker,
@@ -27,7 +28,8 @@ namespace SFA.DAS.Support.Portal.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Challenge(SupportServiceResourceKey resourceKey, SupportServiceResourceKey challengeKey, string resourceId, string url)
+        public async Task<ActionResult> Challenge(SupportServiceResourceKey resourceKey,
+            SupportServiceResourceKey challengeKey, string resourceId, string url)
         {
             if (!_serviceConfiguration.ChallengeExists(challengeKey)) return HttpNotFound();
 
@@ -50,7 +52,8 @@ namespace SFA.DAS.Support.Portal.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Challenge(SupportServiceResourceKey resourceKey, SupportServiceResourceKey challengeKey, string resourceId, FormCollection formData)
+        public async Task<ActionResult> Challenge(SupportServiceResourceKey resourceKey,
+            SupportServiceResourceKey challengeKey, string resourceId, FormCollection formData)
         {
             var pairs = formData.AllKeys.ToDictionary(k => k, v => formData[v]);
             var result = await _repository.SubmitChallenge(resourceId, pairs);
@@ -73,7 +76,6 @@ namespace SFA.DAS.Support.Portal.Web.Controllers
         [HttpGet]
         public async Task<ActionResult> Index(SupportServiceResourceKey key, string id, string childId)
         {
-
             if (!_serviceConfiguration.ResourceExists(key))
                 return View("Sub",
                     new ResourceResultModel
@@ -86,19 +88,15 @@ namespace SFA.DAS.Support.Portal.Web.Controllers
             var resource = _serviceConfiguration.GetResource(key);
 
             if (resource.Challenge.HasValue)
-            {
                 if (!_checker.HasPermissions(Request, Response, User, $"{resource.Challenge}/{id}"))
-                {
                     return RedirectToAction("Challenge",
-                                            new
-                                            {
-                                                resourceId = id,
-                                                resourceKey = (int)key,
-                                                challengeKey = (int)resource.Challenge,
-                                                url = Request.RawUrl
-                                            });
-                }
-            }
+                        new
+                        {
+                            resourceId = id,
+                            resourceKey = (int) key,
+                            challengeKey = (int) resource.Challenge,
+                            url = Request.RawUrl
+                        });
 
             ViewBag.SubNav = await _repository.GetNav(key, id);
             ViewBag.SubHeader = await _repository.GenerateHeader(key, id);

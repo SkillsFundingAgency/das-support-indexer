@@ -49,7 +49,6 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.Services
                                 .Properties(p => p
                                     .Keyword(k => k.Name(n => n.Account))
                                     .Keyword(k => k.Name(n => n.AccountID))
-
                                     .Keyword(k => k.Name(n => n.AccountSearchKeyWord))
                                     .Keyword(k => k.Name(n => n.AccountIDSearchKeyWord))
                                     .Keyword(k => k.Name(n => n.PayeSchemeIdSearchKeyWords))

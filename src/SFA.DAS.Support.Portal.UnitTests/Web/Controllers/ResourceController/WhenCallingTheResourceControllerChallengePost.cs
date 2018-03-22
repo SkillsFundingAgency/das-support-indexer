@@ -34,7 +34,7 @@ namespace SFA.DAS.Support.Portal.UnitTests.Web.Controllers.ResourceController
         [Test]
         public async Task ItShouldRedirectIfTheSubmittedChallengeHasARedirect()
         {
-            var challengeResult = new ChallengeResult { Page = "1", RedirectUrl = "http://tempuri.org" };
+            var challengeResult = new ChallengeResult {Page = "1", RedirectUrl = "http://tempuri.org"};
 
             MockManifestRepository
                 .Setup(x => x.SubmitChallenge(_resourceId, It.IsAny<Dictionary<string, string>>()))
@@ -53,7 +53,7 @@ namespace SFA.DAS.Support.Portal.UnitTests.Web.Controllers.ResourceController
         [Test]
         public async Task ItShouldReturnAnUnRedirectedSubViewofTheChallengePage()
         {
-            var challengeResult = new ChallengeResult { Page = "<html><div>Challenge</div></<html>", RedirectUrl = null };
+            var challengeResult = new ChallengeResult {Page = "<html><div>Challenge</div></<html>", RedirectUrl = null};
             var navResponse =
                 new NavViewModel
                 {
@@ -66,7 +66,8 @@ namespace SFA.DAS.Support.Portal.UnitTests.Web.Controllers.ResourceController
                 .Returns(Task.FromResult(challengeResult));
 
 
-            MockManifestRepository.Setup(x => x.GetNav(_resourceKey, _resourceId)).Returns(Task.FromResult(navResponse));
+            MockManifestRepository.Setup(x => x.GetNav(_resourceKey, _resourceId))
+                .Returns(Task.FromResult(navResponse));
             MockManifestRepository.Setup(x => x.GenerateHeader(_resourceKey, _resourceId))
                 .Returns(Task.FromResult(new ResourceResultModel()));
 
@@ -75,13 +76,13 @@ namespace SFA.DAS.Support.Portal.UnitTests.Web.Controllers.ResourceController
 
 
             Assert.IsInstanceOf<ViewResult>(ActionResultResponse);
-            var viewResult = (ViewResult)ActionResultResponse;
+            var viewResult = (ViewResult) ActionResultResponse;
 
             Assert.IsInstanceOf<NavViewModel>(viewResult.ViewBag.SubNav);
             Assert.IsInstanceOf<object>(viewResult.ViewBag.SubHeader);
             Assert.AreEqual("Sub", viewResult.ViewName);
             Assert.IsInstanceOf<ResourceResultModel>(viewResult.Model);
-            Assert.AreEqual(challengeResult.Page, ((ResourceResultModel)viewResult.Model).Resource);
+            Assert.AreEqual(challengeResult.Page, ((ResourceResultModel) viewResult.Model).Resource);
         }
     }
 }

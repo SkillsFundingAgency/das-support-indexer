@@ -36,11 +36,11 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.Services
 
             _sites = new Dictionary<SupportServiceIdentity, Uri>();
 
-            foreach (var item in (settings.BaseUrls ?? string.Empty).Split(new[] { ',' },
+            foreach (var item in (settings.BaseUrls ?? string.Empty).Split(new[] {','},
                 StringSplitOptions.RemoveEmptyEntries))
             {
-                var subItems = item.Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
-                var key = (SupportServiceIdentity)Enum.Parse(typeof(SupportServiceIdentity), subItems[0]);
+                var subItems = item.Split(new[] {'|'}, StringSplitOptions.RemoveEmptyEntries);
+                var key = (SupportServiceIdentity) Enum.Parse(typeof(SupportServiceIdentity), subItems[0]);
                 var value = new Uri(subItems[1]);
                 _sites.Add(key, value);
             }
@@ -50,14 +50,14 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.Services
         public async Task<ResourceResultModel> GenerateHeader(SupportServiceResourceKey key, string id)
         {
             if (!_serviceConfiguration.ResourceExists(key))
-                return new ResourceResultModel { StatusCode = HttpStatusCode.NotFound };
+                return new ResourceResultModel {StatusCode = HttpStatusCode.NotFound};
             var resource = _serviceConfiguration.GetResource(key);
             var headerKey = resource.HeaderKey ?? key;
 
             var headerResource = _serviceConfiguration.GetResource(headerKey);
 
             var uri = new Uri(_serviceConfiguration.FindSiteBaseUriForManfiestElement(_sites, headerKey),
-                                headerResource.ResourceUrlFormat);
+                headerResource.ResourceUrlFormat);
 
             var url = string.Format(uri.ToString(), id);
             return await GetPage(url);
@@ -78,7 +78,8 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.Services
 
             var challengeUrl =
                 string.Format(
-                    new Uri(_serviceConfiguration.FindSiteBaseUriForManfiestElement(_sites, challengeKey), challenge.ChallengeUrlFormat).ToString(), id);
+                    new Uri(_serviceConfiguration.FindSiteBaseUriForManfiestElement(_sites, challengeKey),
+                        challenge.ChallengeUrlFormat).ToString(), id);
             var page = await GetPage(challengeUrl);
             return _formMapper.UpdateForm(resourceKey, challengeKey, id, url, page.Resource);
         }
@@ -89,9 +90,9 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.Services
             var innerAction = formData["innerAction"];
 
             var challengeKey =
-                (SupportServiceResourceKey)Enum.Parse(typeof(SupportServiceResourceKey), formData["challengeKey"]);
+                (SupportServiceResourceKey) Enum.Parse(typeof(SupportServiceResourceKey), formData["challengeKey"]);
             var resourceKey =
-                (SupportServiceResourceKey)Enum.Parse(typeof(SupportServiceResourceKey), formData["resourceKey"]);
+                (SupportServiceResourceKey) Enum.Parse(typeof(SupportServiceResourceKey), formData["resourceKey"]);
 
             if (!_serviceConfiguration.ChallengeExists(challengeKey)) throw new MissingMemberException();
 
@@ -125,16 +126,19 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.Services
             if (resource == null)
             {
                 var e = new NullReferenceException($"The requested resource {key} was not found");
-                _log.Error(e, $"A manifest was identified but not found, please review the Manifest configuration and update it accordingly.");
+                _log.Error(e,
+                    $"A manifest was identified but not found, please review the Manifest configuration and update it accordingly.");
                 throw e;
             }
+
             if (resource == null) throw new ArgumentNullException(nameof(resource));
 
             var manifest = _serviceConfiguration.ManifestFromResource(resource);
             if (manifest == null)
             {
                 var e = new NullReferenceException($"The manifest that defines {key} could not be found");
-                _log.Error(e, $"A manifest was identified but not found, please review the Manifest configuration and update it accordingly.");
+                _log.Error(e,
+                    $"A manifest was identified but not found, please review the Manifest configuration and update it accordingly.");
                 throw e;
             }
 
@@ -156,10 +160,10 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.Services
         }
 
         private ChallengeResult HandleChallenegeResponseContent(string responseContent,
-                                        SupportServiceResourceKey resourceKey,
-                                        SupportServiceResourceKey challengeKey,
-                                        string id,
-                                        string redirect)
+            SupportServiceResourceKey resourceKey,
+            SupportServiceResourceKey challengeKey,
+            string id,
+            string redirect)
         {
             var challengeValidationResult = new ChallengeValidationResult();
 
@@ -173,14 +177,12 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.Services
             }
 
             if (!challengeValidationResult.IsValidResponse)
-            {
                 return new ChallengeResult
                 {
                     Page = _formMapper.UpdateForm(resourceKey, challengeKey, id, redirect, responseContent)
                 };
-            }
 
-            return new ChallengeResult { RedirectUrl = redirect };
+            return new ChallengeResult {RedirectUrl = redirect};
         }
 
 

@@ -17,7 +17,7 @@ namespace SFA.DAS.Support.Shared.Discovery
                     ResourceUrlFormat = "/account/{0}",
                     ResourceTitle = "Organisations",
                     SearchItemsUrl = "/api/search/accounts/{0}/{1}",
-                    SearchTotalItemsUrl ="/api/search/accounts/totalCount/{0}",
+                    SearchTotalItemsUrl = "/api/search/accounts/totalCount/{0}",
                     SearchCategory = SearchCategory.Account,
                     HeaderKey = SupportServiceResourceKey.EmployerAccountHeader,
                     IsNavigationItem = true
@@ -36,7 +36,7 @@ namespace SFA.DAS.Support.Shared.Discovery
                     HeaderKey = SupportServiceResourceKey.EmployerAccountHeader,
                     IsNavigationItem = true
                 },
-                  new SiteResource
+                new SiteResource
                 {
                     ResourceKey = SupportServiceResourceKey.EmployerAccountPayeSchemeLevys,
                     ResourceUrlFormat = "account/levysubmissions/{0}/{1}",

@@ -16,7 +16,6 @@ namespace SFA.DAS.Support.Portal.Web.DependencyResolution
     {
         public WebRegistry()
         {
-           
             For<IHttpStatusCodeStrategy>().Use<StrategyForSystemErrorStatusCode>();
             For<IHttpStatusCodeStrategy>().Use<StrategyForClientErrorStatusCode>();
             For<IHttpStatusCodeStrategy>().Use<StrategyForRedirectionStatusCode>();

@@ -10,7 +10,10 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.Services
         Task<ResourceResultModel> GetResourcePage(SupportServiceResourceKey key, string id, string childId);
         Task<NavViewModel> GetNav(SupportServiceResourceKey key, string id);
         Task<ResourceResultModel> GenerateHeader(SupportServiceResourceKey key, string id);
-        Task<string> GetChallengeForm(SupportServiceResourceKey resourceKey, SupportServiceResourceKey challengeKey, string id, string url);
+
+        Task<string> GetChallengeForm(SupportServiceResourceKey resourceKey, SupportServiceResourceKey challengeKey,
+            string id, string url);
+
         Task<ChallengeResult> SubmitChallenge(string id, IDictionary<string, string> pairs);
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using Microsoft.Azure;
 using SFA.DAS.Configuration;
 using SFA.DAS.Configuration.AzureTableStorage;
@@ -40,7 +39,6 @@ namespace SFA.DAS.Support.Indexer.Worker.DependencyResolution
                     new EmployerUserSiteManifest()
                 }
             );
-
         }
 
         private WebConfiguration GetConfiguration()

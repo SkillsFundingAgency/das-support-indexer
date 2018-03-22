@@ -3,18 +3,16 @@ using SFA.DAS.Support.Shared.Discovery;
 
 namespace SFA.DAS.Support.Shared.Tests.Discovery
 {
-   
-
     public class WhenCallingServiceConfigurationChallengeExists
     {
-        private ServiceConfiguration _unit = new ServiceConfiguration()
+        private readonly ServiceConfiguration _unit = new ServiceConfiguration
         {
             new EmployerAccountSiteManifest()
         };
-      
+
 
         [Test]
-        public void  ItShouldReturnFalseIfTheChallengeDoesNotExist()
+        public void ItShouldReturnFalseIfTheChallengeDoesNotExist()
         {
             var result = _unit.ChallengeExists(SupportServiceResourceKey.None);
 
@@ -24,10 +22,9 @@ namespace SFA.DAS.Support.Shared.Tests.Discovery
         [Test]
         public void ItShouldReturnTrueIfTheChallengeExists()
         {
-            var result =  _unit.ChallengeExists(SupportServiceResourceKey.EmployerAccountFinanceChallenge);
+            var result = _unit.ChallengeExists(SupportServiceResourceKey.EmployerAccountFinanceChallenge);
 
             Assert.IsTrue(result);
         }
     }
-
 }

@@ -30,8 +30,6 @@ namespace SFA.DAS.Support.Portal.UnitTests.Web.Controllers.ResourceController
         [Test]
         public async Task ItShouldProvideTheChallengeMissingViewIfGetChallengeFormThrowsAnyException()
         {
-
-
             var navResponse =
                 new NavViewModel
                 {
@@ -39,16 +37,18 @@ namespace SFA.DAS.Support.Portal.UnitTests.Web.Controllers.ResourceController
                     Items = new[]
                         {new NavItem {Href = "", Key = SupportServiceResourceKey.EmployerAccountTeam, Title = ""}}
                 };
-            MockManifestRepository.Setup(x => x.GetNav(_resourceKey, _resourceId)).Returns(Task.FromResult(navResponse));
+            MockManifestRepository.Setup(x => x.GetNav(_resourceKey, _resourceId))
+                .Returns(Task.FromResult(navResponse));
             MockManifestRepository.Setup(x => x.GenerateHeader(_resourceKey, _resourceId))
                 .Returns(Task.FromResult(new ResourceResultModel()));
-            MockManifestRepository.Setup(x => x.GetChallengeForm(_resourceKey, _challengeKey, _resourceId, _url)).Throws<Exception>();
+            MockManifestRepository.Setup(x => x.GetChallengeForm(_resourceKey, _challengeKey, _resourceId, _url))
+                .Throws<Exception>();
 
 
             ActionResultResponse = await Unit.Challenge(_resourceKey, _challengeKey, _resourceId, _url);
 
             Assert.IsInstanceOf<ViewResult>(ActionResultResponse);
-            var viewResult = (ViewResult)ActionResultResponse;
+            var viewResult = (ViewResult) ActionResultResponse;
 
             Assert.IsInstanceOf<NavViewModel>(viewResult.ViewBag.SubNav);
             Assert.IsInstanceOf<object>(viewResult.ViewBag.SubHeader);
@@ -67,7 +67,8 @@ namespace SFA.DAS.Support.Portal.UnitTests.Web.Controllers.ResourceController
                         {new NavItem {Href = "", Key = SupportServiceResourceKey.EmployerAccountTeam, Title = ""}}
                 };
             //MockManifestRepository.Setup(x => x.ChallengeExists(_challengeKey)).Returns(Task.FromResult(true));
-            MockManifestRepository.Setup(x => x.GetNav(_resourceKey, _resourceId)).Returns(Task.FromResult(navResponse));
+            MockManifestRepository.Setup(x => x.GetNav(_resourceKey, _resourceId))
+                .Returns(Task.FromResult(navResponse));
             MockManifestRepository.Setup(x => x.GenerateHeader(_resourceKey, _resourceId))
                 .Returns(Task.FromResult(new ResourceResultModel()));
             MockManifestRepository.Setup(x => x.GetChallengeForm(_resourceKey, _challengeKey, _resourceId, _url))
@@ -76,7 +77,7 @@ namespace SFA.DAS.Support.Portal.UnitTests.Web.Controllers.ResourceController
             ActionResultResponse = await Unit.Challenge(_resourceKey, _challengeKey, _resourceId, _url);
 
             Assert.IsInstanceOf<ViewResult>(ActionResultResponse);
-            var viewResult = (ViewResult)ActionResultResponse;
+            var viewResult = (ViewResult) ActionResultResponse;
 
             Assert.IsInstanceOf<NavViewModel>(viewResult.ViewBag.SubNav);
             Assert.IsInstanceOf<object>(viewResult.ViewBag.SubHeader);
@@ -87,7 +88,6 @@ namespace SFA.DAS.Support.Portal.UnitTests.Web.Controllers.ResourceController
         [Test]
         public async Task ItShouldReturnHttpNotFoundIfTheChallengeDoesNotExist()
         {
-            
             _resourceKey = SupportServiceResourceKey.EmployerAccountFinance;
             _challengeKey = SupportServiceResourceKey.EmployerAccountFinance;
 

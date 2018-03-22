@@ -35,7 +35,6 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.Handlers
 
                 if (!string.IsNullOrWhiteSpace(query.SearchTerm))
                 {
-
                     var userResponse =
                         _searchProvider.FindUsers(query.SearchTerm, query.SearchType, query.PageSize, query.Page);
                     searchResponse.UserSearchResult = userResponse;
@@ -44,7 +43,6 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.Handlers
                         _searchProvider.FindAccounts(query.SearchTerm, query.SearchType, query.PageSize, query.Page);
                     searchResponse.AccountSearchResult = accountResponse;
                 }
-
             }
             catch (ElasticSearchInvalidResponseException ex)
             {
@@ -54,6 +52,5 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.Handlers
 
             return await Task.FromResult(searchResponse);
         }
-
     }
 }

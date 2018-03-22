@@ -12,15 +12,12 @@ namespace SFA.DAS.Support.Shared.SearchIndexModel
         public List<string> PayeSchemeIds { get; set; }
 
 
-        public string AccountSearchKeyWord { get => Account.ToLower(); }
-        public string AccountIDSearchKeyWord { get => AccountID.ToLower(); }
+        public string AccountSearchKeyWord => Account.ToLower();
+        public string AccountIDSearchKeyWord => AccountID.ToLower();
 
         public IEnumerable<string> PayeSchemeIdSearchKeyWords
         {
-            get
-            {
-                return PayeSchemeIds?.Select(o => o.ToLower()).ToList();
-            }
+            get { return PayeSchemeIds?.Select(o => o.ToLower()).ToList(); }
         }
     }
 }

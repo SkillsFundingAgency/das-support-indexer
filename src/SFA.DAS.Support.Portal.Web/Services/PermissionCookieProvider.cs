@@ -12,10 +12,10 @@ namespace SFA.DAS.Support.Portal.Web.Services
 {
     public class PermissionCookieProvider : ICheckPermissions, IGrantPermissions
     {
+        private readonly IChallengeSettings _challengeSettings;
         private readonly string _cookieFormat = "Elevate[{0}]";
         private readonly ICrypto _crypto;
         private readonly IRoleSettings _roleSettings;
-        private readonly IChallengeSettings _challengeSettings;
 
 
         public PermissionCookieProvider(ICrypto crypto, IChallengeSettings settings, IRoleSettings roleSettings)
@@ -38,7 +38,7 @@ namespace SFA.DAS.Support.Portal.Web.Services
 
             var payload = GetPayload(httpCookie.Value);
 
-            if (payload != null && 
+            if (payload != null &&
                 payload.EndDate > DateTime.UtcNow &&
                 string.Equals(id, payload.Id, StringComparison.InvariantCultureIgnoreCase))
             {

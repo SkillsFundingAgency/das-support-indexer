@@ -9,7 +9,6 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.UnitTests.Services.Manifest
     [TestFixture]
     public class WhenCallingGetChallengeForm : WhenTestingManifestRepository
     {
-       
         [Test]
         public void ItShouldNotThrowAnExceptionIfTheSiteManifestNull()
         {
@@ -17,7 +16,8 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.UnitTests.Services.Manifest
 
             Assert.DoesNotThrow(() =>
             {
-                var response = Unit.GetChallengeForm(SupportServiceResourceKey.EmployerAccountFinance, SupportServiceResourceKey.EmployerAccountFinanceChallenge, "id",
+                var response = Unit.GetChallengeForm(SupportServiceResourceKey.EmployerAccountFinance,
+                    SupportServiceResourceKey.EmployerAccountFinanceChallenge, "id",
                     "http://tempuri.org/callenge/form");
             });
         }
@@ -43,7 +43,7 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.UnitTests.Services.Manifest
 
             var actual = await Unit.GetChallengeForm(
                 SupportServiceResourceKey.EmployerAccountFinance,
-                SupportServiceResourceKey.EmployerAccountFinanceChallenge, 
+                SupportServiceResourceKey.EmployerAccountFinanceChallenge,
                 "id",
                 "http://tempuri.org/challenge/form");
 
@@ -51,7 +51,5 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.UnitTests.Services.Manifest
             Assert.IsTrue(actual.Contains("<html"));
             Assert.IsTrue(actual.Contains("<form"));
         }
-
-       
     }
 }

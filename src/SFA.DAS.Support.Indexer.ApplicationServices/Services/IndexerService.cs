@@ -22,13 +22,12 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.Services
 
         private readonly Stopwatch _indexTimer = new Stopwatch();
         private readonly ILog _logger;
+        private readonly ServiceConfiguration _manifests;
         private readonly Stopwatch _queryTimer = new Stopwatch();
         private readonly Stopwatch _runtimer = new Stopwatch();
         private readonly ISearchSettings _searchSettings;
         private readonly ISiteSettings _siteSettings;
-        private readonly ServiceConfiguration _manifests;
 
-      
 
         public IndexerService(ISiteSettings settings,
             ISiteConnector downloader,
@@ -53,7 +52,7 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.Services
             _runtimer.Start();
             try
             {
-               var subSites =  GetSubsites();
+                var subSites = GetSubsites();
 
                 foreach (var subSite in subSites)
                 {
@@ -73,15 +72,16 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.Services
                         $"Site Manifest: Uri: {subSite.Value ?? "Missing Url"} # Challenges: {siteManifest.Challenges?.Count() ?? 0} # Resources: {siteManifest.Resources?.Count() ?? 0}");
 
                     var resourcesToIndex = siteManifest.Resources?.Where(x =>
-                                            !string.IsNullOrWhiteSpace(x.SearchItemsUrl) &&
-                                            !string.IsNullOrWhiteSpace(subSite.Value) &&
-                                            x.SearchCategory != SearchCategory.None).ToList();
+                        !string.IsNullOrWhiteSpace(x.SearchItemsUrl) &&
+                        !string.IsNullOrWhiteSpace(subSite.Value) &&
+                        x.SearchCategory != SearchCategory.None).ToList();
 
                     if (resourcesToIndex == null) continue;
 
                     foreach (var resource in resourcesToIndex)
                     {
-                        _logger.Info($"Processing Resource: Key: {resource.ResourceKey} Title: {resource.ResourceTitle} SearchUri: {resource.SearchItemsUrl ?? "not set"}");
+                        _logger.Info(
+                            $"Processing Resource: Key: {resource.ResourceKey} Title: {resource.ResourceTitle} SearchUri: {resource.SearchItemsUrl ?? "not set"}");
 
                         var baseUri = new Uri(subSite.Value);
 
@@ -104,13 +104,15 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.Services
         {
             var subSites = new Dictionary<SupportServiceIdentity, string>();
 
-            foreach (var subSite in _siteSettings.BaseUrls.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).ToList())
+            foreach (var subSite in _siteSettings.BaseUrls.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries)
+                .ToList())
             {
-                var siteElements = subSite.Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+                var siteElements = subSite.Split(new[] {'|'}, StringSplitOptions.RemoveEmptyEntries);
                 if (siteElements.Length != 2) continue;
                 if (string.IsNullOrWhiteSpace(siteElements[0])) continue;
                 if (string.IsNullOrWhiteSpace(siteElements[1])) continue;
-                subSites.Add((SupportServiceIdentity)Enum.Parse(typeof(SupportServiceIdentity), siteElements[0]), siteElements[1]);
+                subSites.Add((SupportServiceIdentity) Enum.Parse(typeof(SupportServiceIdentity), siteElements[0]),
+                    siteElements[1]);
             }
 
             return subSites;

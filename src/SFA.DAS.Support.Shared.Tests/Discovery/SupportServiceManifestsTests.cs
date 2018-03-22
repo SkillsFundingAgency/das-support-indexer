@@ -6,22 +6,21 @@ using SFA.DAS.Support.Shared.Discovery;
 
 namespace SFA.DAS.Support.Shared.Tests.Discovery
 {
-
     [TestFixture]
     public class SupportServiceManifestsTests
     {
-        private string _serviceName = "SFA.DAS.Support.ServiceManifests";
-
         [SetUp]
         public void Setup()
         {
             _unit = new ServiceConfiguration();
         }
 
+        private readonly string _serviceName = "SFA.DAS.Support.ServiceManifests";
+
         private ServiceConfiguration _unit;
         private ServiceConfiguration _deserialisedData;
         private string _serialisedData;
-        
+
         [Test]
         public void ItShouldDeserialise()
         {
