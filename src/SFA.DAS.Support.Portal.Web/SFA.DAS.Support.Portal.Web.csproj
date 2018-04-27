@@ -449,7 +449,7 @@
     <Compile Include="DependencyResolution\StructureMapWebApiDependencyScope.cs" />
     <Compile Include="Models\ChallengeForm.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
-    <Compile Include="Controllers\ResourceController.cs" />
+    <Compile Include="Controllers\ViewsController.cs" />
     <Compile Include="Helpers\AccountHelper.cs" />
     <Compile Include="Helpers\ChallengeHelper.cs" />
     <Compile Include="Models\NavPages.cs" />
