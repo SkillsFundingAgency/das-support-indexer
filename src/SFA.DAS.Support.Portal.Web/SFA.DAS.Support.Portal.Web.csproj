@@ -449,7 +449,7 @@
     <Compile Include="DependencyResolution\StructureMapWebApiDependencyScope.cs" />
     <Compile Include="Models\ChallengeForm.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
-    <Compile Include="Controllers\ViewsController.cs" />
+    <Compile Include="Controllers\ResourcesController.cs" />
     <Compile Include="Helpers\AccountHelper.cs" />
     <Compile Include="Helpers\ChallengeHelper.cs" />
     <Compile Include="Models\NavPages.cs" />
@@ -561,6 +561,7 @@
     <None Include="packages.config" />
     <Content Include="scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="scripts\jquery-3.1.1.min.map" />
+    <Content Include="Views\Resources\Resource.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

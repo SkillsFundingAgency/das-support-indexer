@@ -219,7 +219,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormMapperTests.cs" />
     <Compile Include="HttpClientExtensionStringDownloadTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

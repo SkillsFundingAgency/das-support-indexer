@@ -645,7 +645,7 @@ WriteLiteral("                                                ");
 
             
             #line 83 "..\..\Views\Search\Index.cshtml"
-                                           Write(Html.ActionLink("view", "Index", "Resource", new { key = SupportServiceResourceKey.EmployerAccount, id = account.AccountID }, null));
+                                           Write(Html.ActionLink("view", "Index", "Resources", new { key = SupportServiceResourceKey.EmployerAccount, id = account.AccountID }, null));
 
             
             #line default
@@ -812,7 +812,7 @@ WriteLiteral("                                                ");
 
             
             #line 128 "..\..\Views\Search\Index.cshtml"
-                                           Write(Html.ActionLink("view", "Index", "Resource", new { key = SupportServiceResourceKey.EmployerUser, id = user.Id }, null));
+                                           Write(Html.ActionLink("view", "Index", "Resources", new { key = SupportServiceResourceKey.EmployerUser, id = user.Id }, null));
 
             
             #line default

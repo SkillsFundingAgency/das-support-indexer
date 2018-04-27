@@ -19,7 +19,6 @@ namespace SFA.DAS.Support.Portal.Infrastructure.DependencyResolution
             For<IIndexNameCreator>().Use<IndexNameCreator>();
             For<ISearchProvider>().Use<ElasticSearchProvider>();
             For<ISiteConnector>().Use<SiteConnector>();
-            For<IFormMapper>().Use<FormMapper>();
             For<IWindowsLogonIdentityProvider>().Use<WindowsLogonIdentityProvider>();
         }
     }

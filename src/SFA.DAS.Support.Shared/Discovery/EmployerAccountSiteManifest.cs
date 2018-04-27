@@ -13,7 +13,7 @@ namespace SFA.DAS.Support.Shared.Discovery
             {
                 new SiteResource
                 {
-                    ResourceKey = SupportServiceResourceKey.EmployerAccount,
+                    ServiceIdentity = SupportServiceIdentity.SupportEmployerAccount,
                     SearchItemsUrl = "/api/search/accounts/{0}/{1}",
                     SearchTotalItemsUrl ="/api/search/accounts/totalCount/{0}",
                     SearchCategory = SearchCategory.Account,

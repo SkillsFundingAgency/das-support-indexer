@@ -80,7 +80,7 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.Services
 
                     foreach (var resource in resourcesToIndex)
                     {
-                        _logger.Info($"Processing Resource: Key: {resource.ResourceKey} SearchUri: {resource.SearchItemsUrl ?? "not set"}");
+                        _logger.Info($"Processing Resource: Service Identity: {resource.ServiceIdentity} SearchUri: {resource.SearchItemsUrl ?? "not set"}");
 
                         var baseUri = new Uri(subSite.Value);
 

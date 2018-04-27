@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using SFA.DAS.NLog.Logger;
 using SFA.DAS.Support.Shared.Authentication;
+using SFA.DAS.Support.Shared.Discovery;
 
 namespace SFA.DAS.Support.Shared.SiteConnection
 {
@@ -44,6 +45,11 @@ namespace SFA.DAS.Support.Shared.SiteConnection
         public async Task<T> Download<T>(string url) where T : class
         {
             return await Download<T>(new Uri(url));
+        }
+
+        public Task<string> Download(SupportServiceIdentity service, Uri url)
+        {
+            throw new NotImplementedException(); //TODO
         }
 
         public async Task<string> Download(Uri url)

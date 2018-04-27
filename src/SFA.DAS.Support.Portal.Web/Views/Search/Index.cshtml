@@ -80,7 +80,7 @@
                                                 @account.AccountID
                                             </td>
                                             <td data-label="">
-                                                @Html.ActionLink("view", "Index", "Resource", new { key = SupportServiceResourceKey.EmployerAccount, id = account.AccountID }, null)
+                                                @Html.ActionLink("view", "Index", "Resources", new { key = SupportServiceResourceKey.EmployerAccount, id = account.AccountID }, null)
                                             </td>
                                         </tr>
                                     }
@@ -125,7 +125,7 @@
                                                 @user.Status
                                             </td>
                                             <td data-label="">
-                                                @Html.ActionLink("view", "Index", "Resource", new { key = SupportServiceResourceKey.EmployerUser, id = user.Id }, null)
+                                                @Html.ActionLink("view", "Index", "Resources", new { key = SupportServiceResourceKey.EmployerUser, id = user.Id }, null)
                                             </td>
                                         </tr>
                                     }
