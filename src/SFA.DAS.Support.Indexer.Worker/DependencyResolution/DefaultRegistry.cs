@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.Azure;
 using SFA.DAS.Configuration;
@@ -34,12 +35,10 @@ namespace SFA.DAS.Support.Indexer.Worker.DependencyResolution
             For<ISearchSettings>().Use(configuration.ElasticSearch);
             For<ISiteSettings>().Use(configuration.Site);
             For<ISiteConnectorSettings>().Use(configuration.SiteConnector);
-            For<ServiceConfiguration>().Singleton().Use(new ServiceConfiguration
-                {
-                    new EmployerAccountSiteManifest(),
-                    new EmployerUserSiteManifest()
-                }
-            );
+            var resources = new List<SiteResource>();
+            resources.AddRange(new EmployerAccountSiteManifest());
+            resources.AddRange(new EmployerUserSiteManifest());
+            For<List<SiteResource>>().Singleton().Use(resources);
 
         }
 

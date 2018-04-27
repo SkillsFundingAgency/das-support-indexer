@@ -85,7 +85,6 @@
     <Compile Include="Mapping\UserSummaryMapper.cs" />
     <Compile Include="Models\EmployerUserSearchResults.cs" />
     <Compile Include="IEmployerUserRepository.cs" />
-    <Compile Include="Models\NavViewModel.cs" />
     <Compile Include="Queries\ChallengePermissionQuery.cs" />
     <Compile Include="Queries\ChallengeQuery.cs" />
     <Compile Include="Queries\SearchQuery.cs" />
@@ -103,8 +102,6 @@
     <Compile Include="Services\IDatetimeService.cs" />
     <Compile Include="Services\IFormMapper.cs" />
     <Compile Include="Services\IGetCurrentIdentity.cs" />
-    <Compile Include="Services\IManifestRepository.cs" />
-    <Compile Include="Services\ManifestRepository.cs" />
     <Compile Include="Models\ResourceResultModel.cs" />
     <Compile Include="Settings\SiteSettings.cs" />
     <Compile Include="Settings\CryptoSettings.cs" />

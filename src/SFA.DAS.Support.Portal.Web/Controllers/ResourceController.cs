@@ -1,111 +1,45 @@
-﻿using System.Linq;
-using System.Net;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using SFA.DAS.Support.Portal.ApplicationServices.Models;
-using SFA.DAS.Support.Portal.ApplicationServices.Services;
-using SFA.DAS.Support.Portal.Web.Services;
 using SFA.DAS.Support.Shared.Discovery;
+using SFA.DAS.Support.Shared.SiteConnection;
 
 namespace SFA.DAS.Support.Portal.Web.Controllers
 {
     public class ResourceController : Controller
     {
-        private readonly ICheckPermissions _checker;
-        private readonly IGrantPermissions _granter;
-        private readonly IManifestRepository _repository;
-        private readonly IServiceConfiguration _serviceConfiguration;
-        public ResourceController(
-            IManifestRepository repository,
-            ICheckPermissions checker,
-            IGrantPermissions granter, IServiceConfiguration serviceConfiguration)
+        private readonly ISiteConnector _siteConnector;
+
+        public ResourceController(ISiteConnector siteConnector)
         {
-            _repository = repository;
-            _checker = checker;
-            _granter = granter;
-            _serviceConfiguration = serviceConfiguration;
+            _siteConnector = siteConnector;
         }
 
         [HttpGet]
-        public async Task<ActionResult> Challenge(SupportServiceResourceKey resourceKey, SupportServiceResourceKey challengeKey, string resourceId, string url)
-        {
-            if (!_serviceConfiguration.ChallengeExists(challengeKey)) return HttpNotFound();
-
-            ViewBag.SubNav = await _repository.GetNav(resourceKey, resourceId);
-            ViewBag.SubHeader = await _repository.GenerateHeader(resourceKey, resourceId);
-
-            try
-            {
-                var challengeForm = await _repository.GetChallengeForm(resourceKey, challengeKey, resourceId, url);
-                return View("Sub", new ResourceResultModel
-                {
-                    StatusCode = HttpStatusCode.OK,
-                    Resource = challengeForm
-                });
-            }
-            catch
-            {
-                return View("Missing");
-            }
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> Challenge(SupportServiceResourceKey resourceKey, SupportServiceResourceKey challengeKey, string resourceId, FormCollection formData)
-        {
-            var pairs = formData.AllKeys.ToDictionary(k => k, v => formData[v]);
-            var result = await _repository.SubmitChallenge(resourceId, pairs);
-
-            if (result.HasRedirect)
-            {
-                _granter.GivePermissions(Response, User, $"{challengeKey}/{resourceId}");
-                return Redirect(result.RedirectUrl);
-            }
-
-            ViewBag.SubNav = await _repository.GetNav(resourceKey, resourceId);
-            ViewBag.SubHeader = await _repository.GenerateHeader(resourceKey, resourceId);
-            return View("Sub", new ResourceResultModel
-            {
-                StatusCode = HttpStatusCode.OK,
-                Resource = result.Page
-            });
-        }
-
-        [HttpGet]
-        public async Task<ActionResult> Index(SupportServiceResourceKey key, string id, string childId)
+        [Route("views/{*path")]
+        public async Task<ActionResult> Index(string path)
         {
 
-            if (!_serviceConfiguration.ResourceExists(key))
-                return View("Sub",
-                    new ResourceResultModel
-                    {
-                        Resource = "<h3>This resource isn't registered</h3>",
-                        StatusCode = HttpStatusCode.OK,
-                        Exception = null
-                    });
+            var pathElements = (path??string.Empty).Split('/');
 
-            var resource = _serviceConfiguration.GetResource(key);
+            if (string.IsNullOrWhiteSpace(path) || pathElements.Length < 2)
+                return View("Denied", new {Reason = "No view was requested"});
+            
+            var service = (SupportServiceIdentity) Enum.Parse( typeof(SupportServiceIdentity), pathElements[0]);
 
-            if (resource.Challenge.HasValue)
-            {
-                if (!_checker.HasPermissions(Request, Response, User, $"{resource.Challenge}/{id}"))
-                {
-                    return RedirectToAction("Challenge",
-                                            new
-                                            {
-                                                resourceId = id,
-                                                resourceKey = (int)key,
-                                                challengeKey = (int)resource.Challenge,
-                                                url = Request.RawUrl
-                                            });
-                }
-            }
+            var viewPath = pathElements.Skip(1)
+                        .Take(int.MaxValue)
+                        .Aggregate(string.Empty, 
+                            (current, item) => current + 
+                                               $"{(current.Length == 0 ? string.Empty : "/")}{item}");
+            var uri = new Uri(viewPath, UriKind.Relative);
 
-            ViewBag.SubNav = await _repository.GetNav(key, id);
-            ViewBag.SubHeader = await _repository.GenerateHeader(key, id);
+            string resource = await _siteConnector.Download(service, uri);
 
-            var resourceResult = await _repository.GetResourcePage(key, id, childId);
 
-            return View("Sub", resourceResult);
+            return View("Sub", new ResourceResultModel { Resource = resource});
         }
     }
 }

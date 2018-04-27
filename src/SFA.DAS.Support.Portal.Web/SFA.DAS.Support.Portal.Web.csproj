@@ -467,7 +467,6 @@
     <Compile Include="Settings\WebConfiguration.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Controllers\SearchController.cs" />
-    <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="DependencyResolution\ControllerConvention.cs" />
     <Compile Include="DependencyResolution\DefaultRegistry.cs" />
     <Compile Include="DependencyResolution\IoC.cs" />
@@ -501,7 +500,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="StartUp\IIS.bat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -559,7 +557,6 @@
     <Content Include="Content\src\styles\_tables.scss" />
     <Content Include="Content\src\styles\_typography.scss" />
     <Content Include="Content\src\styles\_variables.scss" />
-    <Content Include="Views\Shared\_SubsiteLayout.cshtml" />
     <Content Include="Views\Shared\_PortalLayout.cshtml" />
     <None Include="packages.config" />
     <Content Include="scripts\jquery-3.1.1.slim.min.map" />

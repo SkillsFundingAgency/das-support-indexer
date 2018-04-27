@@ -95,10 +95,9 @@
     <Compile Include="AssemblyExtensions.cs" />
     <Compile Include="Discovery\EmployerAccountSiteManifest.cs" />
     <Compile Include="Discovery\EmployerUserSiteManifest.cs" />
-    <Compile Include="Discovery\IServiceConfiguration.cs" />
-    <Compile Include="Discovery\ServiceConfiguration.cs" />
     <Compile Include="Discovery\ServiceResourceKey.cs" />
     <Compile Include="Discovery\SupportServiceIdentity.cs" />
+    <Compile Include="Models\SharedViewModel.cs" />
     <Compile Include="SiteConnection\StrategyForClientErrorStatusCode.cs" />
     <Compile Include="SiteConnection\StrategyForRedirectionStatusCode.cs" />
     <Compile Include="SiteConnection\HttpStatusCodeDecision.cs" />
@@ -109,18 +108,12 @@
     <Compile Include="SiteConnection\SiteConnectorSettings.cs" />
     <Compile Include="SiteConnection\ISiteConnector.cs" />
     <Compile Include="SiteConnection\ISiteConnectorSettings.cs" />
-    <Compile Include="Discovery\ISiteManifest.cs" />
-    <Compile Include="Navigation\NavItem.cs" />
-    <Compile Include="Navigation\PageLinks.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Navigation\ResultPage.cs" />
     <Compile Include="SearchIndexModel\AccountSearchModel.cs" />
     <Compile Include="SearchIndexModel\BaseSearchModel.cs" />
     <Compile Include="SearchIndexModel\SearchCategory.cs" />
     <Compile Include="SearchIndexModel\UserSearchModel.cs" />
-    <Compile Include="Authentication\SiteChallenge.cs" />
     <Compile Include="SiteConnection\SiteConnector.cs" />
-    <Compile Include="Discovery\SiteManifest.cs" />
     <Compile Include="Discovery\SiteResource.cs" />
     <Compile Include="SiteConnection\SiteValidatorSettings.cs" />
     <Compile Include="SiteConnection\StrategyForSystemErrorStatusCode.cs" />
@@ -131,6 +124,8 @@
     <None Include="SFA.DAS.Support.Shared.nuspec">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Views\Shared\_Header.cshtml" />
+    <Content Include="Views\Shared\_SubsiteLayout.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

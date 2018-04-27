@@ -148,10 +148,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Web\Controllers\ResourceController\WhenCallingTheResourceControllerChallengeGet.cs" />
-    <Compile Include="Web\Controllers\ResourceController\WhenCallingTheResourceControllerChallengePost.cs" />
-    <Compile Include="Web\Controllers\ResourceController\WhenCallingTheResourceControllerIndexGet.cs" />
-    <Compile Include="Web\Controllers\ResourceController\WhenTestingTheResourceController.cs" />
     <Compile Include="Web\Controllers\SearchController\WhenTestingSearchController.cs" />
     <Compile Include="Web\Domain\WhenAnEmployerUserIsBothActiveAndLocked.cs" />
     <Compile Include="Web\Domain\WhenAnEmployerUserIsBothActiveAndNotLocked.cs" />

@@ -26,9 +26,8 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.Services
         private readonly Stopwatch _runtimer = new Stopwatch();
         private readonly ISearchSettings _searchSettings;
         private readonly ISiteSettings _siteSettings;
-        private readonly ServiceConfiguration _manifests;
+        private List<SiteResource> _resources;
 
-      
 
         public IndexerService(ISiteSettings settings,
             ISiteConnector downloader,
@@ -36,7 +35,7 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.Services
             ISearchSettings searchSettings,
             ILog logger,
             IIndexNameCreator indexNameCreator,
-            IIndexResourceProcessor indexResourceProcessor, ServiceConfiguration manifests)
+            IIndexResourceProcessor indexResourceProcessor, List<SiteResource> resources)
         {
             _siteSettings = settings;
             _dataSource = downloader;
@@ -45,7 +44,7 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.Services
             _logger = logger;
             _indexNameCreator = indexNameCreator;
             _indexResourceProcessor = indexResourceProcessor;
-            _manifests = manifests;
+            _resources = resources;
         }
 
         public async Task Run()
@@ -58,7 +57,7 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.Services
                 foreach (var subSite in subSites)
                 {
                     var siteUri = new Uri(subSite.Value);
-                    var siteManifest = _manifests.FirstOrDefault(x => x.ServiceIdentity == subSite.Key);
+                   // var siteManifest = _manifests.FirstOrDefault(x => x.ServiceIdentity == subSite.Key);
 
 
                     _queryTimer.Stop();
@@ -70,9 +69,9 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.Services
                     }
 
                     _logger.Info(
-                        $"Site Manifest: Uri: {subSite.Value ?? "Missing Url"} # Challenges: {siteManifest.Challenges?.Count() ?? 0} # Resources: {siteManifest.Resources?.Count() ?? 0}");
+                        $"Site Manifest: Uri: {subSite.Value ?? "Missing Url"} # Resources: {_resources?.Count() ?? 0}");
 
-                    var resourcesToIndex = siteManifest.Resources?.Where(x =>
+                    var resourcesToIndex = _resources?.Where(x =>
                                             !string.IsNullOrWhiteSpace(x.SearchItemsUrl) &&
                                             !string.IsNullOrWhiteSpace(subSite.Value) &&
                                             x.SearchCategory != SearchCategory.None).ToList();
@@ -81,7 +80,7 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.Services
 
                     foreach (var resource in resourcesToIndex)
                     {
-                        _logger.Info($"Processing Resource: Key: {resource.ResourceKey} Title: {resource.ResourceTitle} SearchUri: {resource.SearchItemsUrl ?? "not set"}");
+                        _logger.Info($"Processing Resource: Key: {resource.ResourceKey} SearchUri: {resource.SearchItemsUrl ?? "not set"}");
 
                         var baseUri = new Uri(subSite.Value);
 

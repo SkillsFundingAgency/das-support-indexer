@@ -32,6 +32,7 @@ namespace SFA.DAS.Support.Portal.Web.DependencyResolution
     using SFA.DAS.Support.Shared.Discovery;
     using StructureMap.Configuration.DSL;
     using StructureMap.Graph;
+    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
 
     [ExcludeFromCodeCoverage]
@@ -72,12 +73,11 @@ namespace SFA.DAS.Support.Portal.Web.DependencyResolution
 
             For<IADFSConfiguration>().Use<ADFSConfiguration>();
 
-            For<IServiceConfiguration>().Singleton().Use(new ServiceConfiguration
-                                                                       {
-                                                                           new EmployerAccountSiteManifest(),
-                                                                           new EmployerUserSiteManifest()
-                                                                       }
-                                                                   );
+            var resources = new List<SiteResource>();
+            resources.AddRange(new EmployerAccountSiteManifest());
+            resources.AddRange(new EmployerUserSiteManifest());
+
+            For<List<SiteResource>>().Singleton().Use(resources);
 
         }
 
