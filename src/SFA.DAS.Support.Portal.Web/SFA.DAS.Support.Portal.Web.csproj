@@ -444,6 +444,7 @@
     <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="App_Start\StructuremapWebApi.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Models\VersionInformation.cs" />
     <Compile Include="DependencyResolution\StructureMapWebApiDependencyResolver.cs" />

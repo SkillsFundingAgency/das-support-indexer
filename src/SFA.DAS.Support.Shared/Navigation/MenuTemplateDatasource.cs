@@ -1,26 +1,50 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using NUnit.Framework;
-using SFA.DAS.Support.Shared.Navigation;
+using System.Reflection;
+using Newtonsoft.Json;
 
-
-namespace SFA.DAS.Support.Shared.Tests.Navigation
+namespace SFA.DAS.Support.Shared.Navigation
 {
-    public class WhenTestingActiveMenuProvider
-    {
-        private readonly MenuProvider _unit = new MenuProvider();
 
-        [SetUp]
-        public void Setup()
+    /// <summary>
+    /// Obtains the available menu templates 
+    /// </summary>
+    public class MenuTemplateDatasource : IMenuTemplateDatasource
+    {
+
+        private readonly FileInfo _fileDataSource = null;
+        private readonly string _embeddedDataSource = null;
+
+        public MenuTemplateDatasource(FileInfo fileMenuTempalteDataSource)
         {
-            // ARRANGE
-            var items = new List<MenuItem>
+            _fileDataSource = fileMenuTempalteDataSource;
+
+            var embeddedPath = typeof(MenuTemplateDatasource).Namespace;
+            _embeddedDataSource = $"{embeddedPath}.MenuTemplates.json";
+
+        }
+
+        public List<MenuRoot> Provide()
+        {
+            var menuItems = SourceFromFile();
+            if (menuItems.Any()) return menuItems;
+
+            menuItems = SourceFromEmbeddedResource();
+            if (menuItems.Any()) return menuItems;
+
+            menuItems = SourceFromDefault();
+            return menuItems;
+        }
+
+        private List<MenuRoot> SourceFromDefault()
+        {
+            var menuItems = new List<MenuRoot>
             {
-                new MenuItem
+                new MenuRoot
                 {
-                    Key = "User",
-                    Text = "User",
-                    NavigateUrl = "users/{userId}",
+                    Perspective = SupportMenuPerspectives.EmployerUser,
                     MenuItems = new List<MenuItem>
                     {
                         new MenuItem
@@ -37,11 +61,9 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
                         }
                     }
                 },
-                new MenuItem
+                new MenuRoot
                 {
-                    Key = "Account",
-                    Text = "Accounts",
-                    NavigateUrl = "accounts/{accountId}",
+                    Perspective = SupportMenuPerspectives.EmployerAccount,
                     MenuItems = new List<MenuItem>
                     {
                         new MenuItem
@@ -96,29 +118,45 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
                     }
                 }
             };
-            // ACT
-            _unit.SetMenu(items, "Account.Finance.PAYE");
+#if DEBUG
+            var path = new FileInfo(typeof(MenuRoot).Assembly.Location).Directory.FullName;
+            File.WriteAllText($@"{path}\MenuTemplates.json", JsonConvert.SerializeObject(menuItems));
+#endif
+            return menuItems;
         }
-        [Test]
-        public void ItShouldHaveAListOfMenuItems()
+
+        private List<MenuRoot> SourceFromEmbeddedResource()
         {
-            Assert.IsNotEmpty(_unit.MenuItems);
-            Assert.AreEqual(1, _unit.MenuItems.Count);
+            Assembly thisAssembly = Assembly.GetExecutingAssembly();
+            Stream resourceStream = thisAssembly.GetManifestResourceStream(_embeddedDataSource);
+            if (resourceStream == null) return new List<MenuRoot>();
+            BinaryReader br = new BinaryReader(resourceStream);
+            byte[] ba = new byte[resourceStream.Length];
+            resourceStream.Read(ba, 0, ba.Length);
+            br.Close();
+            var data = System.Text.Encoding.UTF8.GetString(ba);
+            try
+            {
+                return JsonConvert.DeserializeObject<List<MenuRoot>>(data);
+            }
+            catch (Exception e)
+            {
+                return new List<MenuRoot>();
+            }
         }
-        [Test]
-        public void ItShouldHaveActiveMenuKeys()
+
+        private List<MenuRoot> SourceFromFile()
         {
-            Assert.IsNotEmpty(_unit.SelectedMenuItemKeys);
-        }
-        [Test]
-        public void ItRootSelectedMenuShouldBeSetCorrectly()
-        {
-            Assert.AreEqual(_unit.SelectedMenuItemKeys.FirstOrDefault(), "Account");
-        }
-        [Test]
-        public void ItActualSelectedMenuShouldBeSetCorrectly()
-        {
-            Assert.AreEqual(_unit.SelectedMenuItemKeys.LastOrDefault(), "Account.Finance.PAYE");
+            if (_fileDataSource == null || !_fileDataSource.Exists) return new List<MenuRoot>();
+            try
+            {
+                return JsonConvert.DeserializeObject<List<MenuRoot>>(File.ReadAllText(_fileDataSource.FullName));
+            }
+            catch
+            {
+                // ignore
+            }
+            return new List<MenuRoot>();
         }
     }
 }

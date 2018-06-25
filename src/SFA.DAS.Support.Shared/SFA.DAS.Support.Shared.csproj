@@ -99,9 +99,15 @@
     <Compile Include="Discovery\ServiceConfiguration.cs" />
     <Compile Include="Discovery\ServiceResourceKey.cs" />
     <Compile Include="Discovery\SupportServiceIdentity.cs" />
+    <Compile Include="Navigation\IMenuTemplateDatasource.cs" />
+    <Compile Include="Navigation\IMenuTemplateHandler.cs" />
     <Compile Include="Navigation\MenuItem.cs" />
     <Compile Include="Navigation\MenuOrientations.cs" />
-    <Compile Include="Navigation\MenuProvider.cs" />
+    <Compile Include="Navigation\MenuTemplateDatasource.cs" />
+    <Compile Include="Navigation\MenuTemplateHandler.cs" />
+    <Compile Include="Navigation\MenuTemplateTransformer.cs" />
+    <Compile Include="Navigation\MenuViewModel.cs" />
+    <Compile Include="Navigation\SupportMenuPerspectives.cs" />
     <Compile Include="SiteConnection\StrategyForClientErrorStatusCode.cs" />
     <Compile Include="SiteConnection\StrategyForRedirectionStatusCode.cs" />
     <Compile Include="SiteConnection\HttpStatusCodeDecision.cs" />
@@ -128,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Navigation\MenuTemplates.json" />
     <None Include="packages.config" />
     <None Include="SFA.DAS.Support.Shared.nuspec">
       <SubType>Designer</SubType>

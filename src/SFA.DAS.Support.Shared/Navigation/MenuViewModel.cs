@@ -4,7 +4,10 @@ using System.Linq;
 
 namespace SFA.DAS.Support.Shared.Navigation
 {
-    public class MenuProvider
+    /// <summary>
+    /// Provides transformed menu tempaltes as navigable Uri's to the UI rendering layer.
+    /// </summary>
+    public class MenuViewModel
     {
         /// <summary>
         /// Determines the intended rendering orientation for this menu
@@ -31,7 +34,7 @@ namespace SFA.DAS.Support.Shared.Navigation
                     (string) elements.Take(i + 1).Aggregate(string.Empty, (current, keyElement) => $"{current}{(string.IsNullOrWhiteSpace(current) ? "" : ".")}{keyElement}"))
                 .ToList();
             SelectedMenuItemKeys = keys;
-            MenuItems = items.Where(x => x.Key == (SelectedMenuItemKeys.FirstOrDefault()?? x.Key)).ToList();
+            MenuItems = items.Where(x => x.Key.StartsWith(SelectedMenuItemKeys.FirstOrDefault()?? x.Key)).ToList();
         }
     }
 }

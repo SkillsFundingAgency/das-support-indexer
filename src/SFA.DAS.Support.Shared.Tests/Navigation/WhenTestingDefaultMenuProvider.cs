@@ -6,7 +6,7 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
 {
     public class WhenTestingDefaultMenuProvider
     {
-        private MenuProvider _unit = new MenuProvider();
+        private MenuViewModel _unit = new MenuViewModel();
 
         [SetUp]
         public void Setup()
