@@ -16,7 +16,7 @@ namespace SFA.DAS.Support.Shared.Navigation
         /// <summary>
         ///     Provides raw presentation and navigational data for a Menu
         /// </summary>
-        public List<MenuItem> MenuItems { get; private set; } = new List<MenuItem>();
+        public List<MenuItem> MenuItems { get; set; } = new List<MenuItem>();
         /// <summary>
         /// Lists the progression of Menu item selections down the entire menu tree. "Account", "Account.Finance", "Account.Finance.PAYE"
         /// <remarks>Requires the key convention to be dot delimited graph address e.g. Item.SubItem1.Subitem2</remarks>

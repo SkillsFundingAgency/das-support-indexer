@@ -32,6 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory, Version=3.18.0.2306, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.3.18.0\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
     </Reference>
@@ -139,6 +140,8 @@
     <None Include="SFA.DAS.Support.Shared.nuspec">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Views\Shared\PanelLayout.cshtml" />
+    <None Include="Views\Shared\_navigation.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
