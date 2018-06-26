@@ -132,6 +132,8 @@
     <Compile Include="Discovery\SiteResource.cs" />
     <Compile Include="SiteConnection\SiteValidatorSettings.cs" />
     <Compile Include="SiteConnection\StrategyForSystemErrorStatusCode.cs" />
+    <Compile Include="Views\EmbeddedResourceFile.cs" />
+    <Compile Include="Views\EmbeddedResourceViewPathProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -140,8 +142,11 @@
     <None Include="SFA.DAS.Support.Shared.nuspec">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Views\Shared\PanelLayout.cshtml" />
-    <None Include="Views\Shared\_navigation.cshtml" />
+    <EmbeddedResource Include="Views\Shared\PanelLayout.cshtml" />
+    <EmbeddedResource Include="Views\Shared\_navigation.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Views.Readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

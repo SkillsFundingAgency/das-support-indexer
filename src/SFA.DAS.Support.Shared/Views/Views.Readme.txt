@@ -1,0 +1,22 @@
+﻿To include the views, layouts and partials delivered by this shared DLL;
+
+PanelLayhout.cshtml 
+_navigation.cshtml 
+
+in any client site, the following should be done.
+
+reference teh Shared Dll in the project.
+
+Add This line to the top of the Application_Start method of the sites Global.Asax.cs class file;
+
+HostingEnvironment.RegisterVirtualPathProvider(new EmbeddedResourceViewPathProvider());
+
+And add the necessary using statement to the class.
+
+This will insert the Shared Dll View folders to the view resolver location list. 
+
+The view files will be included in view resolution if they dont already exist in the other locations such as;
+ 
+ ~\Views\... 
+
+in the site in question.
