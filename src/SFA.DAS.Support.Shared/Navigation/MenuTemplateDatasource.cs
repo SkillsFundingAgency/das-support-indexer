@@ -70,7 +70,7 @@ namespace SFA.DAS.Support.Shared.Navigation
                         {
                             Key = "Account.Organisations",
                             Text = "Organisations",
-                            NavigateUrl = "accounts/{acountId}/organisations"
+                            NavigateUrl = "accounts/{accountId}/organisations"
                         },
                         new MenuItem
                         {
@@ -83,7 +83,7 @@ namespace SFA.DAS.Support.Shared.Navigation
                                 {
                                     Key = "Account.Finance.PAYE",
                                     Text = "PAYE",
-                                    NavigateUrl = "accounts/{acountId}/finance/paye"
+                                    NavigateUrl = "accounts/{accountId}/finance/paye"
                                 },
                                 new MenuItem
                                 {

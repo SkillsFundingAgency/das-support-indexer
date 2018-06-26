@@ -108,6 +108,7 @@
     <Compile Include="Navigation\MenuTemplateHandler.cs" />
     <Compile Include="Navigation\MenuTemplateTransformer.cs" />
     <Compile Include="Navigation\MenuViewModel.cs" />
+    <Compile Include="Navigation\NavItemExtensions.cs" />
     <Compile Include="Navigation\SupportMenuPerspectives.cs" />
     <Compile Include="SiteConnection\StrategyForClientErrorStatusCode.cs" />
     <Compile Include="SiteConnection\StrategyForRedirectionStatusCode.cs" />
