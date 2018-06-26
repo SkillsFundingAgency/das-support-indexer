@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using SFA.DAS.Support.Shared.Authentication;
 using SFA.DAS.Support.Shared.SearchIndexModel;
 
 namespace SFA.DAS.Support.Shared.Discovery
 {
+    [Obsolete]
     public class EmployerAccountSiteManifest : SiteManifest
     {
         public EmployerAccountSiteManifest()

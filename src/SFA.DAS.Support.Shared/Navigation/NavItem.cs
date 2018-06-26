@@ -1,9 +1,11 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using SFA.DAS.Support.Shared.Discovery;
 
 namespace SFA.DAS.Support.Shared.Navigation
 {
     [ExcludeFromCodeCoverage]
+    [Obsolete]
     public class NavItem
     {
         public string Title { get; set; }

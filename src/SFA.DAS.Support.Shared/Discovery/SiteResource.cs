@@ -1,10 +1,12 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json;
 using SFA.DAS.Support.Shared.SearchIndexModel;
 
 namespace SFA.DAS.Support.Shared.Discovery
 {
     [ExcludeFromCodeCoverage]
+    [Obsolete]
     public class SiteResource
     {
         [JsonRequired] public SupportServiceResourceKey ResourceKey { get; set; }

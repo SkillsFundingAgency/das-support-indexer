@@ -1,7 +1,9 @@
-﻿using SFA.DAS.Support.Shared.SearchIndexModel;
+﻿using System;
+using SFA.DAS.Support.Shared.SearchIndexModel;
 
 namespace SFA.DAS.Support.Shared.Discovery
 {
+    [Obsolete]
     public class EmployerUserSiteManifest : SiteManifest
     {
         public EmployerUserSiteManifest()

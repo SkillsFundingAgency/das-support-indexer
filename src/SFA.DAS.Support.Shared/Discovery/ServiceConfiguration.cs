@@ -7,6 +7,7 @@ using SFA.DAS.Support.Shared.Navigation;
 namespace SFA.DAS.Support.Shared.Discovery
 {
 
+    [Obsolete]
     public class ServiceConfiguration : List<SiteManifest>, IServiceConfiguration
     {
         public Uri FindSiteBaseUriForManfiestElement(Dictionary<SupportServiceIdentity, Uri> sites,  SupportServiceResourceKey key)
