@@ -11,12 +11,30 @@ namespace SFA.DAS.Support.Shared.Tests.SiteConnector
     [TestFixture]
     public class SiteConnectorTests : SiteConnectorTestBase
     {
+        [TestCase(HttpStatusCode.NotFound)] // 404
+        public async Task ItShouldReturnNullWhenDownloadTypeRecievesHttpStatus(HttpStatusCode code)
+        {
+            MockHttpMessageHandler
+                .When(TestUrlMatch)
+                .Respond(code, "application/json", "")
+                ;
+
+            var actual = await Unit.Download<TestType>(TestUri);
+            Assert.IsNull(Unit.LastException);
+            Assert.IsNotNull(Unit.LastContent);
+
+            Assert.AreEqual(code, Unit.LastCode);
+            Assert.AreEqual(HttpStatusCodeDecision.ReturnNull, Unit.HttpStatusCodeDecision);
+            Assert.IsNotNull(HttpClient.DefaultRequestHeaders.Authorization);
+            Assert.IsNull(actual);
+        }
+
         [TestCase(HttpStatusCode.BadRequest)] // 400
         [TestCase(HttpStatusCode.Conflict)] // 409
         [TestCase(HttpStatusCode.ExpectationFailed)] // 417
         [TestCase(HttpStatusCode.RequestedRangeNotSatisfiable)] // 416
         [TestCase(HttpStatusCode.BadGateway)] // 502
-        public async Task ItShouldReturnNullWhenDownloadTypeRecievesHttpStatus(HttpStatusCode code)
+        public async Task ItShouldReturnHandleExceptionWhenDownloadTypeRecievesHttpStatus(HttpStatusCode code)
         {
             MockHttpMessageHandler
                 .When(TestUrlMatch)
