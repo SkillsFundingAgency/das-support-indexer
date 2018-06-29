@@ -2,12 +2,14 @@
 
 namespace SFA.DAS.Support.Shared.Navigation
 {
+    [Flags]
     public enum SupportMenuPerspectives
     {
-        EmployerAccount,
-        EmployerUser,
-        TrainingProvider,
-        Apprentice,
+        None,
+        EmployerAccount = 1,
+        EmployerUser = 2,
+        TrainingProvider = 4,
+        Apprentice = 8,
         All = Int32.MaxValue, 
 
     }

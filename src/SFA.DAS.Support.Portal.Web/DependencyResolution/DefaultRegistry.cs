@@ -30,6 +30,7 @@ namespace SFA.DAS.Support.Portal.Web.DependencyResolution
     using SFA.DAS.Support.Portal.Core.Services;
     using SFA.DAS.Support.Portal.Infrastructure.DependencyResolution;
     using SFA.DAS.Support.Shared.Discovery;
+    using SFA.DAS.Support.Shared.Navigation;
     using StructureMap.Configuration.DSL;
     using StructureMap.Graph;
     using System.Diagnostics.CodeAnalysis;
@@ -78,6 +79,10 @@ namespace SFA.DAS.Support.Portal.Web.DependencyResolution
                                                                            new EmployerUserSiteManifest()
                                                                        }
                                                                    );
+
+            For<IMenuTemplateDatasource>().Singleton().Use(new MenuTemplateDatasource("~/app_data"));
+            For<IMenuTemplateHandler>().Singleton().Use<MenuTemplateHandler>();
+
 
         }
 

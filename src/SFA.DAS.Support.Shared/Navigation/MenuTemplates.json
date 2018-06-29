@@ -1,8 +1,14 @@
 [
   {
-    "Perspective": 1,
+    "Perspective": 2,
+    "Key": "User",
+    "Text": "User",
+    "NavigateUrl": "/",
+    "Ordinal": 0,
+    "Roles": [],
     "MenuItems": [
       {
+        "Perspective": 2,
         "Key": "User.Details",
         "Text": "User",
         "NavigateUrl": "users/{userId}",
@@ -11,6 +17,7 @@
         "MenuItems": []
       },
       {
+        "Perspective": 2,
         "Key": "User.Accounts",
         "Text": "Accounts",
         "NavigateUrl": "users/{userId}/accounts",
@@ -21,17 +28,24 @@
     ]
   },
   {
-    "Perspective": 0,
+    "Perspective": 1,
+    "Key": "Account",
+    "Text": "Accounts",
+    "NavigateUrl": "/",
+    "Ordinal": 0,
+    "Roles": [],
     "MenuItems": [
       {
+        "Perspective": 0,
         "Key": "Account.Organisations",
         "Text": "Organisations",
-        "NavigateUrl": "accounts/{accountId}/organisations",
+        "NavigateUrl": "accounts/{acountId}/organisations",
         "Ordinal": 0,
         "Roles": [],
         "MenuItems": []
       },
       {
+        "Perspective": 1,
         "Key": "Account.Finance",
         "Text": "Finance",
         "NavigateUrl": "accounts/{accountId}/finance",
@@ -39,14 +53,16 @@
         "Roles": [],
         "MenuItems": [
           {
+            "Perspective": 1,
             "Key": "Account.Finance.PAYE",
             "Text": "PAYE",
-            "NavigateUrl": "accounts/{accountId}/finance/paye",
+            "NavigateUrl": "accounts/{acountId}/finance/paye",
             "Ordinal": 0,
             "Roles": [],
             "MenuItems": []
           },
           {
+            "Perspective": 1,
             "Key": "Account.Finance.Transactions",
             "Text": "Transactions",
             "NavigateUrl": "accounts/{accountId}/finance/transactions",
@@ -57,6 +73,7 @@
         ]
       },
       {
+        "Perspective": 1,
         "Key": "Account.Commitments",
         "Text": "Commitments",
         "NavigateUrl": "commitments/accounts/{accountId}",
@@ -64,6 +81,7 @@
         "Roles": [],
         "MenuItems": [
           {
+            "Perspective": 1,
             "Key": "Account.Commitments.Apprentices",
             "Text": "Apprentices",
             "NavigateUrl": "commitments/accounts/{accountId}/apprentices",
@@ -72,6 +90,7 @@
             "MenuItems": []
           },
           {
+            "Perspective": 1,
             "Key": "Account.Commitments.Payments",
             "Text": "Payments",
             "NavigateUrl": "commitments/accounts/{accountId}/payments",

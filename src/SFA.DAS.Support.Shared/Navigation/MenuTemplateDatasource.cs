@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Web;
 using Newtonsoft.Json;
 
 namespace SFA.DAS.Support.Shared.Navigation
@@ -26,6 +27,15 @@ namespace SFA.DAS.Support.Shared.Navigation
 
         }
 
+        public MenuTemplateDatasource(string fileMenuTempalteDataSource)
+        {
+            var path = HttpContext.Current?.Server?.MapPath(fileMenuTempalteDataSource) ?? $@"c:\{fileMenuTempalteDataSource}";
+            _fileDataSource = new FileInfo(path);
+
+            var embeddedPath = typeof(MenuTemplateDatasource).Namespace;
+            _embeddedDataSource = $"{embeddedPath}.MenuTemplates.json";
+
+        }
         public List<MenuRoot> Provide()
         {
             var menuItems = SourceFromFile();

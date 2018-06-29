@@ -1,21 +1,20 @@
-﻿using System.Threading.Tasks;
-using System.Web.Http;
+﻿using System.Web.Http;
 using SFA.DAS.Support.Shared.Navigation;
 
 namespace SFA.DAS.Support.Portal.Web.Controllers
 {
-    [RoutePrefix("navigation")]
+    [RoutePrefix("api/navigation")]
     public class NavigationController : ApiController
     {
-        private IMenuTemplateHandler _menuTemplateHandler;  
+        private readonly IMenuTemplateHandler _menuTemplateHandler;  
         public NavigationController(IMenuTemplateHandler menuTemplateHandler)
         {
             _menuTemplateHandler = menuTemplateHandler;
         }
         [HttpGet]
-        public IHttpActionResult Index(SupportMenuPerspectives perspective)
+        public IHttpActionResult Get(SupportMenuPerspectives id = SupportMenuPerspectives.All)
         {
-            var menuForPerspective = _menuTemplateHandler.GetMenuForPerspective(perspective);
+            var menuForPerspective = _menuTemplateHandler.GetMenuForPerspective(id);
             return Ok(menuForPerspective);
         }
 

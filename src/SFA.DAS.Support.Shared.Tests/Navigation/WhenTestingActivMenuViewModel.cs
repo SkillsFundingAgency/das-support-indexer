@@ -9,7 +9,7 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
     public class WhenTestingActivMenuViewModel
     {
         private  List<MenuRoot> _rootMenus ;
-        private readonly IMenuTemplateDatasource _menuTemplateDatasource = new MenuTemplateDatasource(null);
+        private readonly IMenuTemplateDatasource _menuTemplateDatasource = new MenuTemplateDatasource(@".\");
         private readonly MenuViewModel _unit = new MenuViewModel();
 
         [SetUp]
