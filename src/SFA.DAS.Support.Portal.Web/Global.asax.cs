@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Web;
 using System.Web.Configuration;
@@ -16,6 +17,15 @@ namespace SFA.DAS.Support.Portal.Web
     [ExcludeFromCodeCoverage]
     public class MvcApplication : HttpApplication
     {
+
+        public MvcApplication()
+        {
+            this.BeginRequest += (sender, args) =>
+            {
+                Debug.WriteLine($"{HttpContext.Current.Request.RawUrl}");
+            };
+            this.EndRequest += (sender, args) => { };
+        }
         protected void Application_Start()
         {
             MvcHandler.DisableMvcResponseHeader = true;
