@@ -27,39 +27,39 @@ namespace SFA.DAS.Support.Shared.Tests.HttpStatusStrategy
         [TestCase(HttpStatusCode.UpgradeRequired)]
         public void ItShouldLogErrorThenDecideToReturnNullWithCode(HttpStatusCode code)
         {
-            var actual = Unit.Handle(_httpClient, code);
+            var actual = Unit.Handle(HttpClient, code);
             var expected = HttpStatusCodeDecision.HandleException;
             Assert.AreEqual(expected, actual);
             MockLogger.Verify(x => x.Error(It.IsAny<Exception>(), It.IsAny<string>()), Times.Once());
-            Assert.IsNotNull(_httpClient.DefaultRequestHeaders.Authorization);
+            Assert.IsNotNull(HttpClient.DefaultRequestHeaders.Authorization);
         }
 
 
         [TestCase(HttpStatusCode.Unauthorized)]
         public void ItShouldLogWarningDecideToReturnNullAndRemoveAuthorisationHeaderWithCode(HttpStatusCode code)
         {
-            var actual = Unit.Handle(_httpClient, code);
+            var actual = Unit.Handle(HttpClient, code);
             var expected = HttpStatusCodeDecision.ReturnNull;
             Assert.AreEqual(expected, actual);
             MockLogger.Verify(x => x.Warn(It.IsAny<string>()), Times.Once());
-            Assert.IsNull(_httpClient.DefaultRequestHeaders.Authorization);
+            Assert.IsNull(HttpClient.DefaultRequestHeaders.Authorization);
         }
 
         [TestCase(HttpStatusCode.Forbidden)]
         public void ItShouldLogWarningDecideToReturnNullAndNotRemoveAuthorisationHeaderWithCode(HttpStatusCode code)
         {
-            var actual = Unit.Handle(_httpClient, code);
+            var actual = Unit.Handle(HttpClient, code);
             var expected = HttpStatusCodeDecision.ReturnNull;
             Assert.AreEqual(expected, actual);
             MockLogger.Verify(x => x.Warn(It.IsAny<string>()), Times.Once());
-            Assert.IsNotNull(_httpClient.DefaultRequestHeaders.Authorization);
+            Assert.IsNotNull(HttpClient.DefaultRequestHeaders.Authorization);
         }
 
 
         [TestCase(HttpStatusCode.NotFound)]
         public void ItShouldLogWarnAndDecideToReturnNullWithCode(HttpStatusCode code)
         {
-            var actual = Unit.Handle(_httpClient, code);
+            var actual = Unit.Handle(HttpClient, code);
             var expected = HttpStatusCodeDecision.ReturnNull;
             Assert.AreEqual(expected, actual);
             MockLogger.Verify(x => x.Warn(It.IsAny<string>()), Times.Once());

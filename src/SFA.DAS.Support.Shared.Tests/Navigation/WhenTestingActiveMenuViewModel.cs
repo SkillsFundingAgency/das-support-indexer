@@ -6,7 +6,7 @@ using SFA.DAS.Support.Shared.Navigation;
 
 namespace SFA.DAS.Support.Shared.Tests.Navigation
 {
-    public class WhenTestingActivMenuViewModel
+    public class WhenTestingActiveMenuViewModel
     {
         private  List<MenuRoot> _rootMenus ;
         private readonly IMenuTemplateDatasource _menuTemplateDatasource = new MenuTemplateDatasource(@".\");

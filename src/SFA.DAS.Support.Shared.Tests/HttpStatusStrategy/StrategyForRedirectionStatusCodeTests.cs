@@ -23,7 +23,7 @@ namespace SFA.DAS.Support.Shared.Tests.HttpStatusStrategy
         [TestCase(HttpStatusCode.RedirectKeepVerb)]
         public void ItShouldLogInfoAndDecideToReturnNullWithCode(HttpStatusCode code)
         {
-            var actual = Unit.Handle(_httpClient, code);
+            var actual = Unit.Handle(HttpClient, code);
             var expected = HttpStatusCodeDecision.ReturnNull;
             Assert.AreEqual(expected, actual);
             MockLogger.Verify(x => x.Info(It.IsAny<string>()), Times.Once());
