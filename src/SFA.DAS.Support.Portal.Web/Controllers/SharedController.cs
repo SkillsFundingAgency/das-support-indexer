@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Web.Mvc;
 using SFA.DAS.Support.Portal.Web.ViewModels;
 
@@ -6,6 +7,7 @@ namespace SFA.DAS.Support.Portal.Web.Controllers
 {
     public class SharedController : Controller
     {
+        [Obsolete]
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
         public PartialViewResult Header()
         {

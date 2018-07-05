@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -9,6 +10,7 @@ using SFA.DAS.Support.Shared.Discovery;
 
 namespace SFA.DAS.Support.Portal.Web.Controllers
 {
+    [Obsolete]
     public class ResourceController : Controller
     {
         private readonly ICheckPermissions _checker;

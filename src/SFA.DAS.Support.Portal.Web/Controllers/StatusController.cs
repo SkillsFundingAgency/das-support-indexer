@@ -15,7 +15,7 @@ namespace SFA.DAS.Support.Portal.Web.Controllers
     [System.Web.Mvc.RoutePrefix("api/status")]
     public class StatusController : ApiController
     {
-        private ISiteConnector _siteConnector;
+        private readonly ISiteConnector _siteConnector;
         private readonly ISiteSettings _siteSettings;
 
         public StatusController(ISiteConnector siteConnector, ISiteSettings siteSettings)

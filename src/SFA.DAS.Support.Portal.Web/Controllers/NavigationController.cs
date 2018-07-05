@@ -3,6 +3,7 @@ using SFA.DAS.Support.Shared.Navigation;
 
 namespace SFA.DAS.Support.Portal.Web.Controllers
 {
+    [AllowAnonymous]
     [RoutePrefix("api/navigation")]
     public class NavigationController : ApiController
     {
@@ -11,6 +12,7 @@ namespace SFA.DAS.Support.Portal.Web.Controllers
         {
             _menuTemplateHandler = menuTemplateHandler;
         }
+        [AllowAnonymous]
         [HttpGet]
         public IHttpActionResult Get(SupportMenuPerspectives id = SupportMenuPerspectives.All)
         {

@@ -1,0 +1,86 @@
+[
+  {
+    "Perspective": 2,
+    "MenuItems": [
+      {
+        "Key": "User.Details",
+        "Text": "User",
+        "NavigateUrl": "users/{userId}",
+        "Ordinal": 0,
+        "Roles": [],
+        "MenuItems": []
+      },
+      {
+        "Key": "User.Accounts",
+        "Text": "Accounts",
+        "NavigateUrl": "users/{userId}/accounts",
+        "Ordinal": 1,
+        "Roles": [],
+        "MenuItems": []
+      }
+    ]
+  },
+  {
+    "Perspective": 1,
+    "MenuItems": [
+      {
+        "Key": "Account.Organisations",
+        "Text": "Organisations",
+        "NavigateUrl": "accounts/{accountId}/organisations",
+        "Ordinal": 0,
+        "Roles": [],
+        "MenuItems": []
+      },
+      {
+        "Key": "Account.Finance",
+        "Text": "Finance",
+        "NavigateUrl": "accounts/{accountId}/finance",
+        "Ordinal": 1,
+        "Roles": [],
+        "MenuItems": [
+          {
+            "Key": "Account.Finance.PAYE",
+            "Text": "PAYE",
+            "NavigateUrl": "accounts/{accountId}/finance/paye",
+            "Ordinal": 0,
+            "Roles": [],
+            "MenuItems": []
+          },
+          {
+            "Key": "Account.Finance.Transactions",
+            "Text": "Transactions",
+            "NavigateUrl": "accounts/{accountId}/finance/transactions",
+            "Ordinal": 1,
+            "Roles": ["Tier2"],
+            "MenuItems": []
+          }
+        ]
+      },
+      {
+        "Key": "Account.Commitments",
+        "Text": "Commitments",
+        "NavigateUrl": "commitments/accounts/{accountId}",
+        "Ordinal": 0,
+        "Roles": [],
+        "MenuItems": [
+          {
+            "Key": "Account.Commitments.Apprentices",
+            "Text": "Apprentices",
+            "NavigateUrl": "commitments/accounts/{accountId}/apprentices",
+            "Ordinal": 0,
+            "Roles": [],
+            "MenuItems": []
+          },
+          {
+            "Key": "Account.Commitments.Payments",
+            "Text": "Payments",
+            "NavigateUrl": "commitments/accounts/{accountId}/payments",
+            "Ordinal": 1,
+            "Roles": [],
+            "MenuItems": []
+          }
+        ]
+      }
+    ]
+  }
+]
