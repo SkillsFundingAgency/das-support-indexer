@@ -5,7 +5,7 @@ using SFA.DAS.Support.Shared.Navigation;
 namespace SFA.DAS.Support.Shared.Tests.Navigation
 {
     /// <summary>
-    /// Obtains the menu templates for a specific support journey perspective
+    ///     Obtains the menu templates for a specific support journey perspective
     /// </summary>
     public class WhenTestingAMenuTemplateDatasource
     {
@@ -28,6 +28,5 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
         {
             Assert.AreEqual(2, _unit.Provide().Count);
         }
-
     }
 }

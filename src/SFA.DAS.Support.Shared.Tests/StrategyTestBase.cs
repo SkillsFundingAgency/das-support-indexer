@@ -23,9 +23,10 @@ namespace SFA.DAS.Support.Shared.Tests
         {
             Unit = Activator.CreateInstance<T>();
         }
-        protected virtual void Act() { }
 
-
+        protected virtual void Act()
+        {
+        }
     }
 
     public abstract class StrategyTestBase<T> : TestBase<T> where T : class

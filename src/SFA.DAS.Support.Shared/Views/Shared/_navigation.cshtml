@@ -1,10 +1,9 @@
 ﻿@using SFA.DAS.Support.Shared.Navigation
-
 @{
-    MenuViewModel menu = (ViewBag ?? new {}).Menu ?? new MenuViewModel { MenuItems = new List<MenuItem>()};
+    MenuViewModel menu = (ViewBag ?? new {}).Menu ?? new MenuViewModel {MenuItems = new List<MenuItem>()};
     var menuItems = menu.MenuItems;
 
-    var activeMenuRoot = menuItems.FirstOrDefault(x => x.Key == (menu.SelectedMenuItemKeys.LastOrDefault()??""));
+    var activeMenuRoot = menuItems.FirstOrDefault(x => x.Key == (menu.SelectedMenuItemKeys.LastOrDefault() ?? ""));
 
     var orientation = menu.MenuOrientation == MenuOrientations.Vertical ? "flex-column" : "";
 
@@ -17,7 +16,7 @@
         <ul class="nav nav-pills @orientation">
             @foreach (var subMenuItem in activeMenuRoot.MenuItems)
             {
-                var isActive = menu.SelectedMenuItemKeys.Contains( subMenuItem.Key) ? "active" : "";
+                var isActive = menu.SelectedMenuItemKeys.Contains(subMenuItem.Key) ? "active" : "";
                 <li class="nav-item">
                     <a class="nav-link @isActive"
                        id="@subMenuItem.Key"

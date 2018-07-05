@@ -1,22 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using NUnit.Framework;
 using SFA.DAS.Support.Shared.Discovery;
 
 namespace SFA.DAS.Support.Shared.Tests.Discovery
 {
+    [Obsolete]
     [TestFixture]
-    public class WhenCallingGetChallenge 
+    public class WhenCallingGetChallenge
     {
-        private ServiceConfiguration _unit = new ServiceConfiguration()
+        private readonly ServiceConfiguration _unit = new ServiceConfiguration
         {
             new EmployerAccountSiteManifest()
         };
-      
+
 
         [Test]
         public void ItShouldReturnAChallengeObject()
         {
-            var result =  _unit.GetChallenge(SupportServiceResourceKey.EmployerAccountFinanceChallenge);
+            var result = _unit.GetChallenge(SupportServiceResourceKey.EmployerAccountFinanceChallenge);
             Assert.IsNotNull(result);
         }
 

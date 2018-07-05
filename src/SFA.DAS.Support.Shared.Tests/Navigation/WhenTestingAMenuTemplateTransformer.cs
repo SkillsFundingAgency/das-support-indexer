@@ -8,13 +8,13 @@ using SFA.DAS.Support.Shared.Navigation;
 namespace SFA.DAS.Support.Shared.Tests.Navigation
 {
     /// <summary>
-    /// Transforms Menu templates into usable navigable Uri's
+    ///     Transforms Menu templates into usable navigable Uri's
     /// </summary>
     public class WhenTestingAMenuTemplateTransformer
     {
-        private MenuTemplateTransformer _unit;
         private IMenuTemplateDatasource _datasource;
         private List<MenuRoot> _templates;
+        private MenuTemplateTransformer _unit;
 
         [SetUp]
         public void Setup()
@@ -27,34 +27,39 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
         [Test]
         public void ItShouldTransformAllTemplatesForOnePerspective()
         {
-            var actual = _unit.TransformMenuTemplates(_templates.Single(x => x.Perspective == SupportMenuPerspectives.EmployerAccount).MenuItems,
-                    new Uri("https://localhost:44300"),
-                    new Dictionary<string, string>() { { "accountId", "123" } });
+            var actual = _unit.TransformMenuTemplates(
+                _templates.Single(x => x.Perspective == SupportMenuPerspectives.EmployerAccount).MenuItems,
+                new Uri("https://localhost:44300"),
+                new Dictionary<string, string> {{"accountId", "123"}});
             Assert.IsNotEmpty(actual);
-            Assert.AreEqual(_templates.Single(x => x.Perspective == SupportMenuPerspectives.EmployerAccount).MenuItems.Count, actual.Count);
+            Assert.AreEqual(
+                _templates.Single(x => x.Perspective == SupportMenuPerspectives.EmployerAccount).MenuItems.Count,
+                actual.Count);
         }
 
 
         [Test]
         public void ItShouldTransformAllTemplatesForOneOtherPerspective()
         {
-            var actual = _unit.TransformMenuTemplates(_templates.Single(x => x.Perspective == SupportMenuPerspectives.EmployerUser).MenuItems,
+            var actual = _unit.TransformMenuTemplates(
+                _templates.Single(x => x.Perspective == SupportMenuPerspectives.EmployerUser).MenuItems,
                 new Uri("https://localhost:44300"),
-                new Dictionary<string, string>() { { "userId", "123" } });
+                new Dictionary<string, string> {{"userId", "123"}});
             Assert.IsNotEmpty(actual);
-            Assert.AreEqual(_templates.Single(x => x.Perspective == SupportMenuPerspectives.EmployerUser).MenuItems.Count, actual.Count);
-
+            Assert.AreEqual(
+                _templates.Single(x => x.Perspective == SupportMenuPerspectives.EmployerUser).MenuItems.Count,
+                actual.Count);
         }
 
 
         [Test]
         public void ItShouldRemoveUntransformedTemplates()
         {
-            var actual = _unit.TransformMenuTemplates(_templates.Single(x => x.Perspective == SupportMenuPerspectives.EmployerUser).MenuItems,
+            var actual = _unit.TransformMenuTemplates(
+                _templates.Single(x => x.Perspective == SupportMenuPerspectives.EmployerUser).MenuItems,
                 new Uri("https://localhost:44300"),
-                new Dictionary<string, string>() { { "accountId", "123" } });
+                new Dictionary<string, string> {{"accountId", "123"}});
             Assert.IsEmpty(actual);
-
         }
     }
 }

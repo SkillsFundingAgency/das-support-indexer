@@ -27,16 +27,13 @@ namespace SFA.DAS.Support.Shared.Discovery
                 {
                     ResourceKey = SupportServiceResourceKey.EmployerUserHeader,
                     ResourceUrlFormat = "/user/header/{0}"
-
                 },
                 new SiteResource
                 {
                     ResourceKey = SupportServiceResourceKey.EmployerUserAccounts,
                     ResourceUrlFormat = "/user/header/{0}"
-
                 }
             };
         }
-        
     }
 }

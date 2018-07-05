@@ -101,8 +101,10 @@
     <Compile Include="Discovery\ServiceResourceKey.cs" />
     <Compile Include="Discovery\SupportServiceIdentity.cs" />
     <Compile Include="Navigation\IMenuClient.cs" />
+    <Compile Include="Navigation\IMenuService.cs" />
     <Compile Include="Navigation\IMenuTemplateDatasource.cs" />
     <Compile Include="Navigation\IMenuTemplateHandler.cs" />
+    <Compile Include="Navigation\MenuClient.cs" />
     <Compile Include="Navigation\MenuItem.cs" />
     <Compile Include="Navigation\MenuOrientations.cs" />
     <Compile Include="Navigation\MenuRoot.cs" />
@@ -112,7 +114,7 @@
     <Compile Include="Navigation\MenuViewModel.cs" />
     <Compile Include="Navigation\NavItemExtensions.cs" />
     <Compile Include="Navigation\SupportMenuPerspectives.cs" />
-    <Compile Include="Navigation\NavigationService.cs" />
+    <Compile Include="Navigation\MenuService.cs" />
     <Compile Include="SiteConnection\StrategyForClientErrorStatusCode.cs" />
     <Compile Include="SiteConnection\StrategyForRedirectionStatusCode.cs" />
     <Compile Include="SiteConnection\HttpStatusCodeDecision.cs" />

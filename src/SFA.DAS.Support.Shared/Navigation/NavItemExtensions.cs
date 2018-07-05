@@ -26,9 +26,8 @@ namespace SFA.DAS.Support.Shared.Navigation
             // Go through the input enumerable looking for children,
             // and add those if we have them
             foreach (var element in sourceList)
-            {
-                flattenedList = flattenedList.Concat(getChildrenFunction(element).Map(selectorFunction,getChildrenFunction));
-            }
+                flattenedList =
+                    flattenedList.Concat(getChildrenFunction(element).Map(selectorFunction, getChildrenFunction));
             return flattenedList;
         }
     }

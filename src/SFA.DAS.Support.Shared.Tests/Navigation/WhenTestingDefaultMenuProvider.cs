@@ -7,7 +7,7 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
     {
         private readonly MenuViewModel _unit = new MenuViewModel();
 
-       
+
         [Test]
         public void ItShouldHaveAListOfMenuItems()
         {
@@ -29,8 +29,6 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
             _unit.MenuItems.Add(MenuTestHelper.GetEmployerAccountMenu());
 
             Assert.IsNotEmpty(_unit.MenuItems);
-
         }
-
     }
 }

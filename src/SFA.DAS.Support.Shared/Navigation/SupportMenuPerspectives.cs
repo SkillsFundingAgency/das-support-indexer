@@ -10,7 +10,6 @@ namespace SFA.DAS.Support.Shared.Navigation
         EmployerUser = 2,
         TrainingProvider = 4,
         Apprentice = 8,
-        All = Int32.MaxValue, 
-
+        All = int.MaxValue
     }
 }

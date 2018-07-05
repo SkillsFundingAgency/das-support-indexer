@@ -87,9 +87,7 @@ namespace SFA.DAS.Support.Shared
 
         public static string Version(this Assembly source)
         {
-
-            
-            FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(source.Location);
+            var fvi = FileVersionInfo.GetVersionInfo(source.Location);
             return fvi.FileVersion;
 
             //var attribute = (AssemblyVersionAttribute) source

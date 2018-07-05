@@ -4,7 +4,7 @@ using System.Linq;
 namespace SFA.DAS.Support.Shared.Navigation
 {
     /// <summary>
-    /// Serves the menu templates for a specific support journey perspective
+    ///     Serves the menu templates for a specific support journey perspective
     /// </summary>
     public class MenuTemplateHandler : IMenuTemplateHandler
     {
@@ -18,7 +18,8 @@ namespace SFA.DAS.Support.Shared.Navigation
         public IEnumerable<MenuRoot> GetMenuForPerspective(SupportMenuPerspectives perspective)
         {
             var menuRoots = _provider.Provide()
-                    .Where(x => x.Perspective == (perspective == SupportMenuPerspectives.All? x.Perspective: perspective));
+                .Where(x => x.Perspective ==
+                            (perspective == SupportMenuPerspectives.All ? x.Perspective : perspective));
             return menuRoots;
         }
     }

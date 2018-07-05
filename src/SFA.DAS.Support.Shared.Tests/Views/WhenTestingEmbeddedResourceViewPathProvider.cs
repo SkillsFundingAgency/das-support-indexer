@@ -44,7 +44,5 @@ namespace SFA.DAS.Support.Shared.Tests.Views
             var file = item.Open();
             Assert.IsNotNull(file);
         }
-
-
     }
 }

@@ -6,7 +6,7 @@ using SFA.DAS.Support.Shared.Navigation;
 namespace SFA.DAS.Support.Shared.Tests.Navigation
 {
     /// <summary>
-    /// Serves the menu templates for a specific support journey perspective
+    ///     Serves the menu templates for a specific support journey perspective
     /// </summary>
     public class WhenTestingAMenuTemplateHandler
     {
@@ -24,6 +24,5 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
             var menu = _unit.GetMenuForPerspective(SupportMenuPerspectives.All);
             Assert.AreEqual(2, menu.Count());
         }
-
     }
 }
