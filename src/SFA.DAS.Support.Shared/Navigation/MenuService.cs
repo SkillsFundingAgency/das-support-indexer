@@ -11,13 +11,11 @@ namespace SFA.DAS.Support.Shared.Navigation
         private readonly IMenuClient _menuClient;
         private readonly Uri _menuSource;
         private readonly IMenuTemplateDatasource _menuTemplateDatasource;
-        private DirectoryInfo _directoryInfo;
         private List<MenuRoot> _menuRoots = new List<MenuRoot>();
 
-        public MenuService(DirectoryInfo directoryInfo, IMenuTemplateDatasource menuTemplateDatasource,
+        public MenuService( IMenuTemplateDatasource menuTemplateDatasource,
             IMenuClient menuClient, Uri menuSource)
         {
-            _directoryInfo = directoryInfo;
             _menuTemplateDatasource = menuTemplateDatasource;
             _menuClient = menuClient;
             _menuSource = menuSource;
