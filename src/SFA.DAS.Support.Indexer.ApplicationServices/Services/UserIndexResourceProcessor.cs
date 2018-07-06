@@ -12,7 +12,7 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.Services
 {
     public class UserIndexResourceProcessor : BaseIndexResourceProcessor<UserSearchModel>
     {
-        public UserIndexResourceProcessor(ISiteSettings settings,
+        public UserIndexResourceProcessor(IIndexerSiteSettings settings,
             ISiteConnector downloader,
             
             IIndexProvider indexProvider,

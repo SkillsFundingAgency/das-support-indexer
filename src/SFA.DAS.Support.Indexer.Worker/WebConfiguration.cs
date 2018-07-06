@@ -9,7 +9,7 @@ namespace SFA.DAS.Support.Indexer.Worker
     {
         [JsonRequired] public SiteConnectorSettings SiteConnector { get; set; }
 
-        [JsonRequired] public SiteSettings Site { get; set; }
+        [JsonRequired] public IndexerSiteSettings Site { get; set; }
 
         [JsonRequired] public ElasticSearchSettings ElasticSearch { get; set; }
     }

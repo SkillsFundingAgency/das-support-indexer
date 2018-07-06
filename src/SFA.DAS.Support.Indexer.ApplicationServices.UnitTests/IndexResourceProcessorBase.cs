@@ -27,7 +27,7 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.UnitTests
         protected Mock<ILog> _logger;
         protected Mock<IIndexNameCreator> _indexNameCreator;
         protected Mock<IElasticsearchCustomClient> _elasticClient;
-        protected Mock<ISiteSettings> _siteSettings;
+        protected Mock<IIndexerSiteSettings> _siteSettings;
 
         protected const string _indexName = "new_index_name";
         protected Uri _baseUrl;
@@ -75,7 +75,7 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.UnitTests
             _logger = new Mock<ILog>();
             _indexNameCreator = new Mock<IIndexNameCreator>();
             _elasticClient = new Mock<IElasticsearchCustomClient>();
-            _siteSettings = new Mock<ISiteSettings>();
+            _siteSettings = new Mock<IIndexerSiteSettings>();
 
             var existsResponse = new Mock<IExistsResponse>();
 

@@ -32,7 +32,7 @@ namespace SFA.DAS.Support.Indexer.Worker.DependencyResolution
             var configuration = GetConfiguration();
             For<IWebConfiguration>().Use(configuration);
             For<ISearchSettings>().Use(configuration.ElasticSearch);
-            For<ISiteSettings>().Use(configuration.Site);
+            For<IIndexerSiteSettings>().Use(configuration.Site);
             For<ISiteConnectorSettings>().Use(configuration.SiteConnector);
             For<ServiceConfiguration>().Singleton().Use(new ServiceConfiguration
                 {

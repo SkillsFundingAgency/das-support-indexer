@@ -3,7 +3,6 @@ using SFA.DAS.NLog.Logger;
 using SFA.DAS.Support.Common.Infrastucture.Elasticsearch;
 using SFA.DAS.Support.Common.Infrastucture.Indexer;
 using SFA.DAS.Support.Common.Infrastucture.Settings;
-using SFA.DAS.Support.Indexer.ApplicationServices.Settings;
 using SFA.DAS.Support.Shared.Discovery;
 using SFA.DAS.Support.Shared.SearchIndexModel;
 using SFA.DAS.Support.Shared.SiteConnection;
@@ -12,6 +11,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
 using System.Threading.Tasks;
+using SFA.DAS.Support.Indexer.ApplicationServices.Settings;
 
 namespace SFA.DAS.Support.Indexer.ApplicationServices.Services
 {
@@ -29,11 +29,11 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.Services
         protected readonly Stopwatch _queryTimer = new Stopwatch();
         protected readonly Stopwatch _runtimer = new Stopwatch();
         protected readonly ISearchSettings _searchSettings;
-        protected readonly ISiteSettings _settings;
+        protected readonly IIndexerSiteSettings _settings;
 
         private const int _pageSize = 50;
 
-        public BaseIndexResourceProcessor(ISiteSettings settings,
+        public BaseIndexResourceProcessor(IIndexerSiteSettings settings,
             ISiteConnector dataSource,
             IIndexProvider indexProvider,
             ISearchSettings searchSettings,

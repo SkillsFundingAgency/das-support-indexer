@@ -21,7 +21,7 @@ namespace SFA.DAS.Support.Indexer.Worker
         private readonly int _delayTimeInSeconds = 1800 * 1000;
         private IIndexSearchItems _indexer;
         private ILog _logger;
-        private ISiteSettings _siteSettings;
+        private IIndexerSiteSettings _siteSettings;
 
 
         public override void Run()
@@ -47,7 +47,7 @@ namespace SFA.DAS.Support.Indexer.Worker
 
             _indexer = container.GetInstance<IIndexSearchItems>();
             _logger = container.GetInstance<ILog>();
-            _siteSettings = container.GetInstance<ISiteSettings>();
+            _siteSettings = container.GetInstance<IIndexerSiteSettings>();
 
             if (int.TryParse(_siteSettings.DelayTimeInSeconds, out var configDelayTime))
                 _delayTime = configDelayTime * SecondsToMilliSeconds;

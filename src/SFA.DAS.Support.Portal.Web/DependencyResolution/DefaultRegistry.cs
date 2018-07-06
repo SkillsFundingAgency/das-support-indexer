@@ -68,6 +68,7 @@ namespace SFA.DAS.Support.Portal.Web.DependencyResolution
             For<ICryptoSettings>().Use(configuration.Crypto);
             For<ISearchSettings>().Use(configuration.ElasticSearch);
             For<ISiteConnectorSettings>().Use(configuration.SiteConnector);
+            For<ISiteValidatorSettings>().Use(configuration.SiteValidator);
             For<ISiteSettings>().Use(configuration.Site);
             For<IRoleSettings>().Use(configuration.Roles);
 

@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace SFA.DAS.Support.Indexer.ApplicationServices.Settings
 {
     [ExcludeFromCodeCoverage]
-    public class SiteSettings : ISiteSettings
+    public class IndexerSiteSettings : IIndexerSiteSettings
     {
         [JsonRequired] public string BaseUrls { get; set; }
       

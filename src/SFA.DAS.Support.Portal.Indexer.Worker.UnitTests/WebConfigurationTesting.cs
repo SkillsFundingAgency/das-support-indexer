@@ -30,7 +30,7 @@ namespace SFA.DAS.Support.Portal.Indexer.Worker.UnitTests
                     IndexReplicas = 0
                 },
 
-                Site = new SiteSettings
+                Site = new IndexerSiteSettings
                 {
                     BaseUrls = "https://127.0.0.1:51274,https://127.0.0.1:19722",
                     DelayTimeInSeconds = "1800"

@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json;
 
-namespace SFA.DAS.Support.Portal.ApplicationServices.Settings
+namespace SFA.DAS.Support.Shared.SiteConnection
 {
     [ExcludeFromCodeCoverage]
     public class SiteSettings : ISiteSettings

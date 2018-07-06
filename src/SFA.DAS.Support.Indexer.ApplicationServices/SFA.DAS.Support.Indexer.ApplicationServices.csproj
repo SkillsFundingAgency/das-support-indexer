@@ -64,9 +64,9 @@
     <Compile Include="Services\IIndexSearchItems.cs" />
     <Compile Include="Services\IndexerService.cs" />
     <Compile Include="Services\UserIndexResourceProcessor.cs" />
-    <Compile Include="Settings\ISiteSettings.cs" />
+    <Compile Include="Settings\IIndexerSiteSettings.cs" />
     <Compile Include="Settings\SearchSettings.cs" />
-    <Compile Include="Settings\SiteSettings.cs" />
+    <Compile Include="Settings\IndexerSiteSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SFA.DAS.Support.Common.Infrastucture\SFA.DAS.Support.Common.Infrastucture.csproj">

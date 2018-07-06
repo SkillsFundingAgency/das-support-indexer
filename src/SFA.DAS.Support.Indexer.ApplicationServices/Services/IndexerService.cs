@@ -27,12 +27,12 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.Services
         private readonly Stopwatch _queryTimer = new Stopwatch();
         private readonly Stopwatch _runtimer = new Stopwatch();
         private readonly ISearchSettings _searchSettings;
-        private readonly ISiteSettings _siteSettings;
+        private readonly IIndexerSiteSettings _siteSettings;
         private readonly ServiceConfiguration _manifests;
 
 
 
-        public IndexerService(ISiteSettings settings,
+        public IndexerService(IIndexerSiteSettings settings,
             ISiteConnector downloader,
             IIndexProvider indexProvider,
             ISearchSettings searchSettings,

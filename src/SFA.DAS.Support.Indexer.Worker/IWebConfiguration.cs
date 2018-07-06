@@ -5,7 +5,7 @@ namespace SFA.DAS.Support.Indexer.Worker
 {
     public interface IWebConfiguration
     {
-        SiteSettings Site { get; set; }
+        IndexerSiteSettings Site { get; set; }
         ElasticSearchSettings ElasticSearch { get; set; }
     }
 }

@@ -116,6 +116,8 @@
     <Compile Include="Navigation\NavItemExtensions.cs" />
     <Compile Include="Navigation\SupportMenuPerspectives.cs" />
     <Compile Include="Navigation\MenuService.cs" />
+    <Compile Include="SiteConnection\ISiteSettings.cs" />
+    <Compile Include="SiteConnection\SiteSettings.cs" />
     <Compile Include="SiteConnection\StrategyForClientErrorStatusCode.cs" />
     <Compile Include="SiteConnection\StrategyForRedirectionStatusCode.cs" />
     <Compile Include="SiteConnection\HttpStatusCodeDecision.cs" />
