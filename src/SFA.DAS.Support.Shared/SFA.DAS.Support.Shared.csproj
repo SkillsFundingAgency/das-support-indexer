@@ -104,6 +104,7 @@
     <Compile Include="Navigation\IMenuService.cs" />
     <Compile Include="Navigation\IMenuTemplateDatasource.cs" />
     <Compile Include="Navigation\IMenuTemplateHandler.cs" />
+    <Compile Include="Navigation\IMenuTemplateTransformer.cs" />
     <Compile Include="Navigation\MenuClient.cs" />
     <Compile Include="Navigation\MenuItem.cs" />
     <Compile Include="Navigation\MenuOrientations.cs" />
@@ -150,6 +151,8 @@
     </None>
     <EmbeddedResource Include="Views\Shared\PanelLayout.cshtml" />
     <EmbeddedResource Include="Views\Shared\_navigation.cshtml" />
+    <EmbeddedResource Include="Views\Shared\_notFound.cshtml" />
+    <EmbeddedResource Include="Views\Shared\_notUnderstood.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Views.Readme.txt" />
