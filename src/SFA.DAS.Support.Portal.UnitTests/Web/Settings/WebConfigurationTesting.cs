@@ -61,7 +61,14 @@ namespace SFA.DAS.Support.Portal.UnitTests.Web.Settings
                     ClientSecret = "--- configuration value goes here ---",
                     IdentifierUri = "--- configuration value goes here ---",
                     Tenant = "--- configuration value goes here ---"
+                },
+                SiteValidator = new SiteValidatorSettings()
+                {
+                    Audience = "Audience",
+                    Scope = "openid",
+                    Tenant = "tenant"
                 }
+
             };
         }
 
