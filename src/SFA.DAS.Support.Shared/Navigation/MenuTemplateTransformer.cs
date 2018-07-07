@@ -7,7 +7,13 @@ namespace SFA.DAS.Support.Shared.Navigation
 {
     public class MenuTemplateTransformer : IMenuTemplateTransformer
     {
-        public List<MenuItem> TransformMenuTemplates(List<MenuItem> templateItems, Uri supportPortalUri,
+        private Uri _supportPortalUri;
+
+        public MenuTemplateTransformer(Uri supportPortalUri)
+        {
+            _supportPortalUri = supportPortalUri;
+        }
+        public List<MenuItem> TransformMenuTemplates(List<MenuItem> templateItems, 
             Dictionary<string, string> identifiers)
         {
             var templateCopies =
@@ -18,7 +24,7 @@ namespace SFA.DAS.Support.Shared.Navigation
                 foreach (var identifier in identifiers)
                 {
                     menuItem.NavigateUrl =
-                        new Uri(supportPortalUri, menuItem.NavigateUrl)
+                        new Uri(_supportPortalUri, menuItem.NavigateUrl)
                             .OriginalString
                             .Replace($"{{{identifier.Key}}}", identifier.Value);
                 }

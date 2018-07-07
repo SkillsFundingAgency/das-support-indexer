@@ -21,7 +21,7 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
         {
             _datasource = new MenuTemplateDatasource(new FileInfo("/"));
             _templates = _datasource.Provide();
-            _unit = new MenuTemplateTransformer();
+            _unit = new MenuTemplateTransformer(new Uri("https://localhost:44300"));
         }
 
         [Test]
@@ -29,7 +29,6 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
         {
             var actual = _unit.TransformMenuTemplates(
                 _templates.Single(x => x.Perspective == SupportMenuPerspectives.EmployerAccount).MenuItems,
-                new Uri("https://localhost:44300"),
                 new Dictionary<string, string> {{"accountId", "123"}});
             Assert.IsNotEmpty(actual);
             Assert.AreEqual(
@@ -43,7 +42,6 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
         {
             var actual = _unit.TransformMenuTemplates(
                 _templates.Single(x => x.Perspective == SupportMenuPerspectives.EmployerUser).MenuItems,
-                new Uri("https://localhost:44300"),
                 new Dictionary<string, string> {{"userId", "123"}});
             Assert.IsNotEmpty(actual);
             Assert.AreEqual(
@@ -57,7 +55,6 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
         {
             var actual = _unit.TransformMenuTemplates(
                 _templates.Single(x => x.Perspective == SupportMenuPerspectives.EmployerUser).MenuItems,
-                new Uri("https://localhost:44300"),
                 new Dictionary<string, string> {{"accountId", "123"}});
             Assert.IsEmpty(actual);
         }
