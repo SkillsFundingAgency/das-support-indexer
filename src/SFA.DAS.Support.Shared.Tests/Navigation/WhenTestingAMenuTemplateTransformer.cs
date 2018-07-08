@@ -15,13 +15,15 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
         private IMenuTemplateDatasource _datasource;
         private List<MenuRoot> _templates;
         private MenuTemplateTransformer _unit;
+        private Uri _supportPortalUri = new Uri("https://localhost:44300");
 
         [SetUp]
         public void Setup()
         {
             _datasource = new MenuTemplateDatasource(new FileInfo("/"));
             _templates = _datasource.Provide();
-            _unit = new MenuTemplateTransformer(new Uri("https://localhost:44300"));
+            
+            _unit = new MenuTemplateTransformer(_supportPortalUri);
         }
 
         [Test]
