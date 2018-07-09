@@ -142,6 +142,7 @@
     <Compile Include="Discovery\SiteResource.cs" />
     <Compile Include="SiteConnection\SiteValidatorSettings.cs" />
     <Compile Include="SiteConnection\StrategyForSystemErrorStatusCode.cs" />
+    <Compile Include="ViewModels\HeaderViewModel.cs" />
     <Compile Include="Views\EmbeddedResourceFile.cs" />
     <Compile Include="Views\EmbeddedResourceViewPathProvider.cs" />
   </ItemGroup>
@@ -156,6 +157,7 @@
     <EmbeddedResource Include="Views\Shared\_navigation.cshtml" />
     <EmbeddedResource Include="Views\Shared\_notFound.cshtml" />
     <EmbeddedResource Include="Views\Shared\_notUnderstood.cshtml" />
+    <EmbeddedResource Include="Views\Shared\_header.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Views.Readme.txt" />
