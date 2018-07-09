@@ -76,14 +76,14 @@ namespace SFA.DAS.Support.Portal.Web.Controllers
         public async Task<ActionResult> Index(SupportServiceResourceKey key, string id, string childId)
         {
 
-            //if (!_serviceConfiguration.ResourceExists(key))
-            //    return View("Sub",
-            //        new ResourceResultModel
-            //        {
-            //            Resource = "<h3>This resource isn't registered</h3>",
-            //            StatusCode = HttpStatusCode.OK,
-            //            Exception = null
-            //        });
+            if (!_serviceConfiguration.ResourceExists(key))
+                return View("Sub",
+                    new ResourceResultModel
+                    {
+                        Resource = "<h3>This resource isn't registered</h3>",
+                        StatusCode = HttpStatusCode.OK,
+                        Exception = null
+                    });
 
             var resource = _serviceConfiguration.GetResource(key);
 
