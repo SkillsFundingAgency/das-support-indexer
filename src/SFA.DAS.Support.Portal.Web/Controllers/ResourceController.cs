@@ -76,14 +76,14 @@ namespace SFA.DAS.Support.Portal.Web.Controllers
         public async Task<ActionResult> Index(SupportServiceResourceKey key, string id, string childId)
         {
 
-            if (!_serviceConfiguration.ResourceExists(key))
-                return View("Sub",
-                    new ResourceResultModel
-                    {
-                        Resource = "<h3>This resource isn't registered</h3>",
-                        StatusCode = HttpStatusCode.OK,
-                        Exception = null
-                    });
+            //if (!_serviceConfiguration.ResourceExists(key))
+            //    return View("Sub",
+            //        new ResourceResultModel
+            //        {
+            //            Resource = "<h3>This resource isn't registered</h3>",
+            //            StatusCode = HttpStatusCode.OK,
+            //            Exception = null
+            //        });
 
             var resource = _serviceConfiguration.GetResource(key);
 
@@ -102,8 +102,8 @@ namespace SFA.DAS.Support.Portal.Web.Controllers
                 }
             }
 
-            ViewBag.SubNav = await _repository.GetNav(key, id);
-            ViewBag.SubHeader = await _repository.GenerateHeader(key, id);
+            //ViewBag.SubNav = await _repository.GetNav(key, id);
+            //ViewBag.SubHeader = await _repository.GenerateHeader(key, id);
 
             var resourceResult = await _repository.GetResourcePage(key, id, childId);
 

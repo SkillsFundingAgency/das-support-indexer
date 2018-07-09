@@ -4,17 +4,9 @@
     "MenuItems": [
       {
         "Key": "User.Details",
-        "Text": "User",
+        "Text": "Overview",
         "NavigateUrl": "users/{userId}",
         "Ordinal": 0,
-        "Roles": [],
-        "MenuItems": []
-      },
-      {
-        "Key": "User.Accounts",
-        "Text": "Accounts",
-        "NavigateUrl": "users/{userId}/accounts",
-        "Ordinal": 1,
         "Roles": [],
         "MenuItems": []
       }

@@ -60,16 +60,9 @@ namespace SFA.DAS.Support.Shared.Navigation
                         new MenuItem
                         {
                             Key = "User.Details",
-                            Text = "User",
+                            Text = "Overview",
                             NavigateUrl = "users/{userId}",
                             Ordinal = 0
-                        },
-                        new MenuItem
-                        {
-                            Key = "User.Accounts",
-                            Text = "Accounts",
-                            NavigateUrl = "users/{userId}/accounts",
-                            Ordinal = 1
                         }
                     }
                 },
