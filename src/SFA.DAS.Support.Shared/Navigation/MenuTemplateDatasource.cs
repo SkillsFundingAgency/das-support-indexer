@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Web;
 using Newtonsoft.Json;
+using SFA.DAS.NLog.Logger;
 
 namespace SFA.DAS.Support.Shared.Navigation
 {
@@ -14,26 +16,38 @@ namespace SFA.DAS.Support.Shared.Navigation
     /// </summary>
     public class MenuTemplateDatasource : IMenuTemplateDatasource
     {
+        private ILog _logger;
         private readonly string _embeddedDataSource;
 
         private readonly FileInfo _fileDataSource;
+        private readonly List<MenuRoot> _emptyList = new List<MenuRoot>();
+            
 
-        public MenuTemplateDatasource(FileInfo fileMenuTempalteDataSource)
+        public MenuTemplateDatasource(FileInfo fileMenuTempalteDataSource, ILog logger)
         {
             _fileDataSource = fileMenuTempalteDataSource;
+            _logger = logger;
 
             var embeddedPath = typeof(MenuTemplateDatasource).Namespace;
             _embeddedDataSource = $"{embeddedPath}.MenuTemplates.json";
+
+            _logger.Trace($"{nameof(MenuTemplateDatasource)}.ctor File: {_fileDataSource.FullName}, Embedded: {_embeddedDataSource}");
+
         }
 
-        public MenuTemplateDatasource(string fileMenuTempalteDataSource)
+        public MenuTemplateDatasource(string fileMenuTemplateDataSource, ILog logger)
         {
-            var path = HttpContext.Current?.Server?.MapPath(fileMenuTempalteDataSource) ??
-                       $@"c:\{fileMenuTempalteDataSource}";
+            _logger = logger;
+            var path = HttpContext.Current?.Server?.MapPath(fileMenuTemplateDataSource) ??
+                       $@"{fileMenuTemplateDataSource}";
             _fileDataSource = new FileInfo(path);
 
             var embeddedPath = typeof(MenuTemplateDatasource).Namespace;
             _embeddedDataSource = $"{embeddedPath}.MenuTemplates.json";
+
+            _logger.Trace($"{nameof(MenuTemplateDatasource)}.ctor File: {_fileDataSource.FullName}, Embedded: {_embeddedDataSource}");
+
+
         }
 
         public List<MenuRoot> Provide()
@@ -50,6 +64,7 @@ namespace SFA.DAS.Support.Shared.Navigation
 
         private List<MenuRoot> SourceFromDefault()
         {
+            _logger.Info($"Obtaining menu templates from source code.");
             var menuItems = new List<MenuRoot>
             {
                 new MenuRoot
@@ -149,27 +164,42 @@ namespace SFA.DAS.Support.Shared.Navigation
             var data = Encoding.UTF8.GetString(ba);
             try
             {
+                _logger.Info($"Obtaining menu templates from embedded resource {_embeddedDataSource}");
                 return JsonConvert.DeserializeObject<List<MenuRoot>>(data);
             }
             catch (Exception e)
             {
+                _logger.Error(e, $"Exception occured obtaining menu templates from embedded resource {_embeddedDataSource}");
+
                 return new List<MenuRoot>();
             }
         }
 
         private List<MenuRoot> SourceFromFile()
         {
-            if (_fileDataSource == null || !_fileDataSource.Exists) return new List<MenuRoot>();
+            if (_fileDataSource == null )
+            {
+                _logger.Info($"Not Obtaining menu templates from local file as file info is not provided.");
+                return _emptyList;
+            }
+            if (!_fileDataSource.Exists)
+            {
+                _logger.Info($"Not Obtaining menu templates from local file {_fileDataSource.FullName} as it was not found.");
+                return _emptyList;
+            }
             try
             {
+                _logger.Info($"Obtaining menu templates from local file {_fileDataSource.FullName}.");
                 return JsonConvert.DeserializeObject<List<MenuRoot>>(File.ReadAllText(_fileDataSource.FullName));
             }
-            catch
+            catch (Exception e)
             {
                 // ignore
+                _logger.Error(e, $"Exception occured obtaining menu templates from local file {_fileDataSource.FullName}.");
+
             }
 
-            return new List<MenuRoot>();
+            return _emptyList;
         }
     }
 }
