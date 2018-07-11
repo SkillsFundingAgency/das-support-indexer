@@ -18,8 +18,8 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
         public void Setup()
         {
             _mockLogger = new Mock<ILog>();
-            _rootMenus = _menuTemplateDatasource.Provide();
             _menuTemplateDatasource = new MenuTemplateDatasource(@".\", _mockLogger.Object);
+            _rootMenus = _menuTemplateDatasource.Provide();
             var items = _rootMenus.First(x => x.Perspective == SupportMenuPerspectives.EmployerAccount).MenuItems;
             _unit.SetMenu(items, "Account.Finance.PAYE");
         }
