@@ -5,11 +5,17 @@
     /// </summary>
     public enum SupportServiceIdentity
     {
+        [ServiceRoute("portal")]
         SupportPortal,
+        [ServiceRoute("users")]
         SupportEmployerUser,
+        [ServiceRoute("employers")]
         SupportEmployerAccount,
+        [ServiceRoute("providers")]
         SupportProvider,
+        [ServiceRoute("commitments")]
         SupportCommitments,
+        [ServiceRoute("payments")]
         SupportPayments
     }
 }

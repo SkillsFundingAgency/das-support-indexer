@@ -84,8 +84,10 @@ namespace SFA.DAS.Support.Portal.Web.DependencyResolution
 
             For<IMenuTemplateDatasource>().Singleton().Use( (x)=> new MenuTemplateDatasource("~/app_data", x.GetInstance<ILog>()));
             For<IMenuTemplateHandler>().Singleton().Use<MenuTemplateHandler>();
-
-
+            For<IRouteToServiceMapper>().Use<RouteToServiceMapper>();
+            
+            For<IServiceAddressMapper>().Use<ServiceAddressMapper>();
+            
         }
 
 

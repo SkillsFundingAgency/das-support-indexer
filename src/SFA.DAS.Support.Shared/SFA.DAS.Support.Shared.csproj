@@ -99,13 +99,17 @@
     <Compile Include="Discovery\IServiceConfiguration.cs" />
     <Compile Include="Discovery\ServiceConfiguration.cs" />
     <Compile Include="Discovery\ServiceResourceKey.cs" />
+    <Compile Include="Discovery\ServiceRouteAttribute.cs" />
     <Compile Include="Discovery\SupportServiceIdentity.cs" />
     <Compile Include="Navigation\BaseController.cs" />
+    <Compile Include="Navigation\IRouteToServiceMapper.cs" />
+    <Compile Include="Navigation\EnumExtensions.cs" />
     <Compile Include="Navigation\IMenuClient.cs" />
     <Compile Include="Navigation\IMenuService.cs" />
     <Compile Include="Navigation\IMenuTemplateDatasource.cs" />
     <Compile Include="Navigation\IMenuTemplateHandler.cs" />
     <Compile Include="Navigation\IMenuTemplateTransformer.cs" />
+    <Compile Include="Navigation\IServiceAddressMapper.cs" />
     <Compile Include="Navigation\MenuClient.cs" />
     <Compile Include="Navigation\MenuItem.cs" />
     <Compile Include="Navigation\MenuOrientations.cs" />
@@ -115,6 +119,8 @@
     <Compile Include="Navigation\MenuTemplateTransformer.cs" />
     <Compile Include="Navigation\MenuViewModel.cs" />
     <Compile Include="Navigation\NavItemExtensions.cs" />
+    <Compile Include="Navigation\RouteToServiceMapper.cs" />
+    <Compile Include="Navigation\ServiceAddressMapper.cs" />
     <Compile Include="Navigation\SupportMenuPerspectives.cs" />
     <Compile Include="Navigation\MenuService.cs" />
     <Compile Include="SiteConnection\ISiteSettings.cs" />

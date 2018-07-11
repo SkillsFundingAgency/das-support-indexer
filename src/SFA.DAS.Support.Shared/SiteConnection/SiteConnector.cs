@@ -19,6 +19,7 @@ namespace SFA.DAS.Support.Shared.SiteConnection
         private readonly List<IHttpStatusCodeStrategy> _handlers;
         private readonly ILog _logger;
         private readonly ISiteConnectorSettings _settings;
+       
 
         public SiteConnector(HttpClient client,
             IClientAuthenticator clientAuthenticator,
@@ -37,6 +38,15 @@ namespace SFA.DAS.Support.Shared.SiteConnection
         public HttpStatusCode LastCode { get; set; }
 
 
+        public void SetCustomHeader(string customHeader, object value)
+        {
+            _client.DefaultRequestHeaders.Add(customHeader, $"{value}");
+        }
+
+        public void ClearCustomHeaders(string customHeader)
+        {
+            _client.DefaultRequestHeaders.Remove(customHeader);
+        }
         public string LastContent { get; set; }
         public Exception LastException { get; set; }
         public HttpStatusCodeDecision HttpStatusCodeDecision { get; set; }

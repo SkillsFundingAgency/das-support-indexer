@@ -78,6 +78,7 @@
     <Compile Include="Discovery\WhenCallingGetResource.cs" />
     <Compile Include="Discovery\WhenCallingServiceConfigurationChallengeExists.cs" />
     <Compile Include="Extensions\ExtensionsTests.cs" />
+    <Compile Include="Navigation\WhenTestingRouteToServiceMapper.cs" />
     <Compile Include="Navigation\MenuTestHelper.cs" />
     <Compile Include="Navigation\WhenTestingActiveMenuViewModel.cs" />
     <Compile Include="Navigation\WhenTestingAMenuTemplateHandler.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="Navigation\WhenTestingAMenuTemplateDatasource.cs" />
     <Compile Include="Navigation\WhenTestingNavigationServiceWithoutLocalData.cs" />
     <Compile Include="Navigation\WhenTestingNavigationServiceWithLocalData.cs" />
+    <Compile Include="Navigation\WhenTestingServiceAddressMapper.cs" />
     <Compile Include="SiteConnector\SiteConnectorConstructorTests.cs" />
     <Compile Include="SiteConnector\SiteConnectorTestBase.cs" />
     <Compile Include="HttpStatusStrategy\StrategyForClientErrorStatusCodeTests.cs" />
