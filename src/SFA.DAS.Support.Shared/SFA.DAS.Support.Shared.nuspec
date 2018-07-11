@@ -13,7 +13,18 @@
     <summary>DAS Support shared classes</summary>
     <releaseNotes />
     <dependencies>
-      <dependency id="Microsoft.IdentityModel.Clients.ActiveDirectory" version="[3.18.0]"></dependency>
+      <dependency id="Microsoft.IdentityModel.Clients.ActiveDirectory" version="3.18.0"></dependency>
+      <dependency id="SFA.DAS.NLog.Logger" version="1.0" ></dependency>
+      <dependency id="System.IdentityModel.Tokens.Jwt" version="4.0.3" ></dependency>
+      <dependency id="Microsoft.AspNet.Mvc" version="5.2.3"  ></dependency>
+      <dependency id="Microsoft.AspNet.Razor" version="3.2.3"  ></dependency>
+      <dependency id="Microsoft.AspNet.WebApi.Client" version="5.2.3"  ></dependency>
+      <dependency id="Microsoft.AspNet.WebApi.Core" version="5.2.3"  ></dependency>
+      <dependency id="Microsoft.AspNet.WebPages" version="3.2.3"  ></dependency>
+      <dependency id="Microsoft.IdentityModel.Clients.ActiveDirectory" version="3.18.0"  ></dependency>
+      <dependency id="Microsoft.IdentityModel.Protocol.Extensions" version="1.0.3.308261200"  ></dependency>
+      <dependency id="Microsoft.Web.Infrastructure" version="1.0.0.0"  ></dependency>
+      <dependency id="Newtonsoft.Json" version="10.0.3"  ></dependency>
     </dependencies>
   </metadata>
   <files>

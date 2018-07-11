@@ -16,7 +16,7 @@ namespace SFA.DAS.Support.Shared.Navigation
     /// </summary>
     public class MenuTemplateDatasource : IMenuTemplateDatasource
     {
-        private ILog _logger;
+        private readonly ILog _logger;
         private readonly string _embeddedDataSource;
 
         private readonly FileInfo _fileDataSource;
@@ -35,12 +35,13 @@ namespace SFA.DAS.Support.Shared.Navigation
 
         }
 
-        public MenuTemplateDatasource(string fileMenuTemplateDataSource, ILog logger)
+        public MenuTemplateDatasource(string menuTemplateFilePath, ILog logger)
         {
             _logger = logger;
-            var path = HttpContext.Current?.Server?.MapPath(fileMenuTemplateDataSource) ??
-                       $@"{fileMenuTemplateDataSource}";
-            _fileDataSource = new FileInfo(path);
+            var path = HttpContext.Current?.Server?.MapPath(menuTemplateFilePath) ??
+                       $@"{menuTemplateFilePath}";
+
+            _fileDataSource = new FileInfo($"{path}/MenuTemplates.json".Replace(@"//", @"/"));
 
             var embeddedPath = typeof(MenuTemplateDatasource).Namespace;
             _embeddedDataSource = $"{embeddedPath}.MenuTemplates.json";
