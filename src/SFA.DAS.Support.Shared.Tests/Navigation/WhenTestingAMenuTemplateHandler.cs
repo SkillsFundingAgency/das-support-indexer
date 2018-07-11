@@ -1,6 +1,8 @@
 ﻿using System.IO;
 using System.Linq;
+using Moq;
 using NUnit.Framework;
+using SFA.DAS.NLog.Logger;
 using SFA.DAS.Support.Shared.Navigation;
 
 namespace SFA.DAS.Support.Shared.Tests.Navigation
@@ -11,11 +13,13 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
     public class WhenTestingAMenuTemplateHandler
     {
         private MenuTemplateHandler _unit;
+        private Mock<ILog> _mockLogger;
 
         [SetUp]
         public void Setup()
         {
-            _unit = new MenuTemplateHandler(new MenuTemplateDatasource(new FileInfo($@".\MenuTempaltes.json")));
+            _mockLogger = new Mock<ILog>();
+            _unit = new MenuTemplateHandler(new MenuTemplateDatasource(new FileInfo($@".\MenuTempaltes.json"), _mockLogger.Object));
         }
 
         [Test]

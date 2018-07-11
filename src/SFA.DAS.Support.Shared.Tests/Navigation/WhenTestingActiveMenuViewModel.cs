@@ -1,21 +1,25 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Moq;
 using NUnit.Framework;
+using SFA.DAS.NLog.Logger;
 using SFA.DAS.Support.Shared.Navigation;
 
 namespace SFA.DAS.Support.Shared.Tests.Navigation
 {
     public class WhenTestingActiveMenuViewModel
     {
-        private readonly IMenuTemplateDatasource _menuTemplateDatasource = new MenuTemplateDatasource(@".\");
+        private Mock<ILog> _mockLogger;
+        private IMenuTemplateDatasource _menuTemplateDatasource;
         private readonly MenuViewModel _unit = new MenuViewModel();
         private List<MenuRoot> _rootMenus;
 
         [SetUp]
         public void Setup()
         {
+            _mockLogger = new Mock<ILog>();
             _rootMenus = _menuTemplateDatasource.Provide();
-
+            _menuTemplateDatasource = new MenuTemplateDatasource(@".\", _mockLogger.Object);
             var items = _rootMenus.First(x => x.Perspective == SupportMenuPerspectives.EmployerAccount).MenuItems;
             _unit.SetMenu(items, "Account.Finance.PAYE");
         }

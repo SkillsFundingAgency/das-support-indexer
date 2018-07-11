@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Moq;
 using NUnit.Framework;
+using SFA.DAS.NLog.Logger;
 using SFA.DAS.Support.Shared.Navigation;
 
 namespace SFA.DAS.Support.Shared.Tests.Navigation
@@ -16,11 +18,13 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
         private List<MenuRoot> _templates;
         private MenuTemplateTransformer _unit;
         private Uri _supportPortalUri = new Uri("https://localhost:44300");
+        private Mock<ILog> _mockLogger;
 
         [SetUp]
         public void Setup()
         {
-            _datasource = new MenuTemplateDatasource(new FileInfo("/"));
+            _mockLogger = new Mock<ILog>();
+            _datasource = new MenuTemplateDatasource(new FileInfo("/"), _mockLogger.Object);
             _templates = _datasource.Provide();
             
             _unit = new MenuTemplateTransformer(_supportPortalUri);

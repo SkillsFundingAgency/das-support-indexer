@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Moq;
 using NUnit.Framework;
+using SFA.DAS.NLog.Logger;
 using SFA.DAS.Support.Shared.Navigation;
 
 namespace SFA.DAS.Support.Shared.Tests.Navigation
@@ -14,11 +15,13 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
         private Mock<IMenuClient> _mockMenuClient;
         private Mock<IMenuTemplateDatasource> _mockMenuTemplateDataSource;
         private List<MenuRoot> _testMenuTemplates = new List<MenuRoot>();
+        private Mock<ILog> _mockLogger;
 
 
         protected override void Arrange()
         {
-            _testMenuTemplates = new MenuTemplateDatasource(new FileInfo($@"./MenuTemplates.json")).Provide();
+            _mockLogger = new Mock<ILog>();
+            _testMenuTemplates = new MenuTemplateDatasource(new FileInfo($@"./MenuTemplates.json"), _mockLogger.Object).Provide();
             _mockMenuClient = new Mock<IMenuClient>();
             _mockMenuTemplateDataSource = new Mock<IMenuTemplateDatasource>();
             var menuRemoteSource = new Uri("https://localhost/api/navigation/0");
