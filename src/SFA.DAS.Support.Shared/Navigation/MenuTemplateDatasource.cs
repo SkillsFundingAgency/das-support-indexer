@@ -21,7 +21,7 @@ namespace SFA.DAS.Support.Shared.Navigation
 
         private readonly FileInfo _fileDataSource;
         private readonly List<MenuRoot> _emptyList = new List<MenuRoot>();
-            
+
 
         public MenuTemplateDatasource(FileInfo fileMenuTempalteDataSource, ILog logger)
         {
@@ -77,7 +77,7 @@ namespace SFA.DAS.Support.Shared.Navigation
                         {
                             Key = "User.Details",
                             Text = "Overview",
-                            NavigateUrl = "users/{userId}",
+                            NavigateUrl = "views/employers/users/{userId}",
                             Ordinal = 0
                         }
                     }
@@ -91,33 +91,54 @@ namespace SFA.DAS.Support.Shared.Navigation
                         {
                             Key = "Account.Organisations",
                             Text = "Organisations",
-                            NavigateUrl = "accounts/{accountId}/organisations",
+                            NavigateUrl = "views/employers/accounts/{accountId}/organisations",
                             Ordinal = 0
                         },
                         new MenuItem
                         {
                             Key = "Account.Finance",
                             Text = "Finance",
-                            NavigateUrl = "accounts/{accountId}/finance",
+                            NavigateUrl = "views/employers/accounts/{accountId}/finance/payeschemes",
                             Ordinal = 1,
                             MenuItems = new List<MenuItem>
                             {
                                 new MenuItem
                                 {
                                     Key = "Account.Finance.PAYE",
-                                    Text = "PAYE",
-                                    NavigateUrl = "accounts/{accountId}/finance/paye",
-                                    Ordinal = 0
+                                    Text = "PAYE schemes",
+                                    NavigateUrl = "views/employers/accounts/{accountId}/finance/payeschemes",
+                                    Ordinal = 0,
+                                    MenuItems = new List<MenuItem>()
+                                    {
+                                        new MenuItem()
+                                        {
+                                            Key = "Account.Finance.PAYE.Detail",
+                                            Text = "",
+                                            Ordinal = 0,
+                                            NavigateUrl = "views/employers/accounts/{accountId}/finance/payeschemes/{schemeId}",
+                                            Roles = new string[]{},
+                                            MenuItems = new List<MenuItem>(){}
+                                        }
+                                    }
                                 },
                                 new MenuItem
                                 {
                                     Key = "Account.Finance.Transactions",
                                     Text = "Transactions",
-                                    NavigateUrl = "accounts/{accountId}/finance/transactions",
+                                    NavigateUrl = "views/employers/accounts/{accountId}/finance/transactions",
                                     Roles = new[] {"Tier2"},
                                     Ordinal = 1
                                 }
                             }
+                        },
+                        new MenuItem
+                        {
+                            Key = "Account.Teams",
+                            Text = "Teams",
+                            NavigateUrl = "views/employers/accounts/{accountId}/teams",
+                            Ordinal = 2,
+                            MenuItems = new List<MenuItem>(){}
+
                         },
                         new MenuItem
                         {
@@ -178,7 +199,7 @@ namespace SFA.DAS.Support.Shared.Navigation
 
         private List<MenuRoot> SourceFromFile()
         {
-            if (_fileDataSource == null )
+            if (_fileDataSource == null)
             {
                 _logger.Info($"Not Obtaining menu templates from local file as file info is not provided.");
                 return _emptyList;
