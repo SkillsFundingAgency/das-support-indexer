@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using SFA.DAS.NLog.Logger;
 using SFA.DAS.Support.Shared.Authentication;
+using SFA.DAS.Support.Shared.Navigation;
 
 namespace SFA.DAS.Support.Shared.SiteConnection
 {
@@ -19,7 +20,8 @@ namespace SFA.DAS.Support.Shared.SiteConnection
         private readonly List<IHttpStatusCodeStrategy> _handlers;
         private readonly ILog _logger;
         private readonly ISiteConnectorSettings _settings;
-       
+        private bool _requestAsResourceOnlySubView;
+
 
         public SiteConnector(HttpClient client,
             IClientAuthenticator clientAuthenticator,
@@ -38,15 +40,12 @@ namespace SFA.DAS.Support.Shared.SiteConnection
         public HttpStatusCode LastCode { get; set; }
 
 
-        public void SetCustomHeader(string customHeader, object value)
+        public ISiteConnector AsResource()
         {
-            _client.DefaultRequestHeaders.Add(customHeader, $"{value}");
+            _requestAsResourceOnlySubView = true;
+            return this;
         }
 
-        public void ClearCustomHeaders(string customHeader)
-        {
-            _client.DefaultRequestHeaders.Remove(customHeader);
-        }
         public string LastContent { get; set; }
         public Exception LastException { get; set; }
         public HttpStatusCodeDecision HttpStatusCodeDecision { get; set; }
@@ -96,7 +95,15 @@ namespace SFA.DAS.Support.Shared.SiteConnection
 
             var response = await _client.GetAsync(uri);
 
+            if (_requestAsResourceOnlySubView) _client.DefaultRequestHeaders.Add(BaseController.ResourceRequestHeader, "");
+            
             LastContent = await response.Content.ReadAsStringAsync();
+
+            if (_requestAsResourceOnlySubView)
+            {
+                _client.DefaultRequestHeaders.Remove(BaseController.ResourceRequestHeader);
+                _requestAsResourceOnlySubView = false;
+            }
 
             HttpStatusCodeDecision = ExamineResponse(response);
 

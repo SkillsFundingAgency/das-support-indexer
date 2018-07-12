@@ -7,7 +7,6 @@
     ViewBag.currentPage = "DAS Support-Search";
 }
 
-
 <section class="search no-search-term">
     <div class="grid-row">
         <div class="column-full">
@@ -80,7 +79,7 @@
                                                 @account.PublicAccountID
                                             </td>
                                             <td data-label="">
-                                                <div><a href="/Views/employers/@account.AccountID">view</a></div>
+                                                <div><a href="/views/employers/@account.AccountID">view</a></div>
                                             </td>
                                         </tr>
                                     }
@@ -125,7 +124,7 @@
                                                 @user.Status
                                             </td>
                                             <td data-label="">
-                                                <div><a href="/Views/users/@user.Id">view</a></div>
+                                                <div><a href="/views/users/@user.Id">view</a></div>
                                             </td>
                                         </tr>
                                     }
@@ -133,7 +132,6 @@
                             </table>
                         </div>
                     </div>
-
                     @Pager()
                 }
             }

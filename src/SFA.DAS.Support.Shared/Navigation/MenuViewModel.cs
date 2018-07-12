@@ -27,20 +27,20 @@ namespace SFA.DAS.Support.Shared.Navigation
         public List<string> SelectedMenuItemKeys { get; private set; } = new List<string>();
 
         /// <summary>
-        ///     Sets teh menu from the supplied items and using the selected current menu item
+        ///     Sets the menu from the supplied items and using the selected current menu item
         /// </summary>
         /// <param name="items">The menu item templates to use</param>
-        /// <param name="selectedMenuItem"></param>
+        /// <param name="selectedMenuItem">the currently selected menu item</param>
         public void SetMenu(List<MenuItem> items, string selectedMenuItem)
         {
             var elements = selectedMenuItem.Split(new[] {'.'}, StringSplitOptions.RemoveEmptyEntries);
             var keys = elements.Select((t, i) =>
-                    elements.Take(i + 1).Aggregate(string.Empty,
-                        (current, keyElement) =>
-                            $"{current}{(string.IsNullOrWhiteSpace(current) ? "" : ".")}{keyElement}"))
-                .ToList();
+                            elements.Take(i + 1).Aggregate(string.Empty,
+                                (current, keyElement) =>
+                                    $"{current}{(string.IsNullOrWhiteSpace(current) ? "" : ".")}{keyElement}"))
+                        .ToList();
             SelectedMenuItemKeys = keys;
-            MenuItems = items.Where(x => x.Key.StartsWith(SelectedMenuItemKeys.FirstOrDefault() ?? x.Key)).ToList();
+            MenuItems = items;//.Where(x => x.Key.StartsWith(SelectedMenuItemKeys.FirstOrDefault() ?? x.Key)).ToList();
         }
     }
 }

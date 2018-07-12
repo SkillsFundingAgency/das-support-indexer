@@ -67,14 +67,9 @@ namespace SFA.DAS.Support.Portal.Web.Controllers
             var contentUri = new Uri(serviceUri, path);
 
             _logger.Trace($"{nameof(ViewsController)}.{(nameof(Resources))} Resource Content downloading from {contentUri.OriginalString}");
-
-
-            _siteConnector.SetCustomHeader("X-Resource", null);
-
-            var resource = await _siteConnector.Download(contentUri);
-
-            _siteConnector.ClearCustomHeaders("X-Resource");
-
+            
+            var resource = await _siteConnector.AsResource().Download(contentUri);
+            
             return new MvcHtmlString(resource);
         }
     }
