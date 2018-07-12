@@ -93,17 +93,17 @@ namespace SFA.DAS.Support.Shared.SiteConnection
         {
             await EnsureClientAuthorizationHeader();
 
-            var response = await _client.GetAsync(uri);
-
             if (_requestAsResourceOnlySubView) _client.DefaultRequestHeaders.Add(BaseController.ResourceRequestHeader, "");
-            
-            LastContent = await response.Content.ReadAsStringAsync();
+
+            var response = await _client.GetAsync(uri);
 
             if (_requestAsResourceOnlySubView)
             {
                 _client.DefaultRequestHeaders.Remove(BaseController.ResourceRequestHeader);
                 _requestAsResourceOnlySubView = false;
             }
+
+            LastContent = await response.Content.ReadAsStringAsync();
 
             HttpStatusCodeDecision = ExamineResponse(response);
 
