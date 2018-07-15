@@ -148,7 +148,9 @@
     <Compile Include="Discovery\SiteResource.cs" />
     <Compile Include="SiteConnection\SiteValidatorSettings.cs" />
     <Compile Include="SiteConnection\StrategyForSystemErrorStatusCode.cs" />
+    <Compile Include="ViewModels\ChallengeDeniedViewModel.cs" />
     <Compile Include="ViewModels\HeaderViewModel.cs" />
+    <Compile Include="ViewModels\ChallengeViewModel.cs" />
     <Compile Include="Views\EmbeddedResourceFile.cs" />
     <Compile Include="Views\EmbeddedResourceViewPathProvider.cs" />
   </ItemGroup>
