@@ -1,9 +1,8 @@
 ﻿using Moq;
 using NUnit.Framework;
-using SFA.DAS.Support.Portal.ApplicationServices.Services;
-using SFA.DAS.Support.Portal.ApplicationServices.Settings;
+using SFA.DAS.Support.Shared.Authentication;
 
-namespace SFA.DAS.Support.Portal.ApplicationServices.UnitTests.Crytpo
+namespace SFA.DAS.Support.Shared.Tests.Authentication.Crytpo
 {
     [TestFixture]
     public class CryptoTests

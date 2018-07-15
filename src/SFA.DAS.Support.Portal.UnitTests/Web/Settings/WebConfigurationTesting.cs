@@ -4,8 +4,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Schema.Generation;
 using NUnit.Framework;
 using SFA.DAS.Support.Common.Infrastucture.Settings;
-using SFA.DAS.Support.Portal.ApplicationServices.Settings;
 using SFA.DAS.Support.Portal.Web.Settings;
+using SFA.DAS.Support.Shared.Authentication;
 using SFA.DAS.Support.Shared.SiteConnection;
 
 namespace SFA.DAS.Support.Portal.UnitTests.Web.Settings

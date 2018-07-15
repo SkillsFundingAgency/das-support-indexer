@@ -17,6 +17,7 @@
 
 using System;
 using SFA.DAS.Support.Portal.Web.Settings;
+using SFA.DAS.Support.Shared.Authentication;
 using SFA.DAS.Support.Shared.SiteConnection;
 
 namespace SFA.DAS.Support.Portal.Web.DependencyResolution
@@ -26,7 +27,6 @@ namespace SFA.DAS.Support.Portal.Web.DependencyResolution
     using SFA.DAS.Configuration.AzureTableStorage;
     using SFA.DAS.NLog.Logger;
     using SFA.DAS.Support.Common.Infrastucture.Settings;
-    using SFA.DAS.Support.Portal.ApplicationServices.Settings;
     using SFA.DAS.Support.Portal.Core.Services;
     using SFA.DAS.Support.Portal.Infrastructure.DependencyResolution;
     using SFA.DAS.Support.Shared.Discovery;

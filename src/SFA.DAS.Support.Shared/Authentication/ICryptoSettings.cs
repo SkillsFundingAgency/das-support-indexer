@@ -1,4 +1,4 @@
-﻿namespace SFA.DAS.Support.Portal.ApplicationServices.Settings
+﻿namespace SFA.DAS.Support.Shared.Authentication
 {
     public interface ICryptoSettings
     {

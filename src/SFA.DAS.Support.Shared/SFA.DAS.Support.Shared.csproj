@@ -90,10 +90,19 @@
   <ItemGroup>
     <Compile Include="Authentication\ActiveDirectoryClientAuthenticator.cs" />
     <Compile Include="Authentication\ChallengeValidationResult.cs" />
+    <Compile Include="Authentication\Crypto.cs" />
+    <Compile Include="Authentication\CryptoSettings.cs" />
+    <Compile Include="Authentication\ICrypto.cs" />
+    <Compile Include="Authentication\ICryptoSettings.cs" />
+    <Compile Include="Authentication\IdentityHash.cs" />
+    <Compile Include="Authentication\IIdentityHandler.cs" />
+    <Compile Include="Authentication\IIdentityHash.cs" />
+    <Compile Include="Authentication\RequestHeaderIdentityHandler.cs" />
     <Compile Include="Authentication\TokenValidationHandler.cs" />
     <Compile Include="Authentication\TokenValidationFilter.cs" />
     <Compile Include="Authentication\IClientAuthenticator.cs" />
     <Compile Include="AssemblyExtensions.cs" />
+    <Compile Include="Controllers\ChallengeController.cs" />
     <Compile Include="Discovery\EmployerAccountSiteManifest.cs" />
     <Compile Include="Discovery\EmployerUserSiteManifest.cs" />
     <Compile Include="Discovery\IServiceConfiguration.cs" />

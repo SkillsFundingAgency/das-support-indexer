@@ -161,8 +161,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Crytpo\CryptoFailureTests.cs" />
-    <Compile Include="Crytpo\CryptoTests.cs" />
     <Compile Include="Handlers\ChallengeHandlerTests.cs" />
     <Compile Include="Handlers\ChallengePermissionsHandlerTests.cs" />
     <Compile Include="Handlers\SearchHandlerTests.cs" />

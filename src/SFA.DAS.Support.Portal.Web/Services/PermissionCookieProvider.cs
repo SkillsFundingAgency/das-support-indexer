@@ -7,6 +7,7 @@ using SFA.DAS.Support.Portal.ApplicationServices.Services;
 using SFA.DAS.Support.Portal.Core.Services;
 using SFA.DAS.Support.Portal.Web.Models;
 using SFA.DAS.Support.Portal.Web.Settings;
+using SFA.DAS.Support.Shared.Authentication;
 
 namespace SFA.DAS.Support.Portal.Web.Services
 {

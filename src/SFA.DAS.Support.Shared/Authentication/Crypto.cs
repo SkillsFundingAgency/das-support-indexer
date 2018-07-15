@@ -3,9 +3,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using SFA.DAS.Support.Portal.ApplicationServices.Settings;
 
-namespace SFA.DAS.Support.Portal.ApplicationServices.Services
+namespace SFA.DAS.Support.Shared.Authentication
 {
     public class Crypto : ICrypto
     {

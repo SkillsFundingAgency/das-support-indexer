@@ -73,6 +73,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authentication\Crytpo\CryptoFailureTests.cs" />
+    <Compile Include="Authentication\Crytpo\CryptoTests.cs" />
+    <Compile Include="Authentication\WhenTestingIdentityHash.cs" />
+    <Compile Include="Authentication\WhenTestingRequestHeaderIdentityHandler.cs" />
     <Compile Include="Discovery\SupportServiceManifestsTests.cs" />
     <Compile Include="Discovery\WhenCallingGetChallenge.cs" />
     <Compile Include="Discovery\WhenCallingGetResource.cs" />

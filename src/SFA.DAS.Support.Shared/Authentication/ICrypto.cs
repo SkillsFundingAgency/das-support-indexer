@@ -1,4 +1,4 @@
-﻿namespace SFA.DAS.Support.Portal.ApplicationServices.Services
+﻿namespace SFA.DAS.Support.Shared.Authentication
 {
     public interface ICrypto
     {
