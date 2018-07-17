@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using SFA.DAS.Support.Shared.Authentication;
 using SFA.DAS.Support.Shared.Challenge;
@@ -21,27 +23,28 @@ namespace SFA.DAS.Support.Shared.Navigation
         protected readonly IChallengeService ChallengeService;
         protected readonly IMenuService MenuService;
         protected readonly IMenuTemplateTransformer MenuTemplateTransformer;
+        private readonly int _challengeExpiryMinutes;
 
         protected BaseController(IMenuService menuService,
             IMenuTemplateTransformer menuTemplateTransformer,
             IChallengeService challengeService,
-            IIdentityHandler identityHandler)
+            IIdentityHandler identityHandler, int challengeExpiryMinutes)
         {
             MenuService = menuService;
             MenuTemplateTransformer = menuTemplateTransformer;
             ChallengeService = challengeService;
             _identityHandler = identityHandler;
+            _challengeExpiryMinutes = challengeExpiryMinutes;
         }
 
         protected MenuRoot RootMenu { get; set; } = EmptyMenu;
 
-        protected Dictionary<string, string> MenuTransformationIdentifiers { get; set; } =
-            new Dictionary<string, string>();
+        protected Dictionary<string, string> MenuTransformationIdentifiers { get; set; } = new Dictionary<string, string>();
 
         protected SupportMenuPerspectives MenuPerspective { get; set; } = SupportMenuPerspectives.None;
         protected string MenuSelection { get; set; } = null;
 
-        public string ResourceIdentity { get; set; }
+        public string RequestIdentity { get; set; }
 
         /// <summary>
         ///     Signals to the 'OnActionExecuted' to ignore the menu generation processing if this request a resource (sub-view)
@@ -50,7 +53,7 @@ namespace SFA.DAS.Support.Shared.Navigation
 
         protected override void OnActionExecuted(ActionExecutedContext filterContext)
         {
-            ResourceIdentity = _identityHandler.GetIdentity(Request);
+            RequestIdentity = _identityHandler.GetIdentity(Request);
 
             base.OnActionExecuted(filterContext);
 
@@ -78,6 +81,22 @@ namespace SFA.DAS.Support.Shared.Navigation
             _menuViewModel.SetMenu(menuItems, MenuSelection);
 
             ViewBag.Menu = _menuViewModel;
+        }
+
+       
+        protected async Task<SupportAgentChallenge> SaveChallengeSummary(string accountId, Guid challengeId, string entityType)
+        {
+            var challenge = new SupportAgentChallenge
+            {
+                Id = challengeId,
+                Identity = RequestIdentity,
+                EntityType = entityType,
+                EntityKey = accountId,
+                Expires = DateTimeOffset.UtcNow.AddMinutes(_challengeExpiryMinutes)
+            };
+
+            await ChallengeService.Store(challenge);
+            return challenge;
         }
     }
 }
