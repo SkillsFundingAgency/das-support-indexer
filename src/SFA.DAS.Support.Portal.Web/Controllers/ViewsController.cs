@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -44,9 +45,11 @@ namespace SFA.DAS.Support.Portal.Web.Controllers
 
             _logger.Trace($"{nameof(ViewsController)}.{(nameof(Resources))} View Content downloading from {contentUri.OriginalString}");
 
-            var content = await _siteConnector.Download(contentUri);
+            var identity = Thread.CurrentPrincipal?.Identity?.Name ?? "anonymous";
 
-            return View("index", new ViewsViewModel(){ Content = new HtmlString(content) });
+            var content = await _siteConnector.AsIdentity(identity).Download(contentUri);
+
+            return View("index", new ViewsViewModel() { Content = new HtmlString(content) });
         }
 
         [Route("resources/{*path}")]
@@ -67,9 +70,9 @@ namespace SFA.DAS.Support.Portal.Web.Controllers
             var contentUri = new Uri(serviceUri, path);
 
             _logger.Trace($"{nameof(ViewsController)}.{(nameof(Resources))} Resource Content downloading from {contentUri.OriginalString}");
-            
+
             var resource = await _siteConnector.AsResource().Download(contentUri);
-            
+
             return new MvcHtmlString(resource);
         }
     }

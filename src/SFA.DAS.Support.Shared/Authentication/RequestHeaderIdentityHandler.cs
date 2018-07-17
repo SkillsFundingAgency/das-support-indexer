@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System.Net.Http;
+using System.Web;
 
 namespace SFA.DAS.Support.Shared.Authentication
 {
@@ -8,7 +9,7 @@ namespace SFA.DAS.Support.Shared.Authentication
     public class RequestHeaderIdentityHandler : IIdentityHandler
     {
         public const string XResourceRequestIdentity = "X-ResourceRequestIdentity";
-        private const string DefaultIdentity = "anonymous@digitaleductation.gov.uk";
+        private const string DefaultIdentity = "anonymous@digitaleducation.gov.uk";
         private readonly IIdentityHash _identityHash;
         public RequestHeaderIdentityHandler(IIdentityHash identityHash)
         {
@@ -19,9 +20,9 @@ namespace SFA.DAS.Support.Shared.Authentication
             return _identityHash.Decrypt(request?.Headers[XResourceRequestIdentity] ?? DefaultIdentity);
         }
 
-        public void SetIdentity(HttpRequestBase request, string identity)
+        public void SetIdentity(HttpClient client, string identity)
         {
-            request.Headers.Add(XResourceRequestIdentity, _identityHash.Encrypt(identity));
+            client.DefaultRequestHeaders.Add(XResourceRequestIdentity, _identityHash.Encrypt(identity));
         }
     }
 }

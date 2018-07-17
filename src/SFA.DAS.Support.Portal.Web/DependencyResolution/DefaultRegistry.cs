@@ -16,8 +16,10 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using SFA.DAS.Support.Portal.Web.Settings;
 using SFA.DAS.Support.Shared.Authentication;
+using SFA.DAS.Support.Shared.Challenge;
 using SFA.DAS.Support.Shared.SiteConnection;
 
 namespace SFA.DAS.Support.Portal.Web.DependencyResolution
@@ -87,7 +89,10 @@ namespace SFA.DAS.Support.Portal.Web.DependencyResolution
             For<IRouteToServiceMapper>().Use<RouteToServiceMapper>();
             
             For<IServiceAddressMapper>().Use<ServiceAddressMapper>();
-            
+            var challengeTimeoutMinutes = 10; // to configure
+            For<IChallengeService>().Singleton().Use( new InMemoryChallengeService( new Dictionary<Guid, SupportAgentChallenge>() ,challengeTimeoutMinutes ));
+            For<IIdentityHandler>().Use<RequestHeaderIdentityHandler>();
+            For<IIdentityHash>().Use<IdentityHash>();
         }
 
 

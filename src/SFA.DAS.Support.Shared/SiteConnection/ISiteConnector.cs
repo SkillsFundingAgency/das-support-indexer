@@ -17,5 +17,7 @@ namespace SFA.DAS.Support.Shared.SiteConnection
         Task<T> Upload<T>(Uri uri, IDictionary<string, string> formData) where T : class;
        
         ISiteConnector AsResource();
+
+        ISiteConnector AsIdentity(string identity);
     }
 }

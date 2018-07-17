@@ -1,6 +1,4 @@
-﻿using System;
-using System.IdentityModel.Protocols.WSTrust;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Web;
 
 namespace SFA.DAS.Support.Shared.Authentication
@@ -9,7 +7,7 @@ namespace SFA.DAS.Support.Shared.Authentication
     {
         string GetIdentity(HttpRequestBase request);
 
-        void SetIdentity(HttpRequestBase request, string identity);
+        void SetIdentity(HttpClient request, string identity);
 
     }
 }

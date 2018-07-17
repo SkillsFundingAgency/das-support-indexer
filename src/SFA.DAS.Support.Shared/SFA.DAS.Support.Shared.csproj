@@ -102,6 +102,9 @@
     <Compile Include="Authentication\TokenValidationFilter.cs" />
     <Compile Include="Authentication\IClientAuthenticator.cs" />
     <Compile Include="AssemblyExtensions.cs" />
+    <Compile Include="Challenge\SupportAgentChallenge.cs" />
+    <Compile Include="Challenge\IChallengeService.cs" />
+    <Compile Include="Challenge\InMemoryChallengeService.cs" />
     <Compile Include="Controllers\ChallengeController.cs" />
     <Compile Include="Discovery\EmployerAccountSiteManifest.cs" />
     <Compile Include="Discovery\EmployerUserSiteManifest.cs" />

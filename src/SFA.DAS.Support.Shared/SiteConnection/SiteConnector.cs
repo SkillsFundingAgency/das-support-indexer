@@ -21,13 +21,14 @@ namespace SFA.DAS.Support.Shared.SiteConnection
         private readonly ILog _logger;
         private readonly ISiteConnectorSettings _settings;
         private bool _requestAsResourceOnlySubView;
-
+        private readonly IIdentityHandler _identityHandler;
+        private string _requestIdentity;
 
         public SiteConnector(HttpClient client,
             IClientAuthenticator clientAuthenticator,
             ISiteConnectorSettings settings,
             List<IHttpStatusCodeStrategy> handlers,
-            ILog logger)
+            ILog logger, IIdentityHandler identityHandler)
         {
             _client = client ?? throw new ArgumentNullException(TheHttpClientMayNotBeNull);
             _clientAuthenticator = clientAuthenticator ?? throw new ArgumentNullException(nameof(clientAuthenticator));
@@ -35,6 +36,7 @@ namespace SFA.DAS.Support.Shared.SiteConnection
             if (!handlers.Any()) throw new ArgumentException(nameof(handlers));
             _handlers = handlers;
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _identityHandler = identityHandler;
         }
 
         public HttpStatusCode LastCode { get; set; }
@@ -43,6 +45,12 @@ namespace SFA.DAS.Support.Shared.SiteConnection
         public ISiteConnector AsResource()
         {
             _requestAsResourceOnlySubView = true;
+            return this;
+        }
+
+        public ISiteConnector AsIdentity(string identity)
+        {
+            _requestIdentity = identity;
             return this;
         }
 
@@ -95,8 +103,16 @@ namespace SFA.DAS.Support.Shared.SiteConnection
 
             if (_requestAsResourceOnlySubView) _client.DefaultRequestHeaders.Add(BaseController.ResourceRequestHeader, "");
 
-            var response = await _client.GetAsync(uri);
+            if (_requestIdentity != null)
+            {
+                _identityHandler.SetIdentity(_client, _requestIdentity);
+            }
 
+            var response = await _client.GetAsync(uri);
+            if (_requestIdentity != null)
+            {
+                _client.DefaultRequestHeaders.Remove(BaseController.ResourceIdentityHeader);
+            }
             if (_requestAsResourceOnlySubView)
             {
                 _client.DefaultRequestHeaders.Remove(BaseController.ResourceRequestHeader);

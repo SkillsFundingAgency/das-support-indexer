@@ -27,7 +27,7 @@ namespace SFA.DAS.Support.Shared.Tests.SiteConnector
         protected string TestUrlMatch;
         protected ISiteConnector Unit;
         protected string ValidTestResponseData;
-
+        protected Mock<IIdentityHandler> MockIdentityHandler;
         [SetUp]
         public void Setup()
         {
@@ -54,8 +54,10 @@ namespace SFA.DAS.Support.Shared.Tests.SiteConnector
             TestUrl = "http://localhost/api/user/1234";
             TestUri = new Uri(TestUrl);
 
+            MockIdentityHandler = new Mock<IIdentityHandler>();
+
             Unit = new SiteConnection.SiteConnector(HttpClient, MockClientAuthenticator.Object,
-                MockSiteConnectorSettings.Object, Handlers, MockLogger.Object);
+                MockSiteConnectorSettings.Object, Handlers, MockLogger.Object, MockIdentityHandler.Object);
 
 
             MockClientAuthenticator.Setup(x => x.Authenticate(It.IsAny<string>(), It.IsAny<string>(),
