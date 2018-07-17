@@ -14,18 +14,11 @@ namespace SFA.DAS.Support.Shared.Navigation
         protected static readonly MenuRoot EmptyMenu =
             new MenuRoot {MenuItems = new List<MenuItem>(), Perspective = SupportMenuPerspectives.None};
 
-        /// Pull up to basecontroller
-        private readonly int _challengeExpiryMinutes;
-
-        /// Pull up to basecontroller
-        private readonly int _challengeMaxTries;
-
-        /// Pull up to basecontroller
-        private readonly IChallengeService _challengeService;
-
         private readonly IIdentityHandler _identityHandler;
 
         private readonly MenuViewModel _menuViewModel = new MenuViewModel {MenuOrientation = MenuOrientations.Vertical};
+
+        protected readonly IChallengeService ChallengeService;
         protected readonly IMenuService MenuService;
         protected readonly IMenuTemplateTransformer MenuTemplateTransformer;
 
@@ -36,7 +29,7 @@ namespace SFA.DAS.Support.Shared.Navigation
         {
             MenuService = menuService;
             MenuTemplateTransformer = menuTemplateTransformer;
-            _challengeService = challengeService;
+            ChallengeService = challengeService;
             _identityHandler = identityHandler;
         }
 
