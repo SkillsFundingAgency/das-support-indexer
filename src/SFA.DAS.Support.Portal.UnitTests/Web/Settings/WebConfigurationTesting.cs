@@ -23,10 +23,6 @@ namespace SFA.DAS.Support.Portal.UnitTests.Web.Settings
                     Realm = "--- configuration value goes here ---",
                     AdfsMetadata = "--- configuration value goes here ---"
                 },
-                Challenge = new ChallengeSettings
-                {
-                    ChallengeTimeoutMinutes = 3
-                },
                 Crypto = new CryptoSettings
                 {
                     Secret = "--- configuration value goes here ---",

@@ -66,14 +66,13 @@ namespace SFA.DAS.Support.Portal.Web.DependencyResolution
 
             For<IWebConfiguration>().Use(configuration);
             For<IAuthSettings>().Use(configuration.Authentication);
-            For<IChallengeSettings>().Use(configuration.Challenge);
             For<ICryptoSettings>().Use(configuration.Crypto);
             For<ISearchSettings>().Use(configuration.ElasticSearch);
             For<ISiteConnectorSettings>().Use(configuration.SiteConnector);
             For<ISiteValidatorSettings>().Use(configuration.SiteValidator);
             For<ISiteSettings>().Use(configuration.Site);
             For<IRoleSettings>().Use(configuration.Roles);
-
+            
             For<IADFSConfiguration>().Use<ADFSConfiguration>();
 
             For<IServiceConfiguration>().Singleton().Use(new ServiceConfiguration
@@ -87,10 +86,9 @@ namespace SFA.DAS.Support.Portal.Web.DependencyResolution
             For<IMenuTemplateDatasource>().Singleton().Use( (x)=> new MenuTemplateDatasource("~/app_data", x.GetInstance<ILog>()));
             For<IMenuTemplateHandler>().Singleton().Use<MenuTemplateHandler>();
             For<IRouteToServiceMapper>().Use<RouteToServiceMapper>();
-            
+
             For<IServiceAddressMapper>().Use<ServiceAddressMapper>();
-            var challengeTimeoutMinutes = 10; // to configure
-            For<IChallengeService>().Singleton().Use( new InMemoryChallengeService( new Dictionary<Guid, SupportAgentChallenge>() ,challengeTimeoutMinutes ));
+            For<IServiceAddressMapper>().Use<ServiceAddressMapper>();
             For<IIdentityHandler>().Use<RequestHeaderIdentityHandler>();
             For<IIdentityHash>().Use<IdentityHash>();
         }

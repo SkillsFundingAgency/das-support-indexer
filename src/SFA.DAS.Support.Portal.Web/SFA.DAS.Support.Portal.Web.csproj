@@ -466,8 +466,6 @@
     <Compile Include="Settings\AuthSettings.cs" />
     <Compile Include="Settings\IWebConfiguration.cs" />
     <Compile Include="Settings\RoleSettings.cs" />
-    <Compile Include="Settings\ChallengeSettings.cs" />
-    <Compile Include="Settings\IChallengeSettings.cs" />
     <Compile Include="Settings\WebConfiguration.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Controllers\SearchController.cs" />

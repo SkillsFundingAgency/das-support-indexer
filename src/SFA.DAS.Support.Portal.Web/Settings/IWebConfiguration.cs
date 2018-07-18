@@ -8,7 +8,6 @@ namespace SFA.DAS.Support.Portal.Web.Settings
     {
         AuthSettings Authentication { get; set; }
         CryptoSettings Crypto { get; set; }
-        ChallengeSettings Challenge { get; set; }
         ElasticSearchSettings ElasticSearch { get; set; }
         RoleSettings Roles { get; set; }
         SiteSettings Site { get; set; }

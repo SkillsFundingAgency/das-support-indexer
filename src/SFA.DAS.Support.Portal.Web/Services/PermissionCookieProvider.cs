@@ -8,6 +8,7 @@ using SFA.DAS.Support.Portal.Core.Services;
 using SFA.DAS.Support.Portal.Web.Models;
 using SFA.DAS.Support.Portal.Web.Settings;
 using SFA.DAS.Support.Shared.Authentication;
+using SFA.DAS.Support.Shared.Challenge;
 
 namespace SFA.DAS.Support.Portal.Web.Services
 {
@@ -68,7 +69,7 @@ namespace SFA.DAS.Support.Portal.Web.Services
             var model = new PermissionCookieModel
             {
                 Id = id,
-                EndDate = DateTime.UtcNow.AddMinutes(_challengeSettings.ChallengeTimeoutMinutes)
+                EndDate = DateTime.UtcNow.AddMinutes(_challengeSettings.ChallengeExpiryMinutes)
             };
 
             var json = JsonConvert.SerializeObject(model,
