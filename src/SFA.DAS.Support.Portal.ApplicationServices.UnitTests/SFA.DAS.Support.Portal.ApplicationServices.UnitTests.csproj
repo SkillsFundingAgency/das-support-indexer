@@ -161,12 +161,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Handlers\ChallengeHandlerTests.cs" />
-    <Compile Include="Handlers\ChallengePermissionsHandlerTests.cs" />
     <Compile Include="Handlers\SearchHandlerTests.cs" />
     <Compile Include="Handlers\UserStatusTestDataClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\ChallengeServiceTests.cs" />
     <Compile Include="Services\DatetimeServiceTests.cs" />
     <Compile Include="Services\ManifestRepository\WhenCallingGenerateHeader.cs" />
     <Compile Include="Services\ManifestRepository\WhenCallingGetChallengeForm.cs" />

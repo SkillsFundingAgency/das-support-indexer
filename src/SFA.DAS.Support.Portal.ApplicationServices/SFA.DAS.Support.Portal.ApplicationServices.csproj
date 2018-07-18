@@ -76,8 +76,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DependencyResolution\ApplicationServicesRegistry.cs" />
-    <Compile Include="Handlers\ChallengePermissionHandler.cs" />
-    <Compile Include="Handlers\ChallengeHandler.cs" />
     <Compile Include="Handlers\SearchHandler.cs" />
     <Compile Include="ILevySubmissionsRepository.cs" />
     <Compile Include="IAccountRepository.cs" />
@@ -95,9 +93,7 @@
     <Compile Include="Responses\SearchResponse.cs" />
     <Compile Include="Responses\SearchResponseCodes.cs" />
     <Compile Include="Services\ChallengeResult.cs" />
-    <Compile Include="Services\ChallengeService.cs" />
     <Compile Include="Services\DatetimeService.cs" />
-    <Compile Include="Services\IChallengeService.cs" />
     <Compile Include="Services\IDatetimeService.cs" />
     <Compile Include="Services\IFormMapper.cs" />
     <Compile Include="Services\IGetCurrentIdentity.cs" />

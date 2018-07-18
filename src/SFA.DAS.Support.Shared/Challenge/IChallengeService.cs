@@ -12,5 +12,7 @@ namespace SFA.DAS.Support.Shared.Challenge
         );
 
         Task Store(SupportAgentChallenge challenge);
+
+        int ChallengeExpiryMinutes { get; set; }
     }
 }

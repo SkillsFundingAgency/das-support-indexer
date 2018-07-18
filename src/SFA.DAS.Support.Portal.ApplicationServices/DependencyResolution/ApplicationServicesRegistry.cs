@@ -22,8 +22,7 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.DependencyResolution
                     scan.AddAllTypesOf(typeof(IAsyncRequestHandler<,>));
                 });
             For<ICrypto>().Use<Crypto>();
-            For<IChallengeService>().Use<ChallengeService>();
-            For<IDatetimeService>().Use<DatetimeService>();
+           For<IDatetimeService>().Use<DatetimeService>();
             For<IManifestRepository>().Singleton().Use<ManifestRepository>();
         }
     }

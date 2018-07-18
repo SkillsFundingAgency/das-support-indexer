@@ -23,18 +23,18 @@ namespace SFA.DAS.Support.Shared.Navigation
         protected readonly IChallengeService ChallengeService;
         protected readonly IMenuService MenuService;
         protected readonly IMenuTemplateTransformer MenuTemplateTransformer;
-        private readonly int _challengeExpiryMinutes;
+        
 
         protected BaseController(IMenuService menuService,
             IMenuTemplateTransformer menuTemplateTransformer,
             IChallengeService challengeService,
-            IIdentityHandler identityHandler, int challengeExpiryMinutes)
+            IIdentityHandler identityHandler)
         {
             MenuService = menuService;
             MenuTemplateTransformer = menuTemplateTransformer;
             ChallengeService = challengeService;
             _identityHandler = identityHandler;
-            _challengeExpiryMinutes = challengeExpiryMinutes;
+            
         }
 
         protected MenuRoot RootMenu { get; set; } = EmptyMenu;
@@ -92,7 +92,7 @@ namespace SFA.DAS.Support.Shared.Navigation
                 Identity = RequestIdentity,
                 EntityType = entityType,
                 EntityKey = accountId,
-                Expires = DateTimeOffset.UtcNow.AddMinutes(_challengeExpiryMinutes)
+                Expires = DateTimeOffset.UtcNow.AddMinutes(ChallengeService.ChallengeExpiryMinutes)
             };
 
             await ChallengeService.Store(challenge);

@@ -8,13 +8,14 @@ namespace SFA.DAS.Support.Shared.Challenge
     public class InMemoryChallengeService : IChallengeService
     {
         private readonly Dictionary<Guid, SupportAgentChallenge> _challenges;
-        private readonly int _challengeTimeoutMinutes;
 
         public InMemoryChallengeService(Dictionary<Guid, SupportAgentChallenge> challenges, int challengeTimeoutMinutes)
         {
             _challenges = challenges;
-            _challengeTimeoutMinutes = challengeTimeoutMinutes;
+            ChallengeExpiryMinutes = challengeTimeoutMinutes;
         }
+
+        public int ChallengeExpiryMinutes { get; set; }
 
         public async Task<Guid> IsNeeded(string identity, string entityType, string entityKey)
         {
@@ -30,7 +31,7 @@ namespace SFA.DAS.Support.Shared.Challenge
                     Identity = identity,
                     EntityType = entityType,
                     EntityKey = entityKey,
-                    Expires = DateTimeOffset.UtcNow.AddMinutes(_challengeTimeoutMinutes)
+                    Expires = DateTimeOffset.UtcNow.AddMinutes(ChallengeExpiryMinutes)
                 };
                 _challenges.Add(challenge.Id, challenge);
                 return await Task.FromResult(challenge.Id);
