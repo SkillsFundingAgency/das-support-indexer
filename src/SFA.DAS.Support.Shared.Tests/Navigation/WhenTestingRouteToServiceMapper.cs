@@ -31,7 +31,7 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
         [Test]
         public void ItShouldMapToEmployerUsersWhenRouteStartsWithUsers()
         {
-            Assert.AreEqual(SupportServiceIdentity.SupportEmployerUser, _unit.Service("users/whatever"));
+            Assert.AreEqual(SupportServiceIdentity.SupportEmployerUser, _unit.Service("employerusers/whatever"));
         }
 
         [Test]

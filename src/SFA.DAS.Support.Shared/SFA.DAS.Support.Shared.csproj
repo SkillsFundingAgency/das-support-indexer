@@ -105,6 +105,8 @@
     <Compile Include="Authentication\IClientAuthenticator.cs" />
     <Compile Include="AssemblyExtensions.cs" />
     <Compile Include="Challenge\ChallengeSettings.cs" />
+    <Compile Include="Challenge\ChallengeViewModelBase.cs" />
+    <Compile Include="Challenge\IChallengeRepository.cs" />
     <Compile Include="Challenge\IChallengeSettings.cs" />
     <Compile Include="Challenge\SupportAgentChallenge.cs" />
     <Compile Include="Challenge\IChallengeService.cs" />
