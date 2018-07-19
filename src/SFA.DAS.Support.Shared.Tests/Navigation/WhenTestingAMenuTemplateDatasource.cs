@@ -11,8 +11,9 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
     /// </summary>
     public class WhenTestingAMenuTemplateDatasource
     {
-        private IMenuTemplateDatasource _unit;
         private Mock<ILog> _mockLogger;
+        private IMenuTemplateDatasource _unit;
+
         [SetUp]
         public void Setup()
         {

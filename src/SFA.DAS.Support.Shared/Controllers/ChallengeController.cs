@@ -4,7 +4,6 @@ using SFA.DAS.Support.Shared.SiteConnection;
 
 namespace SFA.DAS.Support.Shared.Controllers
 {
-
     public class ChallengeController : Controller
     {
         private readonly string _cookieDomain = ".localhost"; // change to real domain for deployment
@@ -14,12 +13,6 @@ namespace SFA.DAS.Support.Shared.Controllers
         private readonly int _maxChallengeTries = 3;
         private readonly ISiteConnector _siteConnector;
         private string _identity;
-
-        public ChallengeController()
-        {
-            //_siteConnector = new SiteConnector();
-            //_identityHandler = new CookieIdentityHandler(_cookieName, _cookieDomain, _defaultIdentity);
-        }
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
@@ -32,6 +25,7 @@ namespace SFA.DAS.Support.Shared.Controllers
             //                                  "api/navigation/templates") ?? new Dictionary<string, NavItem>();
             base.OnActionExecuting(filterContext);
         }
+
         private string GetChallengeForEntityType(string entityType)
         {
             return $"Challenge for {entityType} ";

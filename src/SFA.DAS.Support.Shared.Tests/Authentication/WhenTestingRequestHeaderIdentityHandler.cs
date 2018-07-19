@@ -10,13 +10,6 @@ namespace SFA.DAS.Support.Shared.Tests.Authentication
     [TestFixture]
     public class WhenTestingRequestHeaderIdentityHandler
     {
-        private IIdentityHandler _unit;
-        private Mock<IIdentityHash> _mockIdentityHash;
-        private string _testIdentity = "me@there.com";
-        private Mock<HttpRequestBase> _requestBase;
-        private string _hashedIdentity = "hashedId";
-        private NameValueCollection _nameValueCollection;
-        private HttpClient _client;
         [SetUp]
         public void Setup()
         {
@@ -29,14 +22,22 @@ namespace SFA.DAS.Support.Shared.Tests.Authentication
             _nameValueCollection = new NameValueCollection();
             _requestBase.SetupGet(x => x.Headers).Returns(_nameValueCollection);
             _unit = new RequestHeaderIdentityHandler(_mockIdentityHash.Object);
-
         }
+
+        private IIdentityHandler _unit;
+        private Mock<IIdentityHash> _mockIdentityHash;
+        private readonly string _testIdentity = "me@there.com";
+        private Mock<HttpRequestBase> _requestBase;
+        private readonly string _hashedIdentity = "hashedId";
+        private NameValueCollection _nameValueCollection;
+        private HttpClient _client;
 
         [Test]
         public void ItShouldStoreTheIdentityreaduForRequestTransmission()
         {
             _unit.SetIdentity(_client, _testIdentity);
-            Assert.IsTrue(_client.DefaultRequestHeaders.Contains(RequestHeaderIdentityHandler.XResourceRequestIdentity));
+            Assert.IsTrue(
+                _client.DefaultRequestHeaders.Contains(RequestHeaderIdentityHandler.XResourceRequestIdentity));
             _mockIdentityHash.Verify(x => x.Encrypt(_testIdentity), Times.Once);
             _mockIdentityHash.Verify(x => x.Decrypt(_hashedIdentity), Times.Never);
         }

@@ -1,13 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
-using System.Reflection;
 using SFA.DAS.Support.Common.Infrastucture.Elasticsearch;
 using SFA.DAS.Support.Common.Infrastucture.Indexer;
 using SFA.DAS.Support.Indexer.ApplicationServices.Services;
 using SFA.DAS.Support.Shared.Authentication;
-using SFA.DAS.Support.Shared.Discovery;
 using SFA.DAS.Support.Shared.SiteConnection;
 using StructureMap.Configuration.DSL;
 
@@ -18,7 +14,6 @@ namespace SFA.DAS.Support.Indexer.Worker.DependencyResolution
     {
         public InfrastuctureRegistry()
         {
-           
             For<IHttpStatusCodeStrategy>().Use<StrategyForSystemErrorStatusCode>();
             For<IHttpStatusCodeStrategy>().Use<StrategyForClientErrorStatusCode>();
             For<IHttpStatusCodeStrategy>().Use<StrategyForRedirectionStatusCode>();
@@ -54,6 +49,5 @@ namespace SFA.DAS.Support.Indexer.Worker.DependencyResolution
                     x.Type<UserIndexResourceProcessor>();
                 });
         }
-
     }
 }

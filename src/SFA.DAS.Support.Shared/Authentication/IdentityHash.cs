@@ -11,7 +11,7 @@
 
         public string Decrypt(string identity)
         {
-            return _crypto.DecryptStringAES( identity);
+            return _crypto.DecryptStringAES(identity);
         }
 
         public string Encrypt(string identity)

@@ -18,10 +18,10 @@ namespace SFA.DAS.Support.Shared.SiteConnection
         private readonly HttpClient _client;
         private readonly IClientAuthenticator _clientAuthenticator;
         private readonly List<IHttpStatusCodeStrategy> _handlers;
+        private readonly IIdentityHandler _identityHandler;
         private readonly ILog _logger;
         private readonly ISiteConnectorSettings _settings;
         private bool _requestAsResourceOnlySubView;
-        private readonly IIdentityHandler _identityHandler;
         private string _requestIdentity;
 
         public SiteConnector(HttpClient client,
@@ -101,18 +101,13 @@ namespace SFA.DAS.Support.Shared.SiteConnection
         {
             await EnsureClientAuthorizationHeader();
 
-            if (_requestAsResourceOnlySubView) _client.DefaultRequestHeaders.Add(BaseController.ResourceRequestHeader, "");
+            if (_requestAsResourceOnlySubView)
+                _client.DefaultRequestHeaders.Add(BaseController.ResourceRequestHeader, "");
 
-            if (_requestIdentity != null)
-            {
-                _identityHandler.SetIdentity(_client, _requestIdentity);
-            }
+            if (_requestIdentity != null) _identityHandler.SetIdentity(_client, _requestIdentity);
 
             var response = await _client.GetAsync(uri);
-            if (_requestIdentity != null)
-            {
-                _client.DefaultRequestHeaders.Remove(BaseController.ResourceIdentityHeader);
-            }
+            if (_requestIdentity != null) _client.DefaultRequestHeaders.Remove(BaseController.ResourceIdentityHeader);
             if (_requestAsResourceOnlySubView)
             {
                 _client.DefaultRequestHeaders.Remove(BaseController.ResourceRequestHeader);

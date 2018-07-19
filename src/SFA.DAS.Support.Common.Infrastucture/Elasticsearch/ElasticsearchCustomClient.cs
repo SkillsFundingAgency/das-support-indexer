@@ -188,16 +188,11 @@ namespace SFA.DAS.Support.Common.Infrastucture.Elasticsearch
 
                     waitHandle.Set();
                 },
-                () => {
-                    waitHandle.Set();
-                }));
+                () => { waitHandle.Set(); }));
 
             waitHandle.WaitOne();
 
-            if (bulkAllException != null)
-            {
-                throw bulkAllException;
-            }
+            if (bulkAllException != null) throw bulkAllException;
 
             SendLog(null, null, timer.ElapsedMilliseconds, "Bulk completed for Document");
         }

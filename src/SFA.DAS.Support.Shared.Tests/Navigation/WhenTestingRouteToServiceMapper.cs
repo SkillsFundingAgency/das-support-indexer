@@ -7,25 +7,18 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
     [TestFixture]
     public class WhenTestingRouteToServiceMapper
     {
-        private RouteToServiceMapper _unit;
-
         [SetUp]
         public void Setup()
         {
             _unit = new RouteToServiceMapper();
         }
 
-        [Test]
-        public void ItShouldMapToPortalByDefault()
-        {
-            Assert.AreEqual(SupportServiceIdentity.SupportPortal , _unit.Service(null));
-        }
-
+        private RouteToServiceMapper _unit;
 
         [Test]
-        public void ItShouldMapToPortalWhenUnknown()
+        public void ItShouldMapToCommitmentsWhenRouteStartsWithCommitments()
         {
-            Assert.AreEqual(SupportServiceIdentity.SupportPortal, _unit.Service("something/unknown"));
+            Assert.AreEqual(SupportServiceIdentity.SupportCommitments, _unit.Service("commitments/whatever"));
         }
 
         [Test]
@@ -41,10 +34,16 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
         }
 
         [Test]
-        public void ItShouldMapToCommitmentsWhenRouteStartsWithCommitments()
+        public void ItShouldMapToPortalByDefault()
         {
-            Assert.AreEqual(SupportServiceIdentity.SupportCommitments, _unit.Service("commitments/whatever"));
+            Assert.AreEqual(SupportServiceIdentity.SupportPortal, _unit.Service(null));
         }
 
+
+        [Test]
+        public void ItShouldMapToPortalWhenUnknown()
+        {
+            Assert.AreEqual(SupportServiceIdentity.SupportPortal, _unit.Service("something/unknown"));
+        }
     }
 }

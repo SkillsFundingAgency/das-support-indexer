@@ -1,39 +1,35 @@
-﻿using Moq;
-using NUnit.Framework;
+﻿using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Threading.Tasks;
+using Moq;
+using Nest;
 using SFA.DAS.NLog.Logger;
 using SFA.DAS.Support.Common.Infrastucture.Elasticsearch;
 using SFA.DAS.Support.Common.Infrastucture.Indexer;
 using SFA.DAS.Support.Common.Infrastucture.Settings;
-using SFA.DAS.Support.Indexer.ApplicationServices.Services;
-using SFA.DAS.Support.Shared.SiteConnection;
-using SFA.DAS.Support.Indexer.ApplicationServices;
 using SFA.DAS.Support.Indexer.ApplicationServices.Settings;
-using SFA.DAS.Support.Shared.SearchIndexModel;
-using System.Threading.Tasks;
-using System;
-using System.Collections.Generic;
-using Nest;
-using System.Net;
 using SFA.DAS.Support.Shared.Discovery;
+using SFA.DAS.Support.Shared.SearchIndexModel;
+using SFA.DAS.Support.Shared.SiteConnection;
 
 namespace SFA.DAS.Support.Indexer.ApplicationServices.UnitTests
 {
     public class IndexResourceProcessorBase
     {
-
-        protected Mock<ISiteConnector> _downloader;
-        protected Mock<IIndexProvider> _indexProvider;
-        protected Mock<ISearchSettings> _searchSettings;
-        protected Mock<ILog> _logger;
-        protected Mock<IIndexNameCreator> _indexNameCreator;
-        protected Mock<IElasticsearchCustomClient> _elasticClient;
-        protected Mock<IIndexerSiteSettings> _siteSettings;
-
         protected const string _indexName = "new_index_name";
-        protected Uri _baseUrl;
         protected const int _indexToRetain = 2;
         protected IEnumerable<AccountSearchModel> _accountModels;
         protected SiteResource _accountSiteResource;
+        protected Uri _baseUrl;
+
+        protected Mock<ISiteConnector> _downloader;
+        protected Mock<IElasticsearchCustomClient> _elasticClient;
+        protected Mock<IIndexNameCreator> _indexNameCreator;
+        protected Mock<IIndexProvider> _indexProvider;
+        protected Mock<ILog> _logger;
+        protected Mock<ISearchSettings> _searchSettings;
+        protected Mock<IIndexerSiteSettings> _siteSettings;
         protected SiteResource _userSiteResource;
 
 
@@ -54,14 +50,14 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.UnitTests
             {
                 SearchCategory = SearchCategory.Account,
                 SearchTotalItemsUrl = "localhost",
-                SearchItemsUrl = "localhost",
+                SearchItemsUrl = "localhost"
             };
 
             _userSiteResource = new SiteResource
             {
                 SearchCategory = SearchCategory.User,
                 SearchTotalItemsUrl = "localhost",
-                SearchItemsUrl = "localhost",
+                SearchItemsUrl = "localhost"
             };
 
 
@@ -98,19 +94,20 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.UnitTests
             var createIndexResponse = new Mock<ICreateIndexResponse>();
             createIndexResponse
                 .Setup(o => o.ApiCall.HttpStatusCode)
-                .Returns((int)HttpStatusCode.OK);
+                .Returns((int) HttpStatusCode.OK);
 
             _elasticClient
-               .Setup(x => x.CreateIndex(_indexName, It.IsAny<Func<CreateIndexDescriptor, ICreateIndexRequest>>(), string.Empty))
-               .Returns(createIndexResponse.Object);
+                .Setup(x => x.CreateIndex(_indexName, It.IsAny<Func<CreateIndexDescriptor, ICreateIndexRequest>>(),
+                    string.Empty))
+                .Returns(createIndexResponse.Object);
 
             _downloader
                 .Setup(o => o.Download<IEnumerable<AccountSearchModel>>(_baseUrl))
                 .Returns(Task.FromResult(_accountModels));
 
             _downloader
-               .Setup(o => o.Download(It.IsAny<Uri>()))
-               .Returns(Task.FromResult("50"));
+                .Setup(o => o.Download(It.IsAny<Uri>()))
+                .Returns(Task.FromResult("50"));
 
             _downloader
                 .Setup(o => o.LastCode)
@@ -120,16 +117,10 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.UnitTests
                 .Setup(o => o.DeleteIndex(_indexName));
 
             _indexProvider
-               .Setup(o => o.CreateIndexAlias(_indexName, It.IsAny<string>()));
+                .Setup(o => o.CreateIndexAlias(_indexName, It.IsAny<string>()));
 
             _indexProvider
-              .Setup(o => o.DeleteIndexes(_indexToRetain, It.IsAny<string>()));
-
-           
+                .Setup(o => o.DeleteIndexes(_indexToRetain, It.IsAny<string>()));
         }
-
-
-
-
     }
 }

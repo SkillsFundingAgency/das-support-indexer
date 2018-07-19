@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 
 namespace SFA.DAS.Support.Shared.Challenge
 {
@@ -10,6 +9,5 @@ namespace SFA.DAS.Support.Shared.Challenge
         public string EntityType { get; set; }
         public string EntityKey { get; set; }
         public DateTimeOffset Expires { get; set; }
-
     }
 }

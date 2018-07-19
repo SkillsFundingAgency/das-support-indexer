@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Moq;
 using NUnit.Framework;
@@ -16,16 +15,16 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.UnitTests.Services.Manifest
             var html = "<html>Some page</html>";
             MockSiteConnector.Setup(x => x.Download(It.IsAny<Uri>()))
                 .ReturnsAsync(html);
-            var result = await Unit.GetResourcePage(SupportServiceResourceKey.EmployerAccountFinance, "id", "childItemId");
+            var result =
+                await Unit.GetResourcePage(SupportServiceResourceKey.EmployerAccountFinance, "id", "childItemId");
             Assert.IsFalse(string.IsNullOrWhiteSpace(result.Resource));
         }
 
         [Test]
         public void ItShouldThrowAnExceptionIfTheKeyIsNotFound()
         {
-            Assert.ThrowsAsync<NullReferenceException>(async () => await Unit.GetResourcePage(SupportServiceResourceKey.None, "id", "childItemId"));
+            Assert.ThrowsAsync<NullReferenceException>(async () =>
+                await Unit.GetResourcePage(SupportServiceResourceKey.None, "id", "childItemId"));
         }
-
-
     }
 }

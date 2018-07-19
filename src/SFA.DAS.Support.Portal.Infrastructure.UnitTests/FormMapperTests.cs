@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Moq;
+using NUnit.Framework;
 using SFA.DAS.NLog.Logger;
 using SFA.DAS.Support.Portal.Infrastructure.Services;
 using SFA.DAS.Support.Shared.Discovery;
@@ -11,7 +12,7 @@ namespace SFA.DAS.Support.Portal.Infrastructure.UnitTests
         [SetUp]
         public void Setup()
         {
-            _unit = new FormMapper(Moq.Mock.Of<ILog>());
+            _unit = new FormMapper(Mock.Of<ILog>());
         }
 
         private FormMapper _unit;

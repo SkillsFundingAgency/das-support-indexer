@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -16,11 +15,11 @@ namespace SFA.DAS.Support.Shared.Navigation
     /// </summary>
     public class MenuTemplateDatasource : IMenuTemplateDatasource
     {
-        private readonly ILog _logger;
         private readonly string _embeddedDataSource;
+        private readonly List<MenuRoot> _emptyList = new List<MenuRoot>();
 
         private readonly FileInfo _fileDataSource;
-        private readonly List<MenuRoot> _emptyList = new List<MenuRoot>();
+        private readonly ILog _logger;
 
 
         public MenuTemplateDatasource(FileInfo fileMenuTempalteDataSource, ILog logger)
@@ -31,8 +30,8 @@ namespace SFA.DAS.Support.Shared.Navigation
             var embeddedPath = typeof(MenuTemplateDatasource).Namespace;
             _embeddedDataSource = $"{embeddedPath}.MenuTemplates.json";
 
-            _logger.Trace($"{nameof(MenuTemplateDatasource)}.ctor File: {_fileDataSource.FullName}, Embedded: {_embeddedDataSource}");
-
+            _logger.Trace(
+                $"{nameof(MenuTemplateDatasource)}.ctor File: {_fileDataSource.FullName}, Embedded: {_embeddedDataSource}");
         }
 
         public MenuTemplateDatasource(string menuTemplateFilePath, ILog logger)
@@ -46,9 +45,8 @@ namespace SFA.DAS.Support.Shared.Navigation
             var embeddedPath = typeof(MenuTemplateDatasource).Namespace;
             _embeddedDataSource = $"{embeddedPath}.MenuTemplates.json";
 
-            _logger.Trace($"{nameof(MenuTemplateDatasource)}.ctor File: {_fileDataSource.FullName}, Embedded: {_embeddedDataSource}");
-
-
+            _logger.Trace(
+                $"{nameof(MenuTemplateDatasource)}.ctor File: {_fileDataSource.FullName}, Embedded: {_embeddedDataSource}");
         }
 
         public List<MenuRoot> Provide()
@@ -108,16 +106,17 @@ namespace SFA.DAS.Support.Shared.Navigation
                                     Text = "PAYE schemes",
                                     NavigateUrl = "views/employers/accounts/{accountId}/finance/payeschemes",
                                     Ordinal = 0,
-                                    MenuItems = new List<MenuItem>()
+                                    MenuItems = new List<MenuItem>
                                     {
-                                        new MenuItem()
+                                        new MenuItem
                                         {
                                             Key = "Account.Finance.PAYE.Detail",
                                             Text = "",
                                             Ordinal = 0,
-                                            NavigateUrl = "views/employers/accounts/{accountId}/finance/payeschemes/{schemeId}",
-                                            Roles = new string[]{},
-                                            MenuItems = new List<MenuItem>(){}
+                                            NavigateUrl =
+                                                "views/employers/accounts/{accountId}/finance/payeschemes/{schemeId}",
+                                            Roles = new string[] { },
+                                            MenuItems = new List<MenuItem>()
                                         }
                                     }
                                 },
@@ -137,8 +136,7 @@ namespace SFA.DAS.Support.Shared.Navigation
                             Text = "Teams",
                             NavigateUrl = "views/employers/accounts/{accountId}/teams",
                             Ordinal = 2,
-                            MenuItems = new List<MenuItem>(){}
-
+                            MenuItems = new List<MenuItem>()
                         },
                         new MenuItem
                         {
@@ -191,7 +189,8 @@ namespace SFA.DAS.Support.Shared.Navigation
             }
             catch (Exception e)
             {
-                _logger.Error(e, $"Exception occured obtaining menu templates from embedded resource {_embeddedDataSource}");
+                _logger.Error(e,
+                    $"Exception occured obtaining menu templates from embedded resource {_embeddedDataSource}");
 
                 return new List<MenuRoot>();
             }
@@ -204,11 +203,14 @@ namespace SFA.DAS.Support.Shared.Navigation
                 _logger.Info($"Not Obtaining menu templates from local file as file info is not provided.");
                 return _emptyList;
             }
+
             if (!_fileDataSource.Exists)
             {
-                _logger.Info($"Not Obtaining menu templates from local file {_fileDataSource.FullName} as it was not found.");
+                _logger.Info(
+                    $"Not Obtaining menu templates from local file {_fileDataSource.FullName} as it was not found.");
                 return _emptyList;
             }
+
             try
             {
                 _logger.Info($"Obtaining menu templates from local file {_fileDataSource.FullName}.");
@@ -217,8 +219,8 @@ namespace SFA.DAS.Support.Shared.Navigation
             catch (Exception e)
             {
                 // ignore
-                _logger.Error(e, $"Exception occured obtaining menu templates from local file {_fileDataSource.FullName}.");
-
+                _logger.Error(e,
+                    $"Exception occured obtaining menu templates from local file {_fileDataSource.FullName}.");
             }
 
             return _emptyList;

@@ -22,12 +22,13 @@ namespace SFA.DAS.Support.Portal.Web.Controllers
             _siteConnector = siteConnector;
             _siteSettings = siteSettings;
         }
+
         [System.Web.Mvc.AllowAnonymous]
         public async Task<IHttpActionResult> Get()
         {
             // Get the status of each site
             // add it to this one and output the results
-            var sites = _siteSettings.BaseUrls.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+            var sites = _siteSettings.BaseUrls.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries).ToList();
             var localResult = new
             {
                 ServiceName = AddServiceName(),
@@ -43,11 +44,12 @@ namespace SFA.DAS.Support.Portal.Web.Controllers
                 var subSites = new Dictionary<SupportServiceIdentity, Uri>();
                 foreach (var subSite in sites)
                 {
-                    var siteElements = subSite.Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+                    var siteElements = subSite.Split(new[] {'|'}, StringSplitOptions.RemoveEmptyEntries);
                     if (siteElements.Length != 2) continue;
                     if (string.IsNullOrWhiteSpace(siteElements[0])) continue;
                     if (string.IsNullOrWhiteSpace(siteElements[1])) continue;
-                    subSites.Add((SupportServiceIdentity)Enum.Parse(typeof(SupportServiceIdentity), siteElements[0]), new Uri(siteElements[1]));
+                    subSites.Add((SupportServiceIdentity) Enum.Parse(typeof(SupportServiceIdentity), siteElements[0]),
+                        new Uri(siteElements[1]));
                 }
 
                 foreach (var subSite in subSites)
@@ -61,7 +63,7 @@ namespace SFA.DAS.Support.Portal.Web.Controllers
                             Result = _siteConnector.HttpStatusCodeDecision,
                             HttpStatusCode = _siteConnector.LastCode,
                             Exception = _siteConnector.LastException,
-                            Content = _siteConnector.LastContent,
+                            Content = _siteConnector.LastContent
                         });
                     }
                     catch (Exception e)
@@ -71,7 +73,7 @@ namespace SFA.DAS.Support.Portal.Web.Controllers
                             Result = _siteConnector.HttpStatusCodeDecision,
                             HttpStatusCode = _siteConnector.LastCode,
                             Exception = e,
-                            Content = _siteConnector.LastContent,
+                            Content = _siteConnector.LastContent
                         });
                     }
                 }

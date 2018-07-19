@@ -5,6 +5,10 @@ namespace SFA.DAS.Support.Shared.Challenge
 {
     public interface IChallengeService
     {
+        int ChallengeExpiryMinutes { get; set; }
+
+        int ChallengeMaxRetries { get; set; }
+
         Task<Guid> IsNeeded(
             string identity,
             string entityType,
@@ -12,9 +16,5 @@ namespace SFA.DAS.Support.Shared.Challenge
         );
 
         Task Store(SupportAgentChallenge challenge);
-
-        int ChallengeExpiryMinutes { get; set; }
-
-        int ChallengeMaxRetries { get; set; }
     }
 }

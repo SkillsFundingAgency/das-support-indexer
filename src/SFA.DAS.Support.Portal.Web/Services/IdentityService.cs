@@ -11,7 +11,7 @@ namespace SFA.DAS.Support.Portal.Web.Services
     {
         public ClaimsIdentity GetCurrentIdentity()
         {
-            return (ClaimsIdentity)HttpContext.Current.User?.Identity ?? new ClaimsIdentity(new List<Claim>());
+            return (ClaimsIdentity) HttpContext.Current.User?.Identity ?? new ClaimsIdentity(new List<Claim>());
         }
     }
 }

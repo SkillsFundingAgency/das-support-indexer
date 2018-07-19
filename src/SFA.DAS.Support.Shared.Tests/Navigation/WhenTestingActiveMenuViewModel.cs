@@ -9,9 +9,9 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
 {
     public class WhenTestingActiveMenuViewModel
     {
-        private Mock<ILog> _mockLogger;
-        private IMenuTemplateDatasource _menuTemplateDatasource;
         private readonly MenuViewModel _unit = new MenuViewModel();
+        private IMenuTemplateDatasource _menuTemplateDatasource;
+        private Mock<ILog> _mockLogger;
         private List<MenuRoot> _rootMenus;
 
         [SetUp]

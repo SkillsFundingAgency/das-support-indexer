@@ -23,7 +23,7 @@ namespace SFA.DAS.Support.Shared.Navigation
         protected readonly IChallengeService ChallengeService;
         protected readonly IMenuService MenuService;
         protected readonly IMenuTemplateTransformer MenuTemplateTransformer;
-        
+
 
         protected BaseController(IMenuService menuService,
             IMenuTemplateTransformer menuTemplateTransformer,
@@ -34,12 +34,12 @@ namespace SFA.DAS.Support.Shared.Navigation
             MenuTemplateTransformer = menuTemplateTransformer;
             ChallengeService = challengeService;
             _identityHandler = identityHandler;
-            
         }
 
         protected MenuRoot RootMenu { get; set; } = EmptyMenu;
 
-        protected Dictionary<string, string> MenuTransformationIdentifiers { get; set; } = new Dictionary<string, string>();
+        protected Dictionary<string, string> MenuTransformationIdentifiers { get; set; } =
+            new Dictionary<string, string>();
 
         protected SupportMenuPerspectives MenuPerspective { get; set; } = SupportMenuPerspectives.None;
         protected string MenuSelection { get; set; } = null;
@@ -83,8 +83,9 @@ namespace SFA.DAS.Support.Shared.Navigation
             ViewBag.Menu = _menuViewModel;
         }
 
-       
-        protected async Task<SupportAgentChallenge> SaveChallengeSummary(string accountId, Guid challengeId, string entityType)
+
+        protected async Task<SupportAgentChallenge> SaveChallengeSummary(string accountId, Guid challengeId,
+            string entityType)
         {
             var challenge = new SupportAgentChallenge
             {

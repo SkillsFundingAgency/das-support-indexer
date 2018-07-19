@@ -2,7 +2,7 @@
 
 namespace SFA.DAS.Support.Indexer.ApplicationServices.Settings
 {
-    public interface IIndexerSiteSettings: ISiteSettings
+    public interface IIndexerSiteSettings : ISiteSettings
     {
         string DelayTimeInSeconds { get; set; }
     }

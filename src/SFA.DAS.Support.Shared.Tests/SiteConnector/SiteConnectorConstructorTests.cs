@@ -39,6 +39,16 @@ namespace SFA.DAS.Support.Shared.Tests.SiteConnector
         }
 
         [Test]
+        public void ItShouldThrowAnArgumentNullExceptionIfPassedANullIdentityHandler()
+        {
+            Handlers = new List<IHttpStatusCodeStrategy>();
+            Assert.Throws<ArgumentNullException>(() =>
+                new SiteConnection.SiteConnector(null, MockClientAuthenticator.Object, null, Handlers,
+                    MockLogger.Object, null)
+            );
+        }
+
+        [Test]
         public void ItShouldThrowAnArgumentNullExceptionIfPassedANullLogger()
         {
             Handlers = new List<IHttpStatusCodeStrategy>();
@@ -53,20 +63,10 @@ namespace SFA.DAS.Support.Shared.Tests.SiteConnector
         {
             Handlers = new List<IHttpStatusCodeStrategy>();
             Assert.Throws<ArgumentNullException>(() =>
-                new SiteConnection.SiteConnector(null, MockClientAuthenticator.Object, MockSiteConnectorSettings.Object, Handlers,
+                new SiteConnection.SiteConnector(null, MockClientAuthenticator.Object, MockSiteConnectorSettings.Object,
+                    Handlers,
                     MockLogger.Object, MockIdentityHandler.Object)
             );
         }
-
-        [Test]
-        public void ItShouldThrowAnArgumentNullExceptionIfPassedANullIdentityHandler()
-        {
-            Handlers = new List<IHttpStatusCodeStrategy>();
-            Assert.Throws<ArgumentNullException>(() =>
-                new SiteConnection.SiteConnector(null, MockClientAuthenticator.Object, null, Handlers,
-                    MockLogger.Object, null)
-            );
-        }
-
     }
 }

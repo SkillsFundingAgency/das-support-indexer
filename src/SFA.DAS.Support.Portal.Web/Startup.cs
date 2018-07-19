@@ -9,7 +9,7 @@ namespace SFA.DAS.Support.Portal.Web
     [ExcludeFromCodeCoverage]
     public partial class Startup
     {
-       public void Configuration(IAppBuilder app)
+        public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledExceptionEventHandler;

@@ -9,10 +9,6 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
     [TestFixture]
     public class WhenTestingServiceAddressMapper
     {
-        private Mock<ISiteSettings> _mockSettings;
-        private ServiceAddressMapper _unit;
-        private string _testAddress = "https://localhost:44347/";
-
         [SetUp]
         public void Setup()
         {
@@ -21,8 +17,11 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
 
             _mockSettings.SetupGet(x => x.BaseUrls)
                 .Returns($"{SupportServiceIdentity.SupportPortal}|{_testAddress}");
-
         }
+
+        private Mock<ISiteSettings> _mockSettings;
+        private ServiceAddressMapper _unit;
+        private readonly string _testAddress = "https://localhost:44347/";
 
         [Test]
         public void ItShouldMapServiceEnumToAddressUri()

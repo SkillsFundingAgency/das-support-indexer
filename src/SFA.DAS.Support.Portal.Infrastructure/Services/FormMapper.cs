@@ -1,8 +1,8 @@
-﻿using AngleSharp.Parser.Html;
+﻿using System;
+using AngleSharp.Parser.Html;
 using SFA.DAS.NLog.Logger;
 using SFA.DAS.Support.Portal.ApplicationServices.Services;
 using SFA.DAS.Support.Shared.Discovery;
-using System;
 
 namespace SFA.DAS.Support.Portal.Infrastructure.Services
 {
@@ -15,7 +15,8 @@ namespace SFA.DAS.Support.Portal.Infrastructure.Services
             _log = log;
         }
 
-        public string UpdateForm(SupportServiceResourceKey resourceKey, SupportServiceResourceKey challengeKey, string id, string url, string html)
+        public string UpdateForm(SupportServiceResourceKey resourceKey, SupportServiceResourceKey challengeKey,
+            string id, string url, string html)
         {
             try
             {
@@ -28,7 +29,8 @@ namespace SFA.DAS.Support.Portal.Infrastructure.Services
                 if (form != null)
                 {
                     var innerAction = form.Attributes["action"].Value;
-                    form.SetAttribute("action", $"/resource/challenge?resourceId={id}&resourceKey={resourceKey}&challengeKey={challengeKey}");
+                    form.SetAttribute("action",
+                        $"/resource/challenge?resourceId={id}&resourceKey={resourceKey}&challengeKey={challengeKey}");
                     form.AppendChild(document.CreateHidden("resourceKey", resourceKey.ToString()));
                     form.AppendChild(document.CreateHidden("challengeKey", challengeKey.ToString()));
                     form.AppendChild(document.CreateHidden("innerAction", innerAction));
@@ -36,10 +38,10 @@ namespace SFA.DAS.Support.Portal.Infrastructure.Services
                 }
 
                 return document
-                        .DocumentElement
-                        .InnerHtml
-                        .Replace("<head>", "").Replace("</head>", "")
-                        .Replace("<body>", "").Replace("</body>", "");
+                    .DocumentElement
+                    .InnerHtml
+                    .Replace("<head>", "").Replace("</head>", "")
+                    .Replace("<body>", "").Replace("</body>", "");
             }
             catch (Exception ex)
             {
@@ -47,7 +49,6 @@ namespace SFA.DAS.Support.Portal.Infrastructure.Services
 
                 throw;
             }
-
         }
     }
 }

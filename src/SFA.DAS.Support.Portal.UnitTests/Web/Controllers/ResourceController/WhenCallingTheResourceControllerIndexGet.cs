@@ -12,11 +12,6 @@ namespace SFA.DAS.Support.Portal.UnitTests.Web.Controllers.ResourceController
     [TestFixture]
     public class WhenCallingTheResourceControllerIndexGet : WhenTestingTheResourceController
     {
-
-        private string _id;
-        private SupportServiceResourceKey _resourceKey;
-  private string _childId;
-
         [SetUp]
         public override void Setup()
         {
@@ -25,6 +20,10 @@ namespace SFA.DAS.Support.Portal.UnitTests.Web.Controllers.ResourceController
             _resourceKey = SupportServiceResourceKey.EmployerAccountFinance;
             _childId = "childId";
         }
+
+        private string _id;
+        private SupportServiceResourceKey _resourceKey;
+        private string _childId;
 
         /// <summary>
         ///     See <see cref="WhenTestingTheResourceController" /> for details of mocking HttpContext
@@ -35,21 +34,25 @@ namespace SFA.DAS.Support.Portal.UnitTests.Web.Controllers.ResourceController
         {
             MockContextBase.Setup(x => x.Request.RawUrl).Returns("https:/tempuri.org");
 
-            var siteResource = new SiteResource { ResourceKey = SupportServiceResourceKey.EmployerAccountFinance, Challenge = SupportServiceResourceKey.EmployerAccountFinanceChallenge };
+            var siteResource = new SiteResource
+            {
+                ResourceKey = SupportServiceResourceKey.EmployerAccountFinance,
+                Challenge = SupportServiceResourceKey.EmployerAccountFinanceChallenge
+            };
             MockPermissionsChecker.Setup(x => x.HasPermissions(It.IsAny<HttpRequestBase>(),
-                    It.IsAny<HttpResponseBase>(), 
-                    It.IsAny<IPrincipal>(), 
+                    It.IsAny<HttpResponseBase>(),
+                    It.IsAny<IPrincipal>(),
                     $"{_resourceKey.ToString()}/{_id}"))
                 .Returns(false);
 
             ActionResultResponse = await Unit.Index(_resourceKey, _id, _childId);
 
             Assert.IsInstanceOf<RedirectToRouteResult>(ActionResultResponse);
-            var result = (RedirectToRouteResult)ActionResultResponse;
+            var result = (RedirectToRouteResult) ActionResultResponse;
 
             Assert.IsNotEmpty(result.RouteValues);
-            Assert.AreEqual((int)siteResource.ResourceKey, result.RouteValues["resourceKey"]);
-            Assert.AreEqual((int)siteResource.Challenge, result.RouteValues["challengeKey"]);
+            Assert.AreEqual((int) siteResource.ResourceKey, result.RouteValues["resourceKey"]);
+            Assert.AreEqual((int) siteResource.Challenge, result.RouteValues["challengeKey"]);
             Assert.AreEqual(_id, result.RouteValues["resourceId"]);
             Assert.AreEqual(MockContextBase.Object.Request.RawUrl, result.RouteValues["url"]);
         }
@@ -62,7 +65,7 @@ namespace SFA.DAS.Support.Portal.UnitTests.Web.Controllers.ResourceController
             ActionResultResponse = await Unit.Index(_resourceKey, _id, _childId);
 
             Assert.IsInstanceOf<ViewResult>(ActionResultResponse);
-            var viewResult = (ViewResult)ActionResultResponse;
+            var viewResult = (ViewResult) ActionResultResponse;
 
             Assert.AreEqual("Sub", viewResult.ViewName);
             Assert.IsInstanceOf<ResourceResultModel>(viewResult.Model);
@@ -86,14 +89,14 @@ namespace SFA.DAS.Support.Portal.UnitTests.Web.Controllers.ResourceController
             MockPermissionsChecker
                 .Setup(x => x.HasPermissions(It.IsAny<HttpRequestBase>(),
                     It.IsAny<HttpResponseBase>(),
-                    It.IsAny<IPrincipal>(), 
+                    It.IsAny<IPrincipal>(),
                     $"{SupportServiceResourceKey.EmployerAccountFinanceChallenge}/{_id}"))
                 .Returns(true);
 
             ActionResultResponse = await Unit.Index(_resourceKey, _id, _childId);
 
             Assert.IsInstanceOf<ViewResult>(ActionResultResponse);
-            var result = (ViewResult)ActionResultResponse;
+            var result = (ViewResult) ActionResultResponse;
 
             Assert.AreEqual("Sub", result.ViewName);
         }
@@ -105,7 +108,6 @@ namespace SFA.DAS.Support.Portal.UnitTests.Web.Controllers.ResourceController
         [Test]
         public async Task ItShouldReturnTheSubviewIfTheResourcedoesNotDefineAChallenge()
         {
-
             _resourceKey = SupportServiceResourceKey.None;
 
             MockContextBase.Setup(x => x.Request.RawUrl).Returns("https:/tempuri.org");
@@ -114,7 +116,7 @@ namespace SFA.DAS.Support.Portal.UnitTests.Web.Controllers.ResourceController
 
             Assert.IsInstanceOf<ViewResult>(ActionResultResponse);
 
-            var result = (ViewResult)ActionResultResponse;
+            var result = (ViewResult) ActionResultResponse;
 
             Assert.AreEqual("Sub", result.ViewName);
         }

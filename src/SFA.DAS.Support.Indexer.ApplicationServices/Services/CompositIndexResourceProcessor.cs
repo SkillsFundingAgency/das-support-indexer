@@ -15,12 +15,9 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.Services
         }
 
         public async Task ProcessResource(Uri basUri, SiteResource siteResource)
-        { 
+        {
             foreach (var indexResourceProcessor in _indexResourceProcessors)
-            {
                 await indexResourceProcessor.ProcessResource(basUri, siteResource);
-            }
-                
         }
     }
 }

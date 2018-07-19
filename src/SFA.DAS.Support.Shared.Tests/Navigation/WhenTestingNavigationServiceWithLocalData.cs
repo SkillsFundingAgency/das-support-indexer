@@ -21,7 +21,8 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
         protected override void Arrange()
         {
             _mockLogger = new Mock<ILog>();
-            _testMenuTemplates = new MenuTemplateDatasource(new FileInfo($@"./MenuTemplates.json"), _mockLogger.Object).Provide();
+            _testMenuTemplates = new MenuTemplateDatasource(new FileInfo($@"./MenuTemplates.json"), _mockLogger.Object)
+                .Provide();
             _mockMenuClient = new Mock<IMenuClient>();
             _mockMenuTemplateDataSource = new Mock<IMenuTemplateDatasource>();
             var menuRemoteSource = new Uri("https://localhost/api/navigation/0");

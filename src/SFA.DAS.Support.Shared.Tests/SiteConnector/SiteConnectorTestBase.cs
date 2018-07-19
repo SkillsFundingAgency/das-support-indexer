@@ -20,6 +20,7 @@ namespace SFA.DAS.Support.Shared.Tests.SiteConnector
         protected HttpClient HttpClient;
         protected Mock<IClientAuthenticator> MockClientAuthenticator;
         protected MockHttpMessageHandler MockHttpMessageHandler;
+        protected Mock<IIdentityHandler> MockIdentityHandler;
         protected Mock<ILog> MockLogger;
         protected Mock<ISiteConnectorSettings> MockSiteConnectorSettings;
         protected TestType TestType;
@@ -27,7 +28,7 @@ namespace SFA.DAS.Support.Shared.Tests.SiteConnector
         protected string TestUrlMatch;
         protected ISiteConnector Unit;
         protected string ValidTestResponseData;
-        protected Mock<IIdentityHandler> MockIdentityHandler;
+
         [SetUp]
         public void Setup()
         {

@@ -1,23 +1,25 @@
-﻿using Nest;
-using SFA.DAS.NLog.Logger;
-using SFA.DAS.Support.Common.Infrastucture.Elasticsearch;
-using SFA.DAS.Support.Common.Infrastucture.Indexer;
-using SFA.DAS.Support.Common.Infrastucture.Settings;
-using SFA.DAS.Support.Shared.Discovery;
-using SFA.DAS.Support.Shared.SearchIndexModel;
-using SFA.DAS.Support.Shared.SiteConnection;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
 using System.Threading.Tasks;
+using Nest;
+using SFA.DAS.NLog.Logger;
+using SFA.DAS.Support.Common.Infrastucture.Elasticsearch;
+using SFA.DAS.Support.Common.Infrastucture.Indexer;
+using SFA.DAS.Support.Common.Infrastucture.Settings;
 using SFA.DAS.Support.Indexer.ApplicationServices.Settings;
+using SFA.DAS.Support.Shared.Discovery;
+using SFA.DAS.Support.Shared.SearchIndexModel;
+using SFA.DAS.Support.Shared.SiteConnection;
 
 namespace SFA.DAS.Support.Indexer.ApplicationServices.Services
 {
     public abstract class BaseIndexResourceProcessor<T> : IIndexResourceProcessor where T : class
     {
         private const int _indexToRetain = 2;
+
+        private const int _pageSize = 50;
 
         protected readonly ISiteConnector _dataSource;
         protected readonly IElasticsearchCustomClient _elasticClient;
@@ -30,8 +32,6 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.Services
         protected readonly Stopwatch _runtimer = new Stopwatch();
         protected readonly ISearchSettings _searchSettings;
         protected readonly IIndexerSiteSettings _settings;
-
-        private const int _pageSize = 50;
 
         public BaseIndexResourceProcessor(IIndexerSiteSettings settings,
             ISiteConnector dataSource,
@@ -56,7 +56,8 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.Services
 
             try
             {
-                var newIndexName = _indexNameCreator.CreateNewIndexName(_searchSettings.IndexName, siteResource.SearchCategory);
+                var newIndexName =
+                    _indexNameCreator.CreateNewIndexName(_searchSettings.IndexName, siteResource.SearchCategory);
                 CreateIndex(newIndexName);
 
                 try
@@ -71,7 +72,8 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.Services
                 }
 
                 _logger.Info($"Creating Index Alias and Swapping from old to new index for type {typeof(T).Name}...");
-                var indexAlias = _indexNameCreator.CreateIndexesAliasName(_searchSettings.IndexName, siteResource.SearchCategory);
+                var indexAlias =
+                    _indexNameCreator.CreateIndexesAliasName(_searchSettings.IndexName, siteResource.SearchCategory);
                 _indexProvider.CreateIndexAlias(newIndexName, indexAlias);
 
                 _logger.Info($"Deleting Old Indexes for type {typeof(T).Name}...");
@@ -90,7 +92,7 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.Services
 
         protected void ValidateResponse(string indexName, ICreateIndexResponse response)
         {
-            if (response.ApiCall.HttpStatusCode != (int)HttpStatusCode.OK)
+            if (response.ApiCall.HttpStatusCode != (int) HttpStatusCode.OK)
                 throw new Exception(
                     $"Call to ElasticSearch client Received non-200 response when trying to create the Index {indexName}, Status Code:{response.ApiCall.HttpStatusCode ?? -1}\r\n{response.DebugInformation}",
                     response.OriginalException);
@@ -107,12 +109,11 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.Services
             do
             {
                 totalSearchItemsString = await _dataSource.Download(searchItemCountUri);
-            }
-            while (_dataSource.LastCode == HttpStatusCode.Unauthorized && ++retryCount < 3);
+            } while (_dataSource.LastCode == HttpStatusCode.Unauthorized && ++retryCount < 3);
 
             ValidateDownResponse(_dataSource.LastCode);
 
-            if (!int.TryParse(totalSearchItemsString, out int totalSearchItems))
+            if (!int.TryParse(totalSearchItemsString, out var totalSearchItems))
             {
                 var errorMsg = $"Get Total Search Item Count returned invalid data from : {totalSearchItemsString}";
                 throw new InvalidCastException(errorMsg);
@@ -120,9 +121,9 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.Services
 
             _logger.Info($"Estimated Total Search Items Count  for type {typeof(T).Name}  equals {totalSearchItems}");
 
-            var pages = (int)Math.Ceiling(totalSearchItems / (double)_pageSize);
+            var pages = (int) Math.Ceiling(totalSearchItems / (double) _pageSize);
 
-            for (int pageNumber = 1; pageNumber <= pages; pageNumber++)
+            for (var pageNumber = 1; pageNumber <= pages; pageNumber++)
             {
                 var searchUri = new Uri(baseUri, string.Format(siteResource.SearchItemsUrl, _pageSize, pageNumber));
                 IEnumerable<T> searchItems;
@@ -130,8 +131,7 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.Services
                 do
                 {
                     searchItems = await _dataSource.Download<IEnumerable<T>>(searchUri);
-                }
-                while (_dataSource.LastCode == HttpStatusCode.Unauthorized && ++retryCount < 3);
+                } while (_dataSource.LastCode == HttpStatusCode.Unauthorized && ++retryCount < 3);
 
                 try
                 {
@@ -158,9 +158,8 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.Services
         private void ValidateDownResponse(HttpStatusCode responseCode)
         {
             if (_dataSource.LastCode != HttpStatusCode.OK)
-            {
-                throw _dataSource.LastException ?? throw new InvalidOperationException("The requested data was not recieved");
-            }
+                throw _dataSource.LastException ??
+                      throw new InvalidOperationException("The requested data was not recieved");
         }
     }
 }

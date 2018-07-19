@@ -12,14 +12,15 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
     /// </summary>
     public class WhenTestingAMenuTemplateHandler
     {
-        private MenuTemplateHandler _unit;
         private Mock<ILog> _mockLogger;
+        private MenuTemplateHandler _unit;
 
         [SetUp]
         public void Setup()
         {
             _mockLogger = new Mock<ILog>();
-            _unit = new MenuTemplateHandler(new MenuTemplateDatasource(new FileInfo($@".\MenuTempaltes.json"), _mockLogger.Object));
+            _unit = new MenuTemplateHandler(new MenuTemplateDatasource(new FileInfo($@".\MenuTempaltes.json"),
+                _mockLogger.Object));
         }
 
         [Test]

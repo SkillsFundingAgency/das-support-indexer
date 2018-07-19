@@ -9,14 +9,16 @@ namespace SFA.DAS.Support.Shared.Challenge
     {
         private readonly Dictionary<Guid, SupportAgentChallenge> _challenges;
         private readonly IChallengeSettings _configuration;
-        public InMemoryChallengeService(Dictionary<Guid, SupportAgentChallenge> challenges, IChallengeSettings configuration)
+
+        public InMemoryChallengeService(Dictionary<Guid, SupportAgentChallenge> challenges,
+            IChallengeSettings configuration)
         {
             _challenges = challenges;
             _configuration = configuration;
             ChallengeMaxRetries = _configuration.ChallengeMaxRetries;
         }
 
-       
+
         public int ChallengeMaxRetries { get; set; }
 
         public async Task<Guid> IsNeeded(string identity, string entityType, string entityKey)
@@ -27,7 +29,7 @@ namespace SFA.DAS.Support.Shared.Challenge
                     && x.EntityKey == entityKey
                     && x.Expires > DateTimeOffset.UtcNow) == null)
             {
-                var challenge = new SupportAgentChallenge()
+                var challenge = new SupportAgentChallenge
                 {
                     Id = Guid.NewGuid(),
                     Identity = identity,
@@ -45,13 +47,9 @@ namespace SFA.DAS.Support.Shared.Challenge
         public Task Store(SupportAgentChallenge challenge)
         {
             if (_challenges.ContainsKey(challenge.Id))
-            {
                 _challenges[challenge.Id] = challenge;
-            }
             else
-            {
                 _challenges.Add(challenge.Id, challenge);
-            }
 
             return Task.CompletedTask;
         }

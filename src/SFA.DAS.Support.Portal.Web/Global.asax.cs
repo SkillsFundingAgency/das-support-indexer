@@ -17,15 +17,12 @@ namespace SFA.DAS.Support.Portal.Web
     [ExcludeFromCodeCoverage]
     public class MvcApplication : HttpApplication
     {
-
         public MvcApplication()
         {
-            this.BeginRequest += (sender, args) =>
-            {
-                Debug.WriteLine($"{HttpContext.Current.Request.RawUrl}");
-            };
-            this.EndRequest += (sender, args) => { };
+            BeginRequest += (sender, args) => { Debug.WriteLine($"{HttpContext.Current.Request.RawUrl}"); };
+            EndRequest += (sender, args) => { };
         }
+
         protected void Application_Start()
         {
             MvcHandler.DisableMvcResponseHeader = true;

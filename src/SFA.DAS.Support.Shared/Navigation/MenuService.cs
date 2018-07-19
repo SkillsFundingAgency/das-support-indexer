@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,7 +12,7 @@ namespace SFA.DAS.Support.Shared.Navigation
         private readonly IMenuTemplateDatasource _menuTemplateDatasource;
         private List<MenuRoot> _menuRoots = new List<MenuRoot>();
 
-        public MenuService( IMenuTemplateDatasource menuTemplateDatasource,
+        public MenuService(IMenuTemplateDatasource menuTemplateDatasource,
             IMenuClient menuClient, Uri menuSource)
         {
             _menuTemplateDatasource = menuTemplateDatasource;

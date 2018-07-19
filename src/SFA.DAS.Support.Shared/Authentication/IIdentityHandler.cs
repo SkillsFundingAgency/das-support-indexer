@@ -8,6 +8,5 @@ namespace SFA.DAS.Support.Shared.Authentication
         string GetIdentity(HttpRequestBase request);
 
         void SetIdentity(HttpClient request, string identity);
-
     }
 }

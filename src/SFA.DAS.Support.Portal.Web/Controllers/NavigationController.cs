@@ -9,11 +9,13 @@ namespace SFA.DAS.Support.Portal.Web.Controllers
     [RoutePrefix("api/navigation")]
     public class NavigationController : ApiController
     {
-        private readonly IMenuTemplateHandler _menuTemplateHandler;  
+        private readonly IMenuTemplateHandler _menuTemplateHandler;
+
         public NavigationController(IMenuTemplateHandler menuTemplateHandler)
         {
             _menuTemplateHandler = menuTemplateHandler;
         }
+
         [AllowAnonymous]
         [HttpGet]
         public IHttpActionResult Get(SupportMenuPerspectives id = SupportMenuPerspectives.All)
@@ -22,6 +24,5 @@ namespace SFA.DAS.Support.Portal.Web.Controllers
             Debug.WriteLine($"Serving menu Data: {JsonConvert.SerializeObject(menuForPerspective)}");
             return Ok(menuForPerspective);
         }
-
     }
 }

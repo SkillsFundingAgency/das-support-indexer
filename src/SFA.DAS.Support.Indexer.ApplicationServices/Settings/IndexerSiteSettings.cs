@@ -7,7 +7,7 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.Settings
     public class IndexerSiteSettings : IIndexerSiteSettings
     {
         [JsonRequired] public string BaseUrls { get; set; }
-      
+
         [JsonRequired] public string DelayTimeInSeconds { get; set; }
     }
 }

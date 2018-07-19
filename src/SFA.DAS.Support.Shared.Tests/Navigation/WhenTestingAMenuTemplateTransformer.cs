@@ -15,10 +15,10 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
     public class WhenTestingAMenuTemplateTransformer
     {
         private IMenuTemplateDatasource _datasource;
+        private Mock<ILog> _mockLogger;
+        private readonly Uri _supportPortalUri = new Uri("https://localhost:44300");
         private List<MenuRoot> _templates;
         private MenuTemplateTransformer _unit;
-        private Uri _supportPortalUri = new Uri("https://localhost:44300");
-        private Mock<ILog> _mockLogger;
 
         [SetUp]
         public void Setup()
@@ -26,7 +26,7 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
             _mockLogger = new Mock<ILog>();
             _datasource = new MenuTemplateDatasource(new FileInfo("/"), _mockLogger.Object);
             _templates = _datasource.Provide();
-            
+
             _unit = new MenuTemplateTransformer(_supportPortalUri);
         }
 
