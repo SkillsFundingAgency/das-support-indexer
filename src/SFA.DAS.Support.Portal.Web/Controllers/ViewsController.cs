@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Linq;
+using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using SFA.DAS.NLog.Logger;
 using SFA.DAS.Support.Portal.Web.ViewModels;
+using SFA.DAS.Support.Shared.Authentication;
 using SFA.DAS.Support.Shared.Discovery;
 using SFA.DAS.Support.Shared.Navigation;
 using SFA.DAS.Support.Shared.SiteConnection;
@@ -17,13 +20,15 @@ namespace SFA.DAS.Support.Portal.Web.Controllers
         private readonly ISiteConnector _siteConnector;
         private readonly IRouteToServiceMapper _routeToServiceMapper;
         private readonly IServiceAddressMapper _serviceToAddressMapper;
+        private readonly IIdentityProvider _identityProvider;
 
-        public ViewsController(ISiteConnector siteConnector, IRouteToServiceMapper routeToServiceMapper, IServiceAddressMapper serviceAddressMapper, ILog logger)
+        public ViewsController(ISiteConnector siteConnector, IRouteToServiceMapper routeToServiceMapper, IServiceAddressMapper serviceAddressMapper, ILog logger, IIdentityProvider identityProvider)
         {
             _siteConnector = siteConnector;
             _routeToServiceMapper = routeToServiceMapper;
             _serviceToAddressMapper = serviceAddressMapper;
             _logger = logger;
+            _identityProvider = identityProvider;
         }
 
         [Route("views/{*path}")]
@@ -45,12 +50,14 @@ namespace SFA.DAS.Support.Portal.Web.Controllers
 
             _logger.Trace($"{nameof(ViewsController)}.{(nameof(Resources))} View Content downloading from {contentUri.OriginalString}");
 
-            var identity = Thread.CurrentPrincipal?.Identity?.Name ?? "anonymous";
+           
 
-            var content = await _siteConnector.AsIdentity(identity).Download(contentUri);
+            var content = await _siteConnector.AsIdentity(_identityProvider.ObtainIdentity()).Download(contentUri);
 
             return View("index", new ViewsViewModel() { Content = new HtmlString(content) });
         }
+
+        public string DefaultIdentity { get; set; } = "anonymous@digitaleducation.gov.uk";
 
         [Route("resources/{*path}")]
         public async Task<MvcHtmlString> Resources(string path)

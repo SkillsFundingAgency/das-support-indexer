@@ -90,6 +90,7 @@
   <ItemGroup>
     <Compile Include="Authentication\ActiveDirectoryClientAuthenticator.cs" />
     <Compile Include="Authentication\ChallengeValidationResult.cs" />
+    <Compile Include="Authentication\ClaimsIdentityProvider.cs" />
     <Compile Include="Authentication\Crypto.cs" />
     <Compile Include="Authentication\CryptoSettings.cs" />
     <Compile Include="Authentication\ICrypto.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Authentication\IdentityHash.cs" />
     <Compile Include="Authentication\IIdentityHandler.cs" />
     <Compile Include="Authentication\IIdentityHash.cs" />
+    <Compile Include="Authentication\IIdentityProvider.cs" />
     <Compile Include="Authentication\RequestHeaderIdentityHandler.cs" />
     <Compile Include="Authentication\TokenValidationHandler.cs" />
     <Compile Include="Authentication\TokenValidationFilter.cs" />

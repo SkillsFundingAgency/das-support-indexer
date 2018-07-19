@@ -7,7 +7,7 @@
     {
         [ServiceRoute("portal")]
         SupportPortal,
-        [ServiceRoute("users")]
+        [ServiceRoute("employerusers")]
         SupportEmployerUser,
         [ServiceRoute("employers")]
         SupportEmployerAccount,

@@ -91,6 +91,8 @@ namespace SFA.DAS.Support.Portal.Web.DependencyResolution
             For<IServiceAddressMapper>().Use<ServiceAddressMapper>();
             For<IIdentityHandler>().Use<RequestHeaderIdentityHandler>();
             For<IIdentityHash>().Use<IdentityHash>();
+            For<IIdentityProvider>().Use<ClaimsIdentityProvider>();
+
         }
 
 

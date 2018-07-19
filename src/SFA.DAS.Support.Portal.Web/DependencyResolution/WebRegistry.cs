@@ -26,7 +26,7 @@ namespace SFA.DAS.Support.Portal.Web.DependencyResolution
 
             For<IClientAuthenticator>().Use<ActiveDirectoryClientAuthenticator>();
 
-            For<HttpClient>().Use(c => new HttpClient());
+            For<HttpClient>().AlwaysUnique().Use(c => new HttpClient());
 
             For<IRequestContext>().Use(x => new RequestContext(new HttpContextWrapper(HttpContext.Current)));
 
