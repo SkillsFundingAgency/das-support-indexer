@@ -4,8 +4,16 @@
     "MenuItems": [
       {
         "Key": "User.Details",
-        "Text": "Overview",
-        "NavigateUrl": "users/{userId}",
+        "Text": "User",
+        "NavigateUrl": "views/employerusers/users/{userId}",
+        "Ordinal": 0,
+        "Roles": [],
+        "MenuItems": []
+      },
+      {
+        "Key": "User.Accounts",
+        "Text": "Accounts",
+        "NavigateUrl": "views/employerusers/users/{userId}/accounts",
         "Ordinal": 0,
         "Roles": [],
         "MenuItems": []
@@ -18,7 +26,7 @@
       {
         "Key": "Account.Organisations",
         "Text": "Organisations",
-        "NavigateUrl": "accounts/{accountId}/organisations",
+        "NavigateUrl": "views/employers/accounts/{acountId}/organisations",
         "Ordinal": 0,
         "Roles": [],
         "MenuItems": []
@@ -26,52 +34,44 @@
       {
         "Key": "Account.Finance",
         "Text": "Finance",
-        "NavigateUrl": "accounts/{accountId}/finance",
-        "Ordinal": 1,
+        "NavigateUrl": "views/employers/accounts/{accountId}/finance",
+        "Ordinal": 0,
         "Roles": [],
         "MenuItems": [
           {
             "Key": "Account.Finance.PAYE",
             "Text": "PAYE",
-            "NavigateUrl": "accounts/{accountId}/finance/paye",
+            "NavigateUrl": "views/employers/accounts/{acountId}/finance/paye",
             "Ordinal": 0,
             "Roles": [],
-            "MenuItems": []
+            "MenuItems": [
+              {
+                "Key": "Account.Finance.PAYE.Submissions",
+                "Text": "Submissions",
+                "NavigateUrl": "views/employers/accounts/{acountId}/finance/paye/{payeSchemeId}",
+                "Ordinal": 0,
+                "Roles": [],
+                "MenuItems": []
+              }
+            ]
           },
           {
             "Key": "Account.Finance.Transactions",
             "Text": "Transactions",
-            "NavigateUrl": "accounts/{accountId}/finance/transactions",
-            "Ordinal": 1,
-            "Roles": ["Tier2"],
+            "NavigateUrl": "views/employers/accounts/{accountId}/finance/transactions",
+            "Ordinal": 0,
+            "Roles": [],
             "MenuItems": []
           }
         ]
       },
       {
-        "Key": "Account.Commitments",
-        "Text": "Commitments",
-        "NavigateUrl": "commitments/accounts/{accountId}",
+        "Key": "Account.Teams",
+        "Text": "Teams",
+        "NavigateUrl": "views/employers/accounts/{acountId}/teams",
         "Ordinal": 0,
         "Roles": [],
-        "MenuItems": [
-          {
-            "Key": "Account.Commitments.Apprentices",
-            "Text": "Apprentices",
-            "NavigateUrl": "commitments/accounts/{accountId}/apprentices",
-            "Ordinal": 0,
-            "Roles": [],
-            "MenuItems": []
-          },
-          {
-            "Key": "Account.Commitments.Payments",
-            "Text": "Payments",
-            "NavigateUrl": "commitments/accounts/{accountId}/payments",
-            "Ordinal": 1,
-            "Roles": [],
-            "MenuItems": []
-          }
-        ]
+        "MenuItems": []
       }
     ]
   }

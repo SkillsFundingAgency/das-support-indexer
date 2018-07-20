@@ -1,93 +1,116 @@
 ﻿using System.Collections.Generic;
+using SFA.DAS.Support.Shared.Discovery;
 using SFA.DAS.Support.Shared.Navigation;
 
 namespace SFA.DAS.Support.Shared.Tests.Navigation
 {
     public static class MenuTestHelper
     {
-        public static MenuItem GetEmployerAccountMenu()
+        public static MenuRoot GetEmployerAccountMenu()
         {
-            return new MenuItem
+            return new MenuRoot
             {
-                Key = "Account",
-                Text = "Accounts",
-                NavigateUrl = "accounts/{accountId}",
+                Perspective = SupportMenuPerspectives.EmployerAccount,
                 MenuItems = new List<MenuItem>
                 {
                     new MenuItem
                     {
                         Key = "Account.Organisations",
                         Text = "Organisations",
-                        NavigateUrl = "accounts/{acountId}/organisations"
+                        NavigateUrl = $"views/{SupportServiceIdentity.SupportEmployerAccount.ToRoutePrefix()}/accounts/{{acountId}}/organisations"
                     },
-                    new MenuItem
+                   new MenuItem
                     {
                         Key = "Account.Finance",
                         Text = "Finance",
-                        NavigateUrl = "accounts/{accountId}/finance",
+                        NavigateUrl = $"views/{SupportServiceIdentity.SupportEmployerAccount.ToRoutePrefix()}/accounts/{{accountId}}/finance",
                         MenuItems = new List<MenuItem>
                         {
                             new MenuItem
                             {
                                 Key = "Account.Finance.PAYE",
                                 Text = "PAYE",
-                                NavigateUrl = "accounts/{acountId}/finance/paye"
+                                NavigateUrl = $"views/{SupportServiceIdentity.SupportEmployerAccount.ToRoutePrefix()}/accounts/{{acountId}}/finance/paye",
+                                MenuItems = new List<MenuItem>()
+                                {
+                                    new MenuItem
+                                    {
+                                        Key = "Account.Finance.PAYE.Submissions",
+                                        Text = "Submissions",
+                                        NavigateUrl = $"views/{SupportServiceIdentity.SupportEmployerAccount.ToRoutePrefix()}/accounts/{{acountId}}/finance/paye/{{payeSchemeId}}"
+                                    },
+                                }
                             },
                             new MenuItem
                             {
                                 Key = "Account.Finance.Transactions",
                                 Text = "Transactions",
-                                NavigateUrl = "accounts/{accountId}/finance/transactions"
+                                NavigateUrl = $"views/{SupportServiceIdentity.SupportEmployerAccount.ToRoutePrefix()}/accounts/{{accountId}}/finance/transactions"
                             }
                         }
                     },
                     new MenuItem
                     {
-                        Key = "Account.Commitments",
-                        Text = "Commitments",
-                        NavigateUrl = "commitments/accounts/{accountId}",
-                        MenuItems = new List<MenuItem>
-                        {
-                            new MenuItem
-                            {
-                                Key = "Account.Commitments.Apprentices",
-                                Text = "Apprentices",
-                                NavigateUrl = "commitments/accounts/{accountId}/apprentices"
-                            },
-                            new MenuItem
-                            {
-                                Key = "Account.Commitments.Payments",
-                                Text = "Payments",
-                                NavigateUrl = "commitments/accounts/{accountId}/payments"
-                            }
-                        }
-                    }
+                        Key = "Account.Teams",
+                        Text = "Teams",
+                        NavigateUrl = $"views/{SupportServiceIdentity.SupportEmployerAccount.ToRoutePrefix()}/accounts/{{acountId}}/teams"
+                    },
+
+                    //new MenuItem
+                    //{
+                    //    Key = "Account.Commitments",
+                    //    Text = "Commitments",
+                    //    NavigateUrl = $"{SupportServiceIdentity.SupportCommitments.ToRoutePrefix()}/accounts/{{accountId}}",
+                    //    MenuItems = new List<MenuItem>
+                    //    {
+                    //        new MenuItem
+                    //        {
+                    //            Key = "Account.Commitments.Apprentices",
+                    //            Text = "Apprentices",
+                    //            NavigateUrl = $"views/{SupportServiceIdentity.SupportCommitments.ToRoutePrefix()}/accounts/{{accountId}}/apprentices"
+                    //        },
+                    //        new MenuItem
+                    //        {
+                    //            Key = "Account.Commitments.Payments",
+                    //            Text = "Payments",
+                    //            NavigateUrl = $"views/{SupportServiceIdentity.SupportCommitments.ToRoutePrefix()}/accounts/{{accountId}}/payments"
+                    //        }
+                    //    }
+                    //}
                 }
             };
         }
 
-        public static MenuItem GetEmployerUserMenu()
+        public static MenuRoot GetEmployerUserMenu()
         {
-            return new MenuItem
+            return new MenuRoot
             {
-                Key = "User",
-                Text = "User",
-                NavigateUrl = "users/{userId}",
+                Perspective = SupportMenuPerspectives.EmployerUser,
                 MenuItems = new List<MenuItem>
                 {
                     new MenuItem
                     {
                         Key = "User.Details",
                         Text = "User",
-                        NavigateUrl = "users/{userId}"
+                        NavigateUrl = $"views/{SupportServiceIdentity.SupportEmployerUser.ToRoutePrefix()}/users/{{userId}}"
                     },
                     new MenuItem
                     {
                         Key = "User.Accounts",
                         Text = "Accounts",
-                        NavigateUrl = "users/{userId}/accounts"
+                        NavigateUrl = $"views/{SupportServiceIdentity.SupportEmployerUser.ToRoutePrefix()}/users/{{userId}}/accounts"
                     }
                 }
+            };
+        }
+
+        public static List<MenuRoot> FullMenu()
+        {
+           
+            return new List<MenuRoot>()
+            {
+                GetEmployerUserMenu(), GetEmployerAccountMenu()
+               
             };
         }
     }

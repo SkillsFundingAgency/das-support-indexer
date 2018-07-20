@@ -174,7 +174,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Navigation\MenuTemplates.json" />
+    <EmbeddedResource Include="Navigation\MenuTemplates.json" />
     <None Include="packages.config" />
     <None Include="SFA.DAS.Support.Shared.nuspec">
       <SubType>Designer</SubType>

@@ -33,13 +33,15 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
         [Test]
         public void ItShouldTransformAllTemplatesForOnePerspective()
         {
-            var actual = _unit.TransformMenuTemplates(
-                _templates.Single(x => x.Perspective == SupportMenuPerspectives.EmployerAccount).MenuItems,
-                new Dictionary<string, string> {{"accountId", "123"}});
+            var templateItems = _templates.Single(x => x.Perspective == SupportMenuPerspectives.EmployerAccount).MenuItems;
+            var templateItemsAsList = templateItems.Map(s => true, n => n.MenuItems).ToList();
+            var _countOfUnIdentifiableMenuItems = 1;
+            var actual = _unit.TransformMenuTemplates(templateItems, new Dictionary<string, string> { { "accountId", "123" } });
             Assert.IsNotEmpty(actual);
-            Assert.AreEqual(
-                _templates.Single(x => x.Perspective == SupportMenuPerspectives.EmployerAccount).MenuItems.Count,
-                actual.Count);
+
+            var actualItemsAsList = actual.Map(s => true, n => n.MenuItems).ToList();
+            
+            Assert.AreEqual(actualItemsAsList.Count, templateItemsAsList.Count - _countOfUnIdentifiableMenuItems);
         }
 
 
@@ -48,7 +50,7 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
         {
             var actual = _unit.TransformMenuTemplates(
                 _templates.Single(x => x.Perspective == SupportMenuPerspectives.EmployerUser).MenuItems,
-                new Dictionary<string, string> {{"userId", "123"}});
+                new Dictionary<string, string> { { "userId", "123" } });
             Assert.IsNotEmpty(actual);
             Assert.AreEqual(
                 _templates.Single(x => x.Perspective == SupportMenuPerspectives.EmployerUser).MenuItems.Count,
@@ -61,7 +63,7 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
         {
             var actual = _unit.TransformMenuTemplates(
                 _templates.Single(x => x.Perspective == SupportMenuPerspectives.EmployerUser).MenuItems,
-                new Dictionary<string, string> {{"accountId", "123"}});
+                new Dictionary<string, string> { { "accountId", "123" } });
             Assert.IsEmpty(actual);
         }
     }

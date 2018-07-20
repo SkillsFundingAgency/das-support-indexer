@@ -5,7 +5,7 @@
       {
         "Key": "User.Details",
         "Text": "Overview",
-        "NavigateUrl": "users/{userId}",
+        "NavigateUrl": "views/employerusers/users/{userId}",
         "Ordinal": 0,
         "Roles": [],
         "MenuItems": []
@@ -18,7 +18,7 @@
       {
         "Key": "Account.Organisations",
         "Text": "Organisations",
-        "NavigateUrl": "accounts/{accountId}/organisations",
+        "NavigateUrl": "views/employerusers/accounts/{accountId}/organisations",
         "Ordinal": 0,
         "Roles": [],
         "MenuItems": []
@@ -26,14 +26,14 @@
       {
         "Key": "Account.Finance",
         "Text": "Finance",
-        "NavigateUrl": "accounts/{accountId}/finance",
+        "NavigateUrl": "views/employerusers/accounts/{accountId}/finance",
         "Ordinal": 1,
         "Roles": [],
         "MenuItems": [
           {
             "Key": "Account.Finance.PAYE",
             "Text": "PAYE",
-            "NavigateUrl": "accounts/{accountId}/finance/paye",
+            "NavigateUrl": "views/employerusers/accounts/{accountId}/finance/paye",
             "Ordinal": 0,
             "Roles": [],
             "MenuItems": []
@@ -41,9 +41,9 @@
           {
             "Key": "Account.Finance.Transactions",
             "Text": "Transactions",
-            "NavigateUrl": "accounts/{accountId}/finance/transactions",
+            "NavigateUrl": "views/employerusers/accounts/{accountId}/finance/transactions",
             "Ordinal": 1,
-            "Roles": ["Tier2"],
+            "Roles": [ "Tier2" ],
             "MenuItems": []
           }
         ]
@@ -51,14 +51,14 @@
       {
         "Key": "Account.Commitments",
         "Text": "Commitments",
-        "NavigateUrl": "commitments/accounts/{accountId}",
+        "NavigateUrl": "views/commitments/accounts/{accountId}",
         "Ordinal": 0,
         "Roles": [],
         "MenuItems": [
           {
             "Key": "Account.Commitments.Apprentices",
             "Text": "Apprentices",
-            "NavigateUrl": "commitments/accounts/{accountId}/apprentices",
+            "NavigateUrl": "views/commitments/accounts/{accountId}/apprentices",
             "Ordinal": 0,
             "Roles": [],
             "MenuItems": []
@@ -66,7 +66,7 @@
           {
             "Key": "Account.Commitments.Payments",
             "Text": "Payments",
-            "NavigateUrl": "commitments/accounts/{accountId}/payments",
+            "NavigateUrl": "views/commitments/accounts/{accountId}/payments",
             "Ordinal": 1,
             "Roles": [],
             "MenuItems": []

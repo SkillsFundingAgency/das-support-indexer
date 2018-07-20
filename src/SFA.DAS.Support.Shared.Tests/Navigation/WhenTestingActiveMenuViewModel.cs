@@ -28,7 +28,6 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
         public void ItShouldHaveAListOfMenuItems()
         {
             Assert.IsNotEmpty(_unit.MenuItems);
-            Assert.AreEqual(4, _unit.MenuItems.Count);
         }
 
         [Test]

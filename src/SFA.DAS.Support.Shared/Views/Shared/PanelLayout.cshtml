@@ -2,7 +2,7 @@
 @using SFA.DAS.Support.Shared.Navigation
 @using SFA.DAS.Support.Shared.ViewModels
 @{
-    MenuViewModel menu = (ViewBag ?? new {}).Menu ?? new MenuViewModel {MenuItems = new List<MenuItem>()};
+    MenuViewModel menu = (ViewBag ?? new { }).Menu ?? new MenuViewModel { MenuItems = new List<MenuItem>() };
     var menuItems = menu.MenuItems;
 
     var header = ViewBag.Header as HeaderViewModel ?? new HeaderViewModel();
