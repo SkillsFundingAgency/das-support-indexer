@@ -84,7 +84,7 @@ namespace SFA.DAS.Support.Shared.Navigation
         }
 
 
-        protected async Task<SupportAgentChallenge> SaveChallengeSummary(string accountId, Guid challengeId,
+        protected async Task<SupportAgentChallenge> SaveChallengeSummary(string entityKey, Guid challengeId,
             string entityType)
         {
             var challenge = new SupportAgentChallenge
@@ -92,8 +92,12 @@ namespace SFA.DAS.Support.Shared.Navigation
                 Id = challengeId,
                 Identity = RequestIdentity,
                 EntityType = entityType,
-                EntityKey = accountId,
-                Expires = DateTimeOffset.UtcNow.AddMinutes(ChallengeService.ChallengeExpiryMinutes)
+                EntityKey = entityKey,
+                Expires = DateTimeOffset.UtcNow.AddMinutes(ChallengeService.ChallengeExpiryMinutes),
+                MenuPerspective = MenuPerspective,
+                MenuSelection = MenuSelection,
+                MenuTransformationIdentifiers = MenuTransformationIdentifiers
+
             };
 
             await ChallengeService.Store(challenge);
