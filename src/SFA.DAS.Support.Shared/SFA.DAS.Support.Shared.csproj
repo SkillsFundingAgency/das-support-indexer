@@ -111,7 +111,6 @@
     <Compile Include="Challenge\SupportAgentChallenge.cs" />
     <Compile Include="Challenge\IChallengeService.cs" />
     <Compile Include="Challenge\InMemoryChallengeService.cs" />
-    <Compile Include="Controllers\ChallengeController.cs" />
     <Compile Include="Discovery\EmployerAccountSiteManifest.cs" />
     <Compile Include="Discovery\EmployerUserSiteManifest.cs" />
     <Compile Include="Discovery\IServiceConfiguration.cs" />
