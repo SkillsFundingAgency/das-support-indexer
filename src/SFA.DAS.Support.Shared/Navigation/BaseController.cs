@@ -93,10 +93,7 @@ namespace SFA.DAS.Support.Shared.Navigation
                 Identity = RequestIdentity,
                 EntityType = entityType,
                 EntityKey = entityKey,
-                Expires = DateTimeOffset.UtcNow.AddMinutes(ChallengeService.ChallengeExpiryMinutes),
-                MenuPerspective = MenuPerspective,
-                MenuSelection = MenuSelection,
-                MenuTransformationIdentifiers = MenuTransformationIdentifiers
+                Expires = DateTimeOffset.UtcNow.AddMinutes(ChallengeService.ChallengeExpiryMinutes)
 
             };
 

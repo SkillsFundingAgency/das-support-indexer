@@ -12,11 +12,5 @@ namespace SFA.DAS.Support.Shared.Challenge
         public string EntityKey { get; set; }
         public DateTimeOffset Expires { get; set; }
 
-
-
-        public SupportMenuPerspectives MenuPerspective { get; set; }
-        public Dictionary<string, string> MenuTransformationIdentifiers { get; set; }
-        public string RequestIdentity { get; set; }
-        public string MenuSelection { get; set; }
     }
 }

@@ -68,5 +68,10 @@ namespace SFA.DAS.Support.Shared.Challenge
         ///     The challenge failure message
         /// </summary>
         public string Message { get; set; }
+
+        /// <summary>
+        /// Persists the current Menu Selection so taht the Menu will be rendered
+        /// </summary>
+        public string MenuSelection { get; set; }
     }
 }
