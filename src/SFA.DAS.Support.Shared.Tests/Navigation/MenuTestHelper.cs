@@ -17,7 +17,7 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
                     {
                         Key = "Account.Organisations",
                         Text = "Organisations",
-                        NavigateUrl = $"views/{SupportServiceIdentity.SupportEmployerAccount.ToRoutePrefix()}/accounts/{{acountId}}/organisations"
+                        NavigateUrl = $"views/{SupportServiceIdentity.SupportEmployerAccount.ToRoutePrefix()}/accounts/{{accountId}}/organisations"
                     },
                    new MenuItem
                     {
@@ -30,14 +30,14 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
                             {
                                 Key = "Account.Finance.PAYE",
                                 Text = "PAYE",
-                                NavigateUrl = $"views/{SupportServiceIdentity.SupportEmployerAccount.ToRoutePrefix()}/accounts/{{acountId}}/finance/paye",
+                                NavigateUrl = $"views/{SupportServiceIdentity.SupportEmployerAccount.ToRoutePrefix()}/accounts/{{accountId}}/finance/paye",
                                 MenuItems = new List<MenuItem>()
                                 {
                                     new MenuItem
                                     {
                                         Key = "Account.Finance.PAYE.Submissions",
                                         Text = "Submissions",
-                                        NavigateUrl = $"views/{SupportServiceIdentity.SupportEmployerAccount.ToRoutePrefix()}/accounts/{{acountId}}/finance/paye/{{payeSchemeId}}"
+                                        NavigateUrl = $"views/{SupportServiceIdentity.SupportEmployerAccount.ToRoutePrefix()}/accounts/{{accountId}}/finance/paye/{{payeSchemeId}}"
                                     },
                                 }
                             },
@@ -52,31 +52,11 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
                     new MenuItem
                     {
                         Key = "Account.Teams",
-                        Text = "Teams",
-                        NavigateUrl = $"views/{SupportServiceIdentity.SupportEmployerAccount.ToRoutePrefix()}/accounts/{{acountId}}/teams"
+                        Text = "Team members",
+                        NavigateUrl = $"views/{SupportServiceIdentity.SupportEmployerAccount.ToRoutePrefix()}/accounts/{{accountId}}/teams"
                     },
 
-                    //new MenuItem
-                    //{
-                    //    Key = "Account.Commitments",
-                    //    Text = "Commitments",
-                    //    NavigateUrl = $"{SupportServiceIdentity.SupportCommitments.ToRoutePrefix()}/accounts/{{accountId}}",
-                    //    MenuItems = new List<MenuItem>
-                    //    {
-                    //        new MenuItem
-                    //        {
-                    //            Key = "Account.Commitments.Apprentices",
-                    //            Text = "Apprentices",
-                    //            NavigateUrl = $"views/{SupportServiceIdentity.SupportCommitments.ToRoutePrefix()}/accounts/{{accountId}}/apprentices"
-                    //        },
-                    //        new MenuItem
-                    //        {
-                    //            Key = "Account.Commitments.Payments",
-                    //            Text = "Payments",
-                    //            NavigateUrl = $"views/{SupportServiceIdentity.SupportCommitments.ToRoutePrefix()}/accounts/{{accountId}}/payments"
-                    //        }
-                    //    }
-                    //}
+                  
                 }
             };
         }

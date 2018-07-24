@@ -73,9 +73,9 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.Services
                     }
 
                     _logger.Info(
-                        $"Site Manifest: Uri: {subSite.Value ?? "Missing Url"} #  Resources: {siteManifest.Resources?.Count() ?? 0}");
+                        $"Site Manifest: Uri: {subSite.Value ?? "Missing Url"} #  Resources: {siteManifest.SearchResources?.Count() ?? 0}");
 
-                    var resourcesToIndex = siteManifest.Resources?.Where(x =>
+                    var resourcesToIndex = siteManifest.SearchResources?.Where(x =>
                         !string.IsNullOrWhiteSpace(x.SearchItemsUrl) &&
                         !string.IsNullOrWhiteSpace(subSite.Value) &&
                         x.SearchCategory != SearchCategory.None).ToList();
@@ -89,7 +89,7 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.Services
 
                         var baseUri = new Uri(subSite.Value);
 
-                        await _indexResourceProcessor.ProcessResource(baseUri, resource);
+                        await _indexResourceProcessor.ProcessResource(baseUri, resource.SearchCategory, resource.SearchTotalItemsUrl, resource.SearchItemsUrl);
                     }
                 }
             }

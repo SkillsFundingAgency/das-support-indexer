@@ -38,7 +38,7 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.UnitTests
                 _indexNameCreator.Object,
                 _elasticClient.Object);
 
-            await sut.ProcessResource(_baseUrl, _accountSiteResource);
+            await sut.ProcessResource(_baseUrl, _accountSiteResource.SearchCategory, _accountSiteResource.SearchTotalItemsUrl, _accountSiteResource.SearchItemsUrl);
 
 
             _indexProvider
@@ -68,7 +68,10 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.UnitTests
                 _indexNameCreator.Object,
                 _elasticClient.Object);
 
-            await sut.ProcessResource(_baseUrl, _accountSiteResource);
+            await sut.ProcessResource(_baseUrl, 
+                                        _accountSiteResource.SearchCategory, 
+                                        _accountSiteResource.SearchTotalItemsUrl, 
+                                        _accountSiteResource.SearchItemsUrl);
 
             _indexNameCreator
                 .Verify(o => o.CreateNewIndexName(_indexName, SearchCategory.Account), Times.Once);
@@ -109,7 +112,10 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.UnitTests
                 _indexNameCreator.Object,
                 _elasticClient.Object);
 
-            await sut.ProcessResource(_baseUrl, _accountSiteResource);
+            await sut.ProcessResource(_baseUrl, 
+                                        _accountSiteResource.SearchCategory, 
+                                        _accountSiteResource.SearchTotalItemsUrl, 
+                                        _accountSiteResource.SearchItemsUrl);
 
             _indexNameCreator
                 .Verify(o => o.CreateNewIndexName(_indexName, SearchCategory.Account), Times.Once);
@@ -155,7 +161,7 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.UnitTests
                 _elasticClient.Object);
 
 
-            await sut.ProcessResource(_baseUrl, _userSiteResource);
+            await sut.ProcessResource(_baseUrl, _userSiteResource.SearchCategory, _userSiteResource.SearchTotalItemsUrl, _userSiteResource.SearchItemsUrl);
 
             _indexNameCreator
                 .Verify(o => o.CreateNewIndexName(_indexName, SearchCategory.User), Times.Never);

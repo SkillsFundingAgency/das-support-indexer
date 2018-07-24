@@ -4,16 +4,8 @@
     "MenuItems": [
       {
         "Key": "User.Details",
-        "Text": "User",
+        "Text": "Overview",
         "NavigateUrl": "views/employerusers/users/{userId}",
-        "Ordinal": 0,
-        "Roles": [],
-        "MenuItems": []
-      },
-      {
-        "Key": "User.Accounts",
-        "Text": "Accounts",
-        "NavigateUrl": "views/employerusers/users/{userId}/accounts",
         "Ordinal": 0,
         "Roles": [],
         "MenuItems": []
@@ -26,7 +18,7 @@
       {
         "Key": "Account.Organisations",
         "Text": "Organisations",
-        "NavigateUrl": "views/employers/accounts/{acountId}/organisations",
+        "NavigateUrl": "views/employers/accounts/{accountId}",
         "Ordinal": 0,
         "Roles": [],
         "MenuItems": []
@@ -34,23 +26,23 @@
       {
         "Key": "Account.Finance",
         "Text": "Finance",
-        "NavigateUrl": "views/employers/accounts/{accountId}/finance",
-        "Ordinal": 0,
-        "Roles": [],
+        "NavigateUrl": "views/employers/accounts/{accountId}/finance/paye",
+        "Ordinal": 1,
+        "Roles": [ "Tier2" ],
         "MenuItems": [
           {
             "Key": "Account.Finance.PAYE",
             "Text": "PAYE",
-            "NavigateUrl": "views/employers/accounts/{acountId}/finance/paye",
+            "NavigateUrl": "views/employers/accounts/{accountId}/finance/paye",
             "Ordinal": 0,
-            "Roles": [],
+            "Roles": [ "Tier2" ],
             "MenuItems": [
               {
                 "Key": "Account.Finance.PAYE.Submissions",
                 "Text": "Submissions",
-                "NavigateUrl": "views/employers/accounts/{acountId}/finance/paye/{payeSchemeId}",
+                "NavigateUrl": "views/employers/accounts/{accountId}/finance/paye/{payeshchemeId}",
                 "Ordinal": 0,
-                "Roles": [],
+                "Roles": [ "Tier2" ],
                 "MenuItems": []
               }
             ]
@@ -59,16 +51,16 @@
             "Key": "Account.Finance.Transactions",
             "Text": "Transactions",
             "NavigateUrl": "views/employers/accounts/{accountId}/finance/transactions",
-            "Ordinal": 0,
-            "Roles": [],
+            "Ordinal": 1,
+            "Roles": [ "Tier2" ],
             "MenuItems": []
           }
         ]
       },
       {
         "Key": "Account.Teams",
-        "Text": "Teams",
-        "NavigateUrl": "views/employers/accounts/{acountId}/teams",
+        "Text": "Team members",
+        "NavigateUrl": "views/employers/accounts/{accountId}/teams",
         "Ordinal": 0,
         "Roles": [],
         "MenuItems": []

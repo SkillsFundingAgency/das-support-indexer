@@ -21,8 +21,8 @@ namespace SFA.DAS.Support.Portal.Infrastructure.UnitTests
         public void ItShouldMapTheForm()
         {
             var id = "123";
-            var challengeKey = SupportServiceResourceKey.EmployerAccountFinanceChallenge;
-            var resourceKey = SupportServiceResourceKey.EmployerAccountFinance;
+            var challengeKey = SupportServiceResourceKey.EmployerUser;
+            var resourceKey = SupportServiceResourceKey.EmployerAccount;
             var url = $"/api/challenge/response/{id}";
             var html = "<html><head></head><body><form action='' method='post'></form></body></html>";
 
@@ -43,8 +43,8 @@ namespace SFA.DAS.Support.Portal.Infrastructure.UnitTests
         public void ItShouldStripTheUniqueHtmlTagsFromTheFormHtml()
         {
             var id = "123";
-            var challengeKey = SupportServiceResourceKey.EmployerAccountFinanceChallenge;
-            var resourceKey = SupportServiceResourceKey.EmployerAccountFinance;
+            var challengeKey = SupportServiceResourceKey.EmployerUser;
+            var resourceKey = SupportServiceResourceKey.EmployerAccount;
             var url = $"/api/challenge/response/{id}";
             var html = "<html><head></head><body><form action='' method='post'></form></body></html>";
 

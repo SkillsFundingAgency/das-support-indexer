@@ -35,13 +35,13 @@ namespace SFA.DAS.Support.Shared.Tests.Navigation
         {
             var templateItems = _templates.Single(x => x.Perspective == SupportMenuPerspectives.EmployerAccount).MenuItems;
             var templateItemsAsList = templateItems.Map(s => true, n => n.MenuItems).ToList();
-            var _countOfUnIdentifiableMenuItems = 1;
+
             var actual = _unit.TransformMenuTemplates(templateItems, new Dictionary<string, string> { { "accountId", "123" } });
             Assert.IsNotEmpty(actual);
 
             var actualItemsAsList = actual.Map(s => true, n => n.MenuItems).ToList();
             
-            Assert.AreEqual(actualItemsAsList.Count, templateItemsAsList.Count - _countOfUnIdentifiableMenuItems);
+            Assert.AreEqual(actualItemsAsList.Count, templateItemsAsList.Count);
         }
 
 

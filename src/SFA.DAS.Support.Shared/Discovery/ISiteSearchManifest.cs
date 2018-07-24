@@ -4,10 +4,10 @@ using System.Collections.Generic;
 namespace SFA.DAS.Support.Shared.Discovery
 {
     [Obsolete]
-    public interface ISiteManifest
+    public interface ISiteSearchManifest
     {
         SupportServiceIdentity ServiceIdentity { get; set; }
-        IEnumerable<SiteResource> Resources { get; }
+        IEnumerable<SiteSearchResource> SearchResources { get; }
      
     }
 }

@@ -7,15 +7,15 @@ using SFA.DAS.Support.Shared.Navigation;
 namespace SFA.DAS.Support.Shared.Discovery
 {
     [Obsolete]
-    public class ServiceConfiguration : List<SiteManifest>, IServiceConfiguration
+    public class ServiceConfiguration : List<SiteSearchManifest>, IServiceConfiguration
     {
         public Uri FindSiteBaseUriForManfiestElement(Dictionary<SupportServiceIdentity, Uri> sites,
             SupportServiceResourceKey key)
         {
             if (sites == null) throw new ArgumentNullException(nameof(sites));
-            SiteManifest manifest = null;
+            SiteSearchManifest manifest = null;
             foreach (var item in this)
-                if (item.Resources.Any(r => r.ResourceKey == key))
+                if (item.SearchResources.Any(r => r.ResourceKey == key))
                     manifest = item;
             if (manifest == null) throw new ArgumentNullException(nameof(manifest));
             var site = sites.FirstOrDefault(x => x.Key == manifest.ServiceIdentity);
@@ -32,7 +32,7 @@ namespace SFA.DAS.Support.Shared.Discovery
         }
 
        
-        public SiteResource GetResource(SupportServiceResourceKey key)
+        public SiteSearchResource GetResource(SupportServiceResourceKey key)
         {
             var resource = FindResource(key);
             return resource;
@@ -46,7 +46,7 @@ namespace SFA.DAS.Support.Shared.Discovery
             var resource = FindResource(key);
             var manifest = ManifestFromResource(resource);
 
-            return manifest.Resources.Select(r => new NavItem
+            return manifest.SearchResources.Select(r => new NavItem
             {
                 Title = r.ResourceTitle,
                 Key = r.ResourceKey,
@@ -54,18 +54,18 @@ namespace SFA.DAS.Support.Shared.Discovery
             });
         }
 
-        public SiteManifest ManifestFromResource(SiteResource resource)
+        public SiteSearchManifest ManifestFromResource(SiteSearchResource resource)
         {
             foreach (var manifest in this)
-                if (manifest.Resources.Any(item => item.ResourceKey == resource.ResourceKey))
+                if (manifest.SearchResources.Any(item => item.ResourceKey == resource.ResourceKey))
                     return manifest;
             return null;
         }
 
-        public SiteResource FindResource(SupportServiceResourceKey key)
+        public SiteSearchResource FindResource(SupportServiceResourceKey key)
         {
             foreach (var manifest in this)
-            foreach (var item in manifest.Resources)
+            foreach (var item in manifest.SearchResources)
                 if (item.ResourceKey == key)
                     return item;
             return null;

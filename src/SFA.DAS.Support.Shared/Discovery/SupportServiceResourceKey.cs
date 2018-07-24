@@ -8,14 +8,8 @@
     {
         None,
         EmployerUser,
-        EmployerUserHeader,
-        EmployerUserAccounts,
-
+        
         EmployerAccount,
-        EmployerAccountHeader,
-        EmployerAccountTeam,
-        EmployerAccountFinance,
-        EmployerAccountPayeSchemeLevys,
-        EmployerAccountFinanceChallenge
+        
     }
 }

@@ -4,14 +4,14 @@ using SFA.DAS.Support.Shared.SearchIndexModel;
 namespace SFA.DAS.Support.Shared.Discovery
 {
     [Obsolete]
-    public class EmployerUserSiteManifest : SiteManifest
+    public class EmployerUserSiteManifest : SiteSearchManifest
     {
         public EmployerUserSiteManifest()
         {
             ServiceIdentity = SupportServiceIdentity.SupportEmployerUser;
-            Resources = new[]
+            SearchResources = new[]
             {
-                new SiteResource
+                new SiteSearchResource
                 {
                     ResourceKey = SupportServiceResourceKey.EmployerUser,
                     ResourceTitle = "Overview",

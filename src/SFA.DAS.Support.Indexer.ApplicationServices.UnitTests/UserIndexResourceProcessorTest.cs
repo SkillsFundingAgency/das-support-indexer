@@ -33,7 +33,7 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.UnitTests
                 _indexNameCreator.Object,
                 _elasticClient.Object);
 
-            await _sut.ProcessResource(new Uri("http://localhost"), _accountSiteResource);
+            await _sut.ProcessResource(new Uri("http://localhost"), _accountSiteResource.SearchCategory, _accountSiteResource.SearchTotalItemsUrl, _accountSiteResource.SearchItemsUrl);
 
             _indexNameCreator
                 .Verify(o => o.CreateNewIndexName(_indexName, SearchCategory.Account), Times.Never);

@@ -20,7 +20,7 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.UnitTests
         protected const string _indexName = "new_index_name";
         protected const int _indexToRetain = 2;
         protected IEnumerable<AccountSearchModel> _accountModels;
-        protected SiteResource _accountSiteResource;
+        protected SiteSearchResource _accountSiteResource;
         protected Uri _baseUrl;
 
         protected Mock<ISiteConnector> _downloader;
@@ -30,7 +30,7 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.UnitTests
         protected Mock<ILog> _logger;
         protected Mock<ISearchSettings> _searchSettings;
         protected Mock<IIndexerSiteSettings> _siteSettings;
-        protected SiteResource _userSiteResource;
+        protected SiteSearchResource _userSiteResource;
 
 
         protected void Initialise()
@@ -46,14 +46,14 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.UnitTests
             };
 
 
-            _accountSiteResource = new SiteResource
+            _accountSiteResource = new SiteSearchResource
             {
                 SearchCategory = SearchCategory.Account,
                 SearchTotalItemsUrl = "localhost",
                 SearchItemsUrl = "localhost"
             };
 
-            _userSiteResource = new SiteResource
+            _userSiteResource = new SiteSearchResource
             {
                 SearchCategory = SearchCategory.User,
                 SearchTotalItemsUrl = "localhost",

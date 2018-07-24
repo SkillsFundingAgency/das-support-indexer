@@ -14,7 +14,7 @@ namespace SFA.DAS.Support.Shared.Tests.Discovery
         [Test]
         public void ItShouldReturnTheResourceObject()
         {
-            var result = _unit.GetResource(SupportServiceResourceKey.EmployerAccountFinance);
+            var result = _unit.GetResource(SupportServiceResourceKey.EmployerAccount);
             Assert.IsNotNull(result);
         }
 
