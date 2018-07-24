@@ -446,6 +446,7 @@
     <Compile Include="App_Start\StructuremapWebApi.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
+    <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Controllers\ViewsController.cs" />
     <Compile Include="Models\VersionInformation.cs" />
@@ -453,7 +454,6 @@
     <Compile Include="DependencyResolution\StructureMapWebApiDependencyScope.cs" />
     <Compile Include="Models\ChallengeForm.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
-    <Compile Include="Controllers\ResourceController.cs" />
     <Compile Include="Helpers\AccountHelper.cs" />
     <Compile Include="Helpers\ChallengeHelper.cs" />
     <Compile Include="Models\NavPages.cs" />
@@ -469,7 +469,6 @@
     <Compile Include="Settings\WebConfiguration.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Controllers\SearchController.cs" />
-    <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="DependencyResolution\ControllerConvention.cs" />
     <Compile Include="DependencyResolution\DefaultRegistry.cs" />
     <Compile Include="DependencyResolution\IoC.cs" />

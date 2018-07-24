@@ -23,7 +23,7 @@ namespace SFA.DAS.Support.Portal.ApplicationServices.DependencyResolution
                 });
             For<ICrypto>().Use<Crypto>();
             For<IDatetimeService>().Use<DatetimeService>();
-            For<IManifestRepository>().Singleton().Use<ManifestRepository>();
+            
         }
     }
 }

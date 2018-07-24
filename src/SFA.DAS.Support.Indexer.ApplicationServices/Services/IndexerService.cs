@@ -73,7 +73,7 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.Services
                     }
 
                     _logger.Info(
-                        $"Site Manifest: Uri: {subSite.Value ?? "Missing Url"} # Challenges: {siteManifest.Challenges?.Count() ?? 0} # Resources: {siteManifest.Resources?.Count() ?? 0}");
+                        $"Site Manifest: Uri: {subSite.Value ?? "Missing Url"} #  Resources: {siteManifest.Resources?.Count() ?? 0}");
 
                     var resourcesToIndex = siteManifest.Resources?.Where(x =>
                         !string.IsNullOrWhiteSpace(x.SearchItemsUrl) &&

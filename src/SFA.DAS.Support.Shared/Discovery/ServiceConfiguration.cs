@@ -15,9 +15,7 @@ namespace SFA.DAS.Support.Shared.Discovery
             if (sites == null) throw new ArgumentNullException(nameof(sites));
             SiteManifest manifest = null;
             foreach (var item in this)
-                if (item.Challenges.Any(c => c.ChallengeKey == key)
-                    ||
-                    item.Resources.Any(r => r.ResourceKey == key))
+                if (item.Resources.Any(r => r.ResourceKey == key))
                     manifest = item;
             if (manifest == null) throw new ArgumentNullException(nameof(manifest));
             var site = sites.FirstOrDefault(x => x.Key == manifest.ServiceIdentity);
@@ -33,25 +31,13 @@ namespace SFA.DAS.Support.Shared.Discovery
             return resource != null;
         }
 
-        public bool ChallengeExists(SupportServiceResourceKey key)
-        {
-            foreach (var manifest in this)
-                if (manifest.Challenges.Any(challenge => challenge.ChallengeKey == key))
-                    return true;
-            return false;
-        }
-
+       
         public SiteResource GetResource(SupportServiceResourceKey key)
         {
             var resource = FindResource(key);
             return resource;
         }
 
-        public SiteChallenge GetChallenge(SupportServiceResourceKey key)
-        {
-            var challenge = FindChallenge(key);
-            return challenge;
-        }
 
         public IEnumerable<NavItem> GetNavItems(SupportServiceResourceKey key, string id)
         {
@@ -60,7 +46,7 @@ namespace SFA.DAS.Support.Shared.Discovery
             var resource = FindResource(key);
             var manifest = ManifestFromResource(resource);
 
-            return manifest.Resources.Where(x => x.IsNavigationItem).Select(r => new NavItem
+            return manifest.Resources.Select(r => new NavItem
             {
                 Title = r.ResourceTitle,
                 Key = r.ResourceKey,
@@ -85,14 +71,5 @@ namespace SFA.DAS.Support.Shared.Discovery
             return null;
         }
 
-        private SiteChallenge FindChallenge(SupportServiceResourceKey key)
-        {
-            foreach (var manifest in this)
-            foreach (var item in manifest.Challenges)
-                if (item.ChallengeKey == key)
-                    return item;
-
-            return null;
-        }
     }
 }

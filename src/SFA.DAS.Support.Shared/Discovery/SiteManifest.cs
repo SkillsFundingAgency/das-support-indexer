@@ -11,6 +11,6 @@ namespace SFA.DAS.Support.Shared.Discovery
     {
         public SupportServiceIdentity ServiceIdentity { get; set; }
         public IEnumerable<SiteResource> Resources { get; set; } = new List<SiteResource>();
-        public IEnumerable<SiteChallenge> Challenges { get; set; } = new List<SiteChallenge>();
+        
     }
 }

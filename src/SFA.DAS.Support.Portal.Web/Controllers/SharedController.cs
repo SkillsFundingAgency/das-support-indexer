@@ -7,7 +7,6 @@ namespace SFA.DAS.Support.Portal.Web.Controllers
 {
     public class SharedController : Controller
     {
-        [Obsolete]
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
         public PartialViewResult Header()
         {

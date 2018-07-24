@@ -97,8 +97,6 @@
     <Compile Include="Services\IDatetimeService.cs" />
     <Compile Include="Services\IFormMapper.cs" />
     <Compile Include="Services\IGetCurrentIdentity.cs" />
-    <Compile Include="Services\IManifestRepository.cs" />
-    <Compile Include="Services\ManifestRepository.cs" />
     <Compile Include="Models\ResourceResultModel.cs" />
   </ItemGroup>
   <ItemGroup>
