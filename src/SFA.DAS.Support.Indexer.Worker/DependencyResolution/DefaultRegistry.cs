@@ -5,6 +5,7 @@ using SFA.DAS.Configuration.AzureTableStorage;
 using SFA.DAS.NLog.Logger;
 using SFA.DAS.Support.Common.Infrastucture.Settings;
 using SFA.DAS.Support.Indexer.ApplicationServices.Settings;
+using SFA.DAS.Support.Shared.Authentication;
 using SFA.DAS.Support.Shared.Discovery;
 using SFA.DAS.Support.Shared.SiteConnection;
 using StructureMap.Configuration.DSL;
@@ -39,6 +40,9 @@ namespace SFA.DAS.Support.Indexer.Worker.DependencyResolution
                     new EmployerUserSiteManifest()
                 }
             );
+            For<ICryptoSettings>().Use(configuration.Crypto);
+            For<ICrypto>().Use<Crypto>();
+
         }
 
         private WebConfiguration GetConfiguration()

@@ -31,7 +31,10 @@ namespace SFA.DAS.Support.Indexer.Worker.DependencyResolution
             For<IElasticsearchCustomClient>().Use<ElasticsearchCustomClient>();
 
             For<IIndexProvider>().Use<ElasticSearchIndexProvider>();
-
+            
+            For<IIdentityHandler>().Use<RequestHeaderIdentityHandler>();
+            For<IIdentityHash>().Use<IdentityHash>();
+            For<IIdentityProvider>().Use<ClaimsIdentityProvider>();
             For<ISiteConnector>().Use<SiteConnector>();
 
             For<IClientAuthenticator>().Use<ActiveDirectoryClientAuthenticator>();
