@@ -31,7 +31,7 @@ namespace SFA.DAS.Support.Indexer.ApplicationServices.Services
         protected readonly ISearchSettings _searchSettings;
         protected readonly ISiteSettings _settings;
 
-        private const int _pageSize = 50;
+        private const int _pageSize = 1000;
 
         public BaseIndexResourceProcessor(ISiteSettings settings,
             ISiteConnector dataSource,
